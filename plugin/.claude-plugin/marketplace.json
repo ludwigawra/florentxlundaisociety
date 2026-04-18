@@ -45,10 +45,13 @@
         {
           "name": "nightly-brain-consolidation",
           "description": "Nightly brain consolidation — processes short-term memory, extracts patterns, improves skills."
+        },
+        {
+          "name": "reflect",
+          "description": "On-demand strategic reflection — goal-by-goal progress, patterns observed, course corrections. Use at checkpoints or when feeling scattered."
         }
       ],
       "plannedSkills": [
-        { "name": "reflect",              "phase": "P1" },
         { "name": "foresight",            "phase": "P1" },
         { "name": "project-status",       "phase": "P1" },
         { "name": "thalamus-calibration", "phase": "P1" },
