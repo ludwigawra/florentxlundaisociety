@@ -139,8 +139,11 @@ install_optional() {
   local name="$1"
   local required="$2" # space-separated list like "gmail gcal"
   [[ ! -d "$PLUGIN_ROOT/skills/optional/$name" ]] && return 0
+  # Lowercase via tr for bash 3.2 compatibility (macOS default)
+  local ints_lc
+  ints_lc=$(printf '%s' "$USER_INTEGRATIONS" | tr '[:upper:]' '[:lower:]')
   for req in $required; do
-    if ! [[ ",${USER_INTEGRATIONS,,}," == *",$req,"* ]]; then
+    if ! [[ ",${ints_lc}," == *",$req,"* ]]; then
       return 0
     fi
   done
