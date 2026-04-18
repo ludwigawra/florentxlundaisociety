@@ -1,0 +1,67 @@
+---
+type: reference
+tags: [goals, metrics, priorities, context]
+created: {{today}}
+updated: {{today}}
+status: active
+---
+
+# Goals & Metrics — {{user.name}}
+
+_Current priorities and the numbers that tell me whether I'm winning. The agent reads this at session start when priorities are relevant._
+
+---
+
+## Who I am
+
+- Name: {{user.name}}
+- Role: {{user.role}}
+- Company: {{user.company}}
+
+---
+
+## What I'm trying to do
+
+{{user.goals}}
+
+_Rewrite this block as the season evolves. Keep it to 3–5 lines. Specific outcomes beat vague aspirations._
+
+---
+
+## Current priorities (this month)
+
+1. _Priority 1 — the one thing that matters most right now._
+2. _Priority 2._
+3. _Priority 3._
+
+_When adding or removing priorities, log the change in `HIPPOCAMPUS/decisions/`._
+
+---
+
+## Metrics I track
+
+| Metric | Cadence | Current | Target | Source |
+|---|---|---|---|---|
+| _e.g. Monthly revenue_ | Monthly | — | — | — |
+| _e.g. Qualified leads_ | Weekly | — | — | — |
+| _e.g. Pipeline value_ | Weekly | — | — | — |
+| _e.g. Time spent on deep work_ | Weekly | — | — | — |
+
+_Leave rows empty until a metric is being tracked. Empty rows are better than invented numbers._
+
+---
+
+## Non-goals
+
+_Things I'm explicitly not pursuing this quarter, so the agent doesn't drift toward them._
+
+- _e.g. No new service lines until the current one is repeatable._
+- _e.g. No fundraising this quarter._
+
+---
+
+## Review cadence
+
+- Re-read this file at the start of each week.
+- Re-evaluate priorities at the start of each month.
+- Any change gets logged as a decision in `HIPPOCAMPUS/decisions/`.

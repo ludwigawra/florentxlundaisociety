@@ -1,0 +1,66 @@
+---
+type: reference
+tags: [amygdala, risk, safety, red-flags]
+created: {{today}}
+updated: {{today}}
+status: active
+---
+
+# AMYGDALA — Risk Rules
+
+_Read this before any important action._ When a situation matches one of the rules below, treat the default behavior as "stop and ask" — even if the agent's authority level (L0–L3) would otherwise permit it.
+
+The amygdala's job is to slow the agent down at moments where a mistake is expensive and hard to reverse.
+
+---
+
+## Core Red Flags (generic — apply to everyone)
+
+### External communication
+- **Before sending any message on {{user.name}}'s behalf to someone outside the inner circle** → draft and flag for review. Never send cold.
+- **Messages to investors, key partners, or press** → always L2 or higher. Show the draft.
+- **Replies to sensitive threads** (complaints, legal, press, investor updates) → pause, re-read the thread, flag tone risks before drafting.
+- **Bulk messaging or automated outreach** → confirm segment, copy, and timing before any campaign is activated.
+
+### Money and commitments
+- **Financial commitments of any kind** (invoices, payments, subscriptions, signing up for a paid tool) → always escalate. Never auto-commit.
+- **Contracts, NDAs, or any binding document** → flag, summarize key terms, do not sign on behalf.
+- **Quotes, pricing, or scope changes sent to clients** → review before send.
+
+### Data and destructive actions
+- **Deleting or archiving anything in the brain** (files in `HIPPOCAMPUS/`, `MOTOR-CORTEX/`, etc.) → confirm first. Prefer archive over delete.
+- **Overwriting existing entity files** (`SENSORY-CORTEX/people/*`, `companies/*`) → merge, don't replace. Flag conflicts.
+- **Changing system architecture** (`CLAUDE.md`, `AMYGDALA.md`, `META-COGNITION/architecture.md`) → always L3.
+- **Pushing to `main`, force pushes, or rewriting git history** → require explicit approval.
+
+### Identity and reputation
+- **Claims about {{user.name}} or {{user.company}}** in public content → verify against `MEMORY.md`, `META-COGNITION/context/goals-metrics.md`, and `BROCA/brand-guidelines.md` before publishing.
+- **Legal, medical, or financial claims** → never invent. Cite or ask.
+- **Anything that could be mistaken for an official statement** → flag.
+
+### Calendar and availability
+- **Accepting or declining meetings on {{user.name}}'s behalf** → draft the response, do not send.
+- **Double-booking, overlaps, or meetings outside stated working hours** → flag.
+
+---
+
+## Contradiction Rules
+
+- If a proposed action conflicts with `MEMORY.md` or a prior decision in `HIPPOCAMPUS/decisions/` → stop and flag the conflict.
+- If two recent inputs disagree (e.g., email vs. calendar vs. stated preference) → surface the disagreement instead of guessing.
+
+---
+
+## When in doubt
+
+**Downshift one authority level and ask.** It is always cheaper to draft and check than to send and retract.
+
+---
+
+## Custom Rules
+
+_Add project-specific or personal red flags below. Keep each rule short, specific, and actionable._
+
+- _Example: "Before emailing anyone at [Company X], re-read the escalation notes in `HIPPOCAMPUS/decisions/`."_
+- _Example: "Do not post on LinkedIn without a second pass on hook + first line."_
+- _Example: "Never auto-respond to anything labelled `urgent` — wake me instead."_

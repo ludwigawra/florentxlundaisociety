@@ -1,0 +1,109 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "aios",
+  "description": "Your second brain for Claude Code — persistent memory, learned patterns, and skills that improve over time.",
+  "owner": {
+    "name": "AI-OS",
+    "url": "https://aios.dev"
+  },
+  "homepage": "https://aios.dev",
+  "category": "productivity",
+  "keywords": [
+    "memory",
+    "second-brain",
+    "productivity",
+    "solo-founder",
+    "knowledge-management",
+    "personal-os"
+  ],
+  "plugins": [
+    {
+      "name": "aios",
+      "description": "Your second brain for Claude Code — persistent memory, learned patterns, and skills that improve over time.",
+      "version": "0.1.0",
+      "category": "productivity",
+      "source": "./plugin",
+      "homepage": "https://aios.dev",
+      "screenshots": [
+        "./plugin/assets/screenshot-welcome.png",
+        "./plugin/assets/screenshot-briefing.png",
+        "./plugin/assets/screenshot-brain-map.png"
+      ],
+      "skills": [
+        {
+          "name": "aios-init",
+          "description": "Bootstrap a new AI-OS in the current directory — conversational onboarding that scaffolds your brain, configures skills, and sets up the self-improvement loop."
+        },
+        {
+          "name": "brain-search",
+          "description": "Search the AI-OS brain for relevant files, entities, and knowledge before starting work."
+        },
+        {
+          "name": "decision-check",
+          "description": "Search prior decisions on a topic — prevents contradictions and surfaces relevant history."
+        },
+        {
+          "name": "nightly-brain-consolidation",
+          "description": "Nightly brain consolidation — processes short-term memory, extracts patterns, improves skills."
+        },
+        {
+          "name": "morning-briefing",
+          "description": "Daily morning briefing — scans Gmail and GCal, produces a prioritized summary of what needs attention."
+        },
+        {
+          "name": "email-triage",
+          "description": "Daily email triage — categorizes inbox, drafts priority replies, surfaces what actually matters."
+        },
+        {
+          "name": "meeting-prep",
+          "description": "Prepare a meeting brief — surfaces relationship context, prior decisions, and open commitments."
+        },
+        {
+          "name": "relationship-check",
+          "description": "Check the status of a relationship — last contact, open commitments, suggested next action."
+        },
+        {
+          "name": "project-status",
+          "description": "Quick status check on any active project — progress, blockers, days since activity, next actions."
+        },
+        {
+          "name": "brain-dump-content",
+          "description": "Process a brain dump into content drafts — extract ideas, research, draft posts."
+        },
+        {
+          "name": "content-interview",
+          "description": "Structured interview to extract content ideas — Claude asks, you answer, drafts get created."
+        },
+        {
+          "name": "reflect",
+          "description": "On-demand reflection — goal-by-goal progress check, pattern analysis, strategic course correction."
+        },
+        {
+          "name": "foresight",
+          "description": "Forward-looking strategic planning — ranked priorities for the week ahead based on goals and patterns."
+        },
+        {
+          "name": "thalamus-calibration",
+          "description": "Nightly self-improvement for the thalamus signal detector — identifies misses, proposes pattern updates."
+        }
+      ],
+      "hooks": [
+        {
+          "name": "session-start",
+          "event": "SessionStart",
+          "description": "Creates a short-term memory file for the session and injects vital signs plus learned patterns into context."
+        },
+        {
+          "name": "session-end",
+          "event": "SessionEnd",
+          "description": "Archives the session transcript into HIPPOCAMPUS/short-term/transcripts/ so nightly consolidation can read it."
+        },
+        {
+          "name": "post-tool-failure",
+          "event": "PostToolUseFailure",
+          "description": "Logs every tool or MCP failure to CEREBELLUM/tool-errors.log so the system can learn from them."
+        }
+      ]
+    }
+  ]
+}

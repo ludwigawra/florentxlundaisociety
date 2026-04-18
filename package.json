@@ -1,0 +1,21 @@
+{
+  "name": "aios-workspace",
+  "version": "0.1.0",
+  "private": true,
+  "description": "AI-OS — Claude Code plugin and local dashboard. A brain-inspired operating system for solo operators.",
+  "workspaces": [
+    "plugin",
+    "dashboard"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace=dashboard",
+    "build": "npm run build --workspace=dashboard",
+    "start": "npm run start --workspace=dashboard",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT"
+}

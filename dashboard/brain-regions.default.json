@@ -1,0 +1,9 @@
+[
+  { "id": "HIPPOCAMPUS", "label": "Memory", "icon": "brain", "viewType": "timeline", "order": 1 },
+  { "id": "CEREBELLUM",  "label": "Learning","icon": "zap",   "viewType": "kv-list",  "order": 2 },
+  { "id": "SENSORY-CORTEX","label":"World","icon":"globe",  "viewType": "grid",     "order": 3 },
+  { "id": "MOTOR-CORTEX","label": "Projects","icon":"layers","viewType":"grid",    "order": 4 },
+  { "id": "META-COGNITION","label":"Self","icon":"cpu",    "viewType":"timeline",  "order": 5 },
+  { "id": "BROCA",       "label": "Comms",  "icon":"message","viewType":"grid",   "order": 6 },
+  { "id": "BASAL-GANGLIA","label":"Habits", "icon":"repeat", "viewType":"timeline","order": 7 }
+]

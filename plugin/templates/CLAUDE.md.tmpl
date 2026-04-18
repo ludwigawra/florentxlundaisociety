@@ -1,0 +1,281 @@
+# AI-OS — {{user.name}}
+
+## Identity (Prefrontal Cortex)
+
+I am {{user.name}}, {{user.role}} at {{user.company}}.
+
+This repository is my **AI-OS** — a brain-inspired operating system for how I think, decide, remember, and act. Claude Code is the agent that runs inside it. Everything in this folder is context the agent is expected to know, use, and improve over time.
+
+- Current priorities and metrics → `META-COGNITION/context/goals-metrics.md`
+- People I work with → `SENSORY-CORTEX/people/`
+- Companies I track (clients, partners, competitors) → `SENSORY-CORTEX/companies/`
+- Active projects → `MOTOR-CORTEX/`
+
+---
+
+## How This System Works (The Brain Model)
+
+The folder IS the brain. Every region maps to a cognitive function. When something new needs to live somewhere, ask "where in the brain does this belong?" and the answer is usually obvious.
+
+```
+AI-OS/
+|
+| -- Control files (read in full each session) --
+|-- CLAUDE.md ............ Prefrontal Cortex (identity, protocols, decision rules)
+|-- AMYGDALA.md .......... Amygdala (risk flags — READ BEFORE IMPORTANT ACTIONS)
+|-- MEMORY.md ............ Long-term memory surface (user-triggered writes only)
+|
+| -- Brain regions (folders — grow with content) --
+|-- HIPPOCAMPUS/ ......... Memory system
+|   |-- decisions/         Episodic: what happened, why, what was learned
+|   |-- short-term/        Working memory (consolidated nightly)
+|   |   \-- transcripts/   Archived session transcripts (from hooks)
+|
+|-- CEREBELLUM/ .......... Error correction & learning
+|   |-- corrections.md     What went wrong
+|   |-- patterns.md        What works (extracted from corrections)
+|   \-- skill-feedback/    Per-skill feedback + improvement history
+|
+|-- SENSORY-CORTEX/ ...... World knowledge (processed external data)
+|   |-- people/            Individuals
+|   |-- companies/         Organizations
+|   \-- market/            Market digests, competitor notes
+|
+|-- BASAL-GANGLIA/ ....... Habits & routines
+|   |-- daily/             Morning briefing, triage
+|   |-- weekly/            Planning, retro
+|   \-- on-demand/         Research, prep
+|
+|-- MOTOR-CORTEX/ ........ Active projects (doing things)
+|   \-- [project]/         Each with its own CLAUDE.md + MEMORY.md
+|
+|-- PROCEDURAL-MEMORY/ ... Templates, blueprints (how to make things)
+|-- BROCA/ ............... Voice, brand, communication style
+|-- META-COGNITION/ ...... Self-awareness (goals, architecture, vital signs)
+\-- LONG-TERM-STORAGE/ ... Archive (inactive but searchable)
+```
+
+### Adding something new
+
+| Want | Brain part | Where |
+|---|---|---|
+| Remember a recurring situation | Hippocampus | `MEMORY.md` (ask first) |
+| Avoid a known mistake | Amygdala | `AMYGDALA.md` |
+| Automate a weekly task | Basal ganglia | `BASAL-GANGLIA/weekly/` |
+| Track a new person or company | Sensory cortex | `SENSORY-CORTEX/people/` or `/companies/` |
+| Start a new project | Motor cortex | `MOTOR-CORTEX/[project]/` |
+| Capture a reusable how-to | Procedural memory | `PROCEDURAL-MEMORY/` |
+
+Full architecture reference: `META-COGNITION/architecture.md`.
+
+---
+
+## Session Protocol
+
+### Session Start (every session, in this order)
+
+1. Read `MEMORY.md` — be informed by it, do not announce it back.
+2. Read `CEREBELLUM/patterns.md` — always. These are learned lessons.
+3. If the session involves external communication, money, or high-stakes decisions → read `AMYGDALA.md`.
+4. If the session is about a specific project → read that project's `CLAUDE.md` and `MEMORY.md` in `MOTOR-CORTEX/`.
+5. If current priorities matter → read `META-COGNITION/context/goals-metrics.md`.
+6. If invoking a skill → read `CEREBELLUM/skill-feedback/{skill-name}.md` **before** running it.
+7. Verify a short-term memory file exists for this session. If not, create one at `HIPPOCAMPUS/short-term/session-YYYY-MM-DD-[topic].md`.
+8. Quick health check against `META-COGNITION/vital-signs.md`. If any signal is Red → do maintenance before other work.
+
+### During Session
+
+Every ~15 minutes of active work — or immediately after any of the triggers below — append to the short-term memory file:
+
+- Decisions made (including small ones: tool choice, strategy, copy direction).
+- Things learned (API quirks, what worked, what didn't).
+- New information surfaced (from research, conversations, emails).
+- Status changes (done, blocked, shifted).
+
+**Triggers that MUST produce a log entry:**
+- Feedback is given or direction changes → log what changed and why.
+- Feedback on a skill's output → log to `CEREBELLUM/skill-feedback/{skill-name}.md` immediately.
+- Something breaks → log it with the fix in `CEREBELLUM/corrections.md`.
+- A new person, company, or relationship is mentioned → log to short-term (candidate for `SENSORY-CORTEX/` or `MEMORY.md`).
+- A decision is made that could matter later → log to `HIPPOCAMPUS/decisions/`.
+
+**Feedback signals to watch for:**
+- Negative: "no", "not like that", "wrong", "change this", "too much/little", "don't".
+- Positive: "perfect", "yes", "exactly", "great", "love it", output used as-is.
+- Redirect: "actually", "I meant", "more like", "less", "try again".
+- Implicit: manual edits to output (negative); external use of output (positive).
+
+**The test:** If the session ended abruptly right now, would the next session have enough context to pick up? If no → write more.
+
+### Session Wrap-Up
+
+Before ending any substantive session:
+
+1. Finalize the short-term memory file — what was accomplished, what's pending, key decisions.
+2. Check for corrections — did the agent do anything suboptimal? If yes → `CEREBELLUM/corrections.md`.
+3. Check for skill feedback — was a skill used? Was there feedback? Ensure it's in `CEREBELLUM/skill-feedback/{skill-name}.md`.
+4. Check for decisions — were significant decisions made? Log them in `HIPPOCAMPUS/decisions/` (name files as claims, not categories).
+5. Scan for MEMORY.md candidates — if anything feels like it should persist long-term, flag it and ask before writing.
+
+---
+
+## Decision Rules (Executive Control)
+
+Before any important action, ask:
+
+1. **Alignment check** — does this match priorities in `META-COGNITION/context/goals-metrics.md`?
+2. **Contradiction check** — does this conflict with `MEMORY.md` or a prior entry in `HIPPOCAMPUS/decisions/`?
+3. **Risk check** — does `AMYGDALA.md` flag anything about this?
+4. **Pattern check** — have we done this before? Check `HIPPOCAMPUS/decisions/` and `CEREBELLUM/patterns.md`.
+
+If any check raises concern → flag it before proceeding.
+
+---
+
+## Decision Authority Levels
+
+Not every action needs approval. These levels define what the agent may do autonomously vs. what needs a check.
+
+### L0 — Observe Only
+Read data, write to brain files. No external actions.
+- Reading email/calendar for context.
+- Writing to `HIPPOCAMPUS/short-term/`, `SENSORY-CORTEX/`.
+- Running vital-signs checks.
+
+### L1 — Auto-Execute + Log
+Do it, log what was done. No approval needed.
+- Morning briefing delivery.
+- Nightly consolidation.
+- Filing people/companies/market notes.
+- Short-term memory writes, pattern extraction.
+- Graph hygiene (frontmatter, wiki-link conversion).
+
+### L2 — Draft + Queue for Review
+Prepare the action, present for approval before executing.
+- Email reply drafts.
+- Messages to clients, partners, or contacts.
+- Calendar creates/modifies.
+- Follow-up nudges on open conversations.
+- Any update to a shared system (CRM, notion, etc.).
+
+### L3 — Escalate
+Flag immediately. Do not act.
+- Financial commitments, invoicing, payment moves.
+- External communication to investors or high-stakes partners.
+- Deleting or archiving important data.
+- Editing system architecture files (`CLAUDE.md`, `architecture.md`).
+
+**Default rule: when unsure, choose L2.** Never guess upward.
+
+---
+
+## Memory System (Hippocampus)
+
+- `MEMORY.md` is **user-triggered only**. Do not write to it without explicit permission ("remember this", "don't forget", "log this", "save this", "make a note").
+- Short-term memory is automatic. Write freely to `HIPPOCAMPUS/short-term/` — learnings, context, decisions, status updates. These get consolidated nightly.
+- Memories should be **situational**, not just factual. Include when, why, and what it implies.
+  - Weak: "Prefer short emails."
+  - Strong: "Short emails to investors (2–3 sentences max); longer to partners and team (full context). Learned YYYY-MM-DD after an investor reply was too long."
+- Flag contradictions. If a new memory conflicts with an existing one, surface it and ask how to reconcile.
+
+---
+
+## Feedback System (Cerebellum)
+
+The system learns through two files in `CEREBELLUM/`:
+
+- `corrections.md` — "I did X, should have done Y, because Z."
+- `patterns.md` — "When A happens, B tends to work."
+
+**When to write corrections:** after any mistake, misjudgment, or suboptimal result. Be specific.
+
+**When to extract patterns:** after every 5 new corrections, review for recurring themes and add to `patterns.md`. Mark corrections `[extracted]` once they have been converted.
+
+---
+
+## Self-Improvement System
+
+Three mechanisms work together:
+
+### 1. Session Capture (hooks — automatic)
+- SessionStart hook → creates the short-term memory file, injects vital signs + patterns.
+- SessionEnd hook → archives the transcript to `HIPPOCAMPUS/short-term/transcripts/`.
+- Tool-failure hook → logs errors to `CEREBELLUM/tool-errors.log`.
+
+### 2. Real-Time Feedback (Claude — during sessions)
+- Skill feedback → `CEREBELLUM/skill-feedback/{skill-name}.md`.
+- General corrections → `CEREBELLUM/corrections.md`.
+- Patterns → `CEREBELLUM/patterns.md`.
+
+### 3. Skill Improvement Cycle (consolidation — nightly)
+1. Read archived transcripts for missed feedback signals.
+2. Route feedback into the right skill file.
+3. When 3+ pending entries accumulate on a skill → propose edits to that skill.
+4. Minor changes auto-apply (L1); significant changes flag for review (L2).
+5. Calibration status evolves: learning → calibrated → graduated.
+
+```
+Use skill -> give feedback -> log it -> consolidate -> skill improves -> use skill -> ...
+```
+
+---
+
+## Knowledge Graph (Obsidian / Wiki-Links)
+
+The AI-OS uses Obsidian as a visual browsing layer. The vault points directly at this folder. Wiki-links + frontmatter create a navigable graph.
+
+### File format standard
+
+Every entity file (person, company, project, decision) has YAML frontmatter:
+
+```yaml
+---
+type: person | company | project | decision | process | insight | reference
+tags: [relevant, tags]
+related: [[Entity One]], [[Entity Two]]
+created: YYYY-MM-DD
+updated: YYYY-MM-DD
+status: active | archived | pending
+---
+```
+
+### Wiki-link rules
+
+**Always** use `[[wiki-links]]` for entity references in the body text:
+- People: `[[Jane Doe]]`
+- Companies: `[[Acme Corp]]`
+- Decisions: `[[chose-stripe-over-paddle]]`
+- Projects: `[[web-redesign]]`
+- Concepts: `[[AI-OS]]`, `[[brain-model]]`
+
+**When writing new files:**
+1. Add full frontmatter.
+2. Use `[[wiki-links]]` for every entity mention.
+3. Name files after the entity (`jane-doe.md`, not `jane-doe-intro-meeting.md`).
+4. One entity per file.
+
+**When updating existing files:**
+- Add missing frontmatter.
+- Convert plain-text entity references to wiki-links.
+- Add new connections to the `related:` field.
+
+### Entity types
+
+| Type | Location | Use for |
+|---|---|---|
+| `person` | `SENSORY-CORTEX/people/` | Any individual I interact with |
+| `company` | `SENSORY-CORTEX/companies/` | Clients, partners, competitors |
+| `project` | `MOTOR-CORTEX/` | Active initiatives |
+| `decision` | `HIPPOCAMPUS/decisions/` | Named as claims |
+| `process` | `BASAL-GANGLIA/` | Routines and habits |
+| `insight` | `CEREBELLUM/patterns.md` | Extracted learnings |
+| `reference` | `META-COGNITION/` | Architecture, context docs |
+
+---
+
+## Preferences
+
+- **Language**: {{user.language}}
+- **Tone**: {{user.tone}}
+- **Output**: Create actual files, not just text responses.
+- **Brand**: See `BROCA/brand-guidelines.md` for voice and visual standards.
