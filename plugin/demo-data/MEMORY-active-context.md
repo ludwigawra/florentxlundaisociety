@@ -1,0 +1,4 @@
+- Shipping v1 of the product by end of month; investor call on the 24th
+- Marcus (designer) kicking off brand refresh next week — needs logo variations by Friday
+- Pricing model still in debate: usage-based vs seat-based; decide before Tuesday
+- Hire #4 (senior eng) interviewing Wednesday; Maya is the strongest lead

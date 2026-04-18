@@ -87,10 +87,11 @@ cd florentxlundaisociety
   --name "Your Name" \
   --role "Your role" \
   --company "Your company" \
-  --integrations "gmail,gcal"
+  --integrations "gmail,gcal" \
+  --with-demo-data
 ```
 
-This scaffolds a fresh brain in `~/my-brain/` — 9 regions, 10 skills, 4 session hooks, first git commit included.
+This scaffolds a fresh brain in `~/my-brain/` — 9 regions, 10 skills, 4 session hooks, first git commit included. `--with-demo-data` seeds realistic example content (decisions, people, a project, patterns) so you can see what a lived-in brain looks like from minute one. Drop the flag to start empty.
 
 ### 2. Talk to your brain via Claude Code
 

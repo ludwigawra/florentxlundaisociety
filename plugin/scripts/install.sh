@@ -9,10 +9,12 @@
 #   install.sh --target <dir> [--name NAME] [--role ROLE] [--company CO]
 #              [--goals "g1;g2;g3"] [--integrations "gmail,gcal"]
 #              [--pillars "p1;p2"] [--language en] [--tone sophisticated]
-#              [--force] [--no-git]
+#              [--force] [--no-git] [--with-demo-data]
 #
-# --force      Overwrite an existing AI-OS (normally refused)
-# --no-git     Skip git init and initial commit
+# --force            Overwrite an existing AI-OS (normally refused)
+# --no-git           Skip git init and initial commit
+# --with-demo-data   Seed the new brain with realistic example content
+#                    (decisions, people, a project, patterns). Great for demos.
 
 set -euo pipefail
 
@@ -33,6 +35,7 @@ USER_TONE="sophisticated"
 USER_USE_CASE="solo founder"
 FORCE=0
 DO_GIT=1
+WITH_DEMO=0
 
 # --- parse args ---
 while [[ $# -gt 0 ]]; do
@@ -49,6 +52,7 @@ while [[ $# -gt 0 ]]; do
     --use-case)      USER_USE_CASE="$2"; shift 2 ;;
     --force)         FORCE=1; shift ;;
     --no-git)        DO_GIT=0; shift ;;
+    --with-demo-data) WITH_DEMO=1; shift ;;
     -h|--help)
       sed -n '2,14p' "${BASH_SOURCE[0]}" | sed 's/^# \{0,1\}//'
       exit 0 ;;
@@ -208,6 +212,54 @@ cat > "$TARGET/aios.config.json" <<JSONEOF
   "integrations": $(printf '%s' "$USER_INTEGRATIONS" | python3 -c "import json,sys; v=sys.stdin.read().strip(); print(json.dumps([x.strip() for x in v.split(',') if x.strip()]))")
 }
 JSONEOF
+
+# --- demo data seed (optional) ---
+if [[ $WITH_DEMO -eq 1 && -d "$PLUGIN_ROOT/demo-data" ]]; then
+  echo "seeding demo data"
+  DEMO="$PLUGIN_ROOT/demo-data"
+
+  # Copy tree structures: HIPPOCAMPUS/decisions, HIPPOCAMPUS/short-term,
+  # SENSORY-CORTEX/people, SENSORY-CORTEX/companies, MOTOR-CORTEX/*
+  for sub in HIPPOCAMPUS/decisions HIPPOCAMPUS/short-term \
+             SENSORY-CORTEX/people SENSORY-CORTEX/companies; do
+    if [[ -d "$DEMO/$sub" ]]; then
+      mkdir -p "$TARGET/$sub"
+      cp "$DEMO/$sub"/*.md "$TARGET/$sub/" 2>/dev/null || true
+    fi
+  done
+
+  # MOTOR-CORTEX projects (each is a subdir)
+  if [[ -d "$DEMO/MOTOR-CORTEX" ]]; then
+    for proj in "$DEMO/MOTOR-CORTEX"/*/; do
+      [[ -d "$proj" ]] || continue
+      projname=$(basename "$proj")
+      mkdir -p "$TARGET/MOTOR-CORTEX/$projname"
+      cp "$proj"*.md "$TARGET/MOTOR-CORTEX/$projname/" 2>/dev/null || true
+    done
+  fi
+
+  # Append the Active Context body into the scaffolded MEMORY.md
+  if [[ -f "$DEMO/MEMORY-active-context.md" ]]; then
+    python3 - "$TARGET/MEMORY.md" "$DEMO/MEMORY-active-context.md" <<'PYEOF'
+import sys, re, pathlib
+mem_path = pathlib.Path(sys.argv[1])
+body = pathlib.Path(sys.argv[2]).read_text().strip()
+text = mem_path.read_text()
+pattern = re.compile(r"(## Active Context\n)(.*?)(?=\n## |\Z)", re.S)
+def repl(m):
+    return m.group(1) + "\n" + body + "\n\n"
+new = pattern.sub(repl, text, count=1)
+mem_path.write_text(new)
+PYEOF
+  fi
+
+  # Append pattern additions to CEREBELLUM/patterns.md
+  if [[ -f "$DEMO/CEREBELLUM/patterns-additions.md" ]]; then
+    cat "$DEMO/CEREBELLUM/patterns-additions.md" >> "$TARGET/CEREBELLUM/patterns.md"
+  fi
+
+  echo "  seeded 3 decisions, 2 people, 1 company, 1 project, 1 short-term, 2 patterns"
+fi
 
 # --- git init + first commit ---
 if [[ $DO_GIT -eq 1 ]] && ! [[ -d "$TARGET/.git" ]]; then
