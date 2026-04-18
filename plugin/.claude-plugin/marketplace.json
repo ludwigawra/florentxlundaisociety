@@ -71,12 +71,16 @@
         {
           "name": "relationship-check",
           "description": "Quick, honest read on one relationship — last contact, freshness verdict, open commitments both ways, specific next action. Reads SENSORY-CORTEX/people/ and cross-references decisions, projects, and optional Gmail/GCal/WhatsApp. No integration required."
+        },
+        {
+          "name": "meeting-prep",
+          "requires": ["gcal"],
+          "description": "One-screen brief for an upcoming meeting — purpose, desired outcome, attendees with freshness, open threads, your asks + their likely asks, risk flags. Pulls from GCal, SENSORY-CORTEX, decisions, and MOTOR-CORTEX."
         }
       ],
       "plannedSkills": [
         { "name": "morning-briefing",     "phase": "P2", "requires": ["gmail", "gcal"] },
         { "name": "email-triage",         "phase": "P2", "requires": ["gmail"] },
-        { "name": "meeting-prep",         "phase": "P2", "requires": ["gcal"] },
         { "name": "brain-dump-content",   "phase": "P2" },
         { "name": "content-interview",    "phase": "P2" }
       ],
