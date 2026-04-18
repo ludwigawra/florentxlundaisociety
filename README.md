@@ -73,17 +73,63 @@ A local-first web dashboard that renders your brain. No account. No cloud. Runs 
 
 ---
 
-## Quick start
+## Quick start — install in 3 minutes
+
+Prerequisites: `git`, `bash`, Node.js 20+ (for the dashboard), and [Claude Code](https://docs.claude.com/en/docs/claude-code).
+
+### 1. Clone and install
 
 ```bash
-claude plugin add aios
-claude
-> /aios-init
+git clone https://github.com/ludwigawra/florentxlundaisociety.git
+cd florentxlundaisociety
+./plugin/scripts/install.sh \
+  --target ~/my-brain \
+  --name "Your Name" \
+  --role "Your role" \
+  --company "Your company" \
+  --integrations "gmail,gcal"
 ```
 
-That's it. The plugin installs the brain scaffold into `~/AI-OS/`, wires the session hooks, and registers the skills. Open the dashboard with `npm run dev` inside the repo or follow the prompt after `/aios-init`.
+This scaffolds a fresh brain in `~/my-brain/` — 9 regions, 10 skills, 4 session hooks, first git commit included.
 
-See [`docs/getting-started.md`](docs/getting-started.md) for the full walkthrough.
+### 2. Talk to your brain via Claude Code
+
+```bash
+cd ~/my-brain
+claude
+```
+
+The `SessionStart` hook fires automatically, prints your vital signs, and loads learned patterns into context. Then try any shipped skill:
+
+```
+/reflect            honest checkpoint on your goals
+/foresight          ranked priorities for the week ahead
+/brain-search      load context about a person, project, or decision
+/project-status    status read on any project
+```
+
+Skills write back to the brain. Decisions land in `HIPPOCAMPUS/decisions/`. Patterns land in `CEREBELLUM/patterns.md`. Your context compounds.
+
+### 3. See your brain (optional)
+
+```bash
+# from the cloned repo
+cd dashboard
+npm install
+AIOS_ROOT=~/my-brain npm run dev
+open http://localhost:3000
+```
+
+Local-first dashboard. No account, no cloud. The files on disk are the source of truth; the dashboard is just a viewer.
+
+### Coming soon: one-command install
+
+```
+# Not yet — pending plugin marketplace submission
+claude plugin add aios
+```
+
+See [`docs/getting-started.md`](docs/getting-started.md) for the detailed walkthrough and [`install.sh --help`](plugin/scripts/install.sh) for all options.
 
 ---
 
