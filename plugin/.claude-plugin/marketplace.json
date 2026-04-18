@@ -45,47 +45,19 @@
         {
           "name": "nightly-brain-consolidation",
           "description": "Nightly brain consolidation — processes short-term memory, extracts patterns, improves skills."
-        },
-        {
-          "name": "morning-briefing",
-          "description": "Daily morning briefing — scans Gmail and GCal, produces a prioritized summary of what needs attention."
-        },
-        {
-          "name": "email-triage",
-          "description": "Daily email triage — categorizes inbox, drafts priority replies, surfaces what actually matters."
-        },
-        {
-          "name": "meeting-prep",
-          "description": "Prepare a meeting brief — surfaces relationship context, prior decisions, and open commitments."
-        },
-        {
-          "name": "relationship-check",
-          "description": "Check the status of a relationship — last contact, open commitments, suggested next action."
-        },
-        {
-          "name": "project-status",
-          "description": "Quick status check on any active project — progress, blockers, days since activity, next actions."
-        },
-        {
-          "name": "brain-dump-content",
-          "description": "Process a brain dump into content drafts — extract ideas, research, draft posts."
-        },
-        {
-          "name": "content-interview",
-          "description": "Structured interview to extract content ideas — Claude asks, you answer, drafts get created."
-        },
-        {
-          "name": "reflect",
-          "description": "On-demand reflection — goal-by-goal progress check, pattern analysis, strategic course correction."
-        },
-        {
-          "name": "foresight",
-          "description": "Forward-looking strategic planning — ranked priorities for the week ahead based on goals and patterns."
-        },
-        {
-          "name": "thalamus-calibration",
-          "description": "Nightly self-improvement for the thalamus signal detector — identifies misses, proposes pattern updates."
         }
+      ],
+      "plannedSkills": [
+        { "name": "reflect",              "phase": "P1" },
+        { "name": "foresight",            "phase": "P1" },
+        { "name": "project-status",       "phase": "P1" },
+        { "name": "thalamus-calibration", "phase": "P1" },
+        { "name": "morning-briefing",     "phase": "P2", "requires": ["gmail", "gcal"] },
+        { "name": "email-triage",         "phase": "P2", "requires": ["gmail"] },
+        { "name": "meeting-prep",         "phase": "P2", "requires": ["gcal"] },
+        { "name": "relationship-check",   "phase": "P2" },
+        { "name": "brain-dump-content",   "phase": "P2" },
+        { "name": "content-interview",    "phase": "P2" }
       ],
       "hooks": [
         {
@@ -100,8 +72,13 @@
         },
         {
           "name": "post-tool-failure",
-          "event": "PostToolUseFailure",
-          "description": "Logs every tool or MCP failure to CEREBELLUM/tool-errors.log so the system can learn from them."
+          "event": "PostToolUse",
+          "description": "Logs tool or MCP failures to CEREBELLUM/tool-errors.log so the system can learn from them."
+        },
+        {
+          "name": "user-prompt-submit",
+          "event": "UserPromptSubmit",
+          "description": "Emits a lightweight THALAMUS routing hint based on keyword signals in the prompt."
         }
       ]
     }
