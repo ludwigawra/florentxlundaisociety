@@ -49,10 +49,13 @@
         {
           "name": "reflect",
           "description": "On-demand strategic reflection — goal-by-goal progress, patterns observed, course corrections. Use at checkpoints or when feeling scattered."
+        },
+        {
+          "name": "foresight",
+          "description": "Forward-looking planning — 3-7 ranked priorities for the week or window ahead with explicit cost, progress signals, and one drop. Use when planning a new window or recovering from scatter."
         }
       ],
       "plannedSkills": [
-        { "name": "foresight",            "phase": "P1" },
         { "name": "project-status",       "phase": "P1" },
         { "name": "thalamus-calibration", "phase": "P1" },
         { "name": "morning-briefing",     "phase": "P2", "requires": ["gmail", "gcal"] },

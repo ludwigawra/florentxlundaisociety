@@ -6,6 +6,7 @@
 - **2026-04-18** — Dashboard baseline build (P0). `npm install` resolved 247 packages; typecheck + build both pass (6 routes, ~1s). Fixed Next.js workspace-root warning via `outputFileTracingRoot`. Paths touched: `dashboard/next.config.mjs`, `dashboard/package-lock.json`.
 - **2026-04-18** — Plugin smoke test (P0). Validated: `plugin.json`, `marketplace.json`, `settings.template.json` all parse clean; 4 hooks executable; `session-start.sh` dry-runs with exit 0 in a temp dir, creates session file, prints vital signs. Fixed marketplace claim/reality mismatch: trimmed `skills` to the 4 actually shipped, added `plannedSkills` array with phase + integration requirements for the other 10; added missing `user-prompt-submit` hook declaration; corrected `post-tool-failure` event name from `PostToolUseFailure` → `PostToolUse`. Verify gate: typecheck + build still pass. Paths touched: `plugin/.claude-plugin/marketplace.json`.
 - **2026-04-18** — `reflect` core skill shipped (P1). Full SKILL.md with 7-step process (load context, scope check, goal-by-goal progress with verdicts including `abandoned-quietly`, patterns with two-instance rule, contradictions, course corrections with cost + signal of success, `What went unsaid` section), tone calibration (honest/harsh/gentle, no flattery), optional dated save to short-term, integration handoffs to decision-check/foresight/project-status. Moved `reflect` from `plannedSkills` to `skills` in marketplace. Verify gate: typecheck + build pass. Paths touched: `plugin/skills/core/reflect/SKILL.md`, `plugin/.claude-plugin/marketplace.json`.
+- **2026-04-18** — `foresight` core skill shipped (P1). 8-step process: load context, inventory demand, rank by 5-lens filter (anchored / goal-advancing / compounding / decay-risk / energy-fit in priority order), produce 3-7 ranked priorities each with cost + progress signal + skip-risk, mandatory single drop, cross-check against learned patterns before finalizing. Capacity calibration (light/normal/sprint). Fails gracefully when GCal/Gmail MCPs absent. Feeds the next `reflect` cycle via optional saved foresight note. Moved to `skills` in marketplace. Verify gate: typecheck + build pass. Paths touched: `plugin/skills/core/foresight/SKILL.md`, `plugin/.claude-plugin/marketplace.json`.
 
 ## In Progress
 
@@ -13,9 +14,9 @@
 
 ## Next
 
-1. `foresight` core skill (P1).
-2. `project-status` core skill (P1).
-3. `thalamus-calibration` core skill (P1).
+1. `project-status` core skill (P1).
+2. `thalamus-calibration` core skill (P1).
+3. `plugin/assets/` placeholder screenshots (P3).
 
 ## Blockers
 
