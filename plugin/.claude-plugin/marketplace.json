@@ -57,10 +57,13 @@
         {
           "name": "project-status",
           "description": "Decision-grade status read on one project — cadence, state label (active/stalled/blocked/deprioritized/done/abandoned-quietly), next concrete action, and a continue/revive/close/hand-off/wait recommendation."
+        },
+        {
+          "name": "thalamus-calibration",
+          "description": "Nightly calibration of the thalamus signal detector — compares predicted vs used brain regions across real transcripts, computes precision/recall per category, proposes concrete keyword changes with citations. observe/propose/apply modes; apply requires explicit confirmation."
         }
       ],
       "plannedSkills": [
-        { "name": "thalamus-calibration", "phase": "P1" },
         { "name": "morning-briefing",     "phase": "P2", "requires": ["gmail", "gcal"] },
         { "name": "email-triage",         "phase": "P2", "requires": ["gmail"] },
         { "name": "meeting-prep",         "phase": "P2", "requires": ["gcal"] },
