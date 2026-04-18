@@ -65,6 +65,18 @@
         {
           "name": "thalamus-calibration",
           "description": "Nightly calibration of the thalamus signal detector — compares predicted vs used brain regions across real transcripts, computes precision/recall per category, proposes concrete keyword changes with citations. observe/propose/apply modes; apply requires explicit confirmation."
+        },
+        {
+          "name": "nightly-goal-pursuit",
+          "description": "Advance one long-term goal overnight — research, outreach prep, drafts, or list-building grounded in the brain. Writes a single morning-delivery file under HIPPOCAMPUS/short-term/ with a headline, the first move to take when waking up, concrete outputs, and a gap log. Turns sleep into compounding."
+        },
+        {
+          "name": "behavioral-learning",
+          "description": "Observe how the user actually works — not what they say — and extract behavioral patterns that feed back into skills, triggers, and defaults. Reads archived transcripts, the autonomous-runs ledger, and usage frequency. Writes inferred patterns to CEREBELLUM/behavioral-patterns.md. The difference between 'memory' and 'an assistant that learns you'."
+        },
+        {
+          "name": "auto-outreach-queue",
+          "description": "Autonomously draft a queue of personalized follow-ups for people in SENSORY-CORTEX/people/ who are overdue, have open commitments, or matter for an active goal. Voice-matched, grounded in prior interactions, queued for morning review. Nothing sent without the user's approval."
         }
       ],
       "optionalSkills": [
