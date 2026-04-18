@@ -53,10 +53,13 @@
         {
           "name": "foresight",
           "description": "Forward-looking planning — 3-7 ranked priorities for the week or window ahead with explicit cost, progress signals, and one drop. Use when planning a new window or recovering from scatter."
+        },
+        {
+          "name": "project-status",
+          "description": "Decision-grade status read on one project — cadence, state label (active/stalled/blocked/deprioritized/done/abandoned-quietly), next concrete action, and a continue/revive/close/hand-off/wait recommendation."
         }
       ],
       "plannedSkills": [
-        { "name": "project-status",       "phase": "P1" },
         { "name": "thalamus-calibration", "phase": "P1" },
         { "name": "morning-briefing",     "phase": "P2", "requires": ["gmail", "gcal"] },
         { "name": "email-triage",         "phase": "P2", "requires": ["gmail"] },
