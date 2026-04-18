@@ -9,6 +9,7 @@
 - **2026-04-18** — `foresight` core skill shipped (P1). 8-step process: load context, inventory demand, rank by 5-lens filter (anchored / goal-advancing / compounding / decay-risk / energy-fit in priority order), produce 3-7 ranked priorities each with cost + progress signal + skip-risk, mandatory single drop, cross-check against learned patterns before finalizing. Capacity calibration (light/normal/sprint). Fails gracefully when GCal/Gmail MCPs absent. Feeds the next `reflect` cycle via optional saved foresight note. Moved to `skills` in marketplace. Verify gate: typecheck + build pass. Paths touched: `plugin/skills/core/foresight/SKILL.md`, `plugin/.claude-plugin/marketplace.json`.
 - **2026-04-18** — `project-status` core skill shipped (P1). 8-step process: locate project (fuzzy match with ambiguity refusal), load project CLAUDE.md/MEMORY.md + recent files + cross-referenced decisions/corrections/short-term, compute cadence from git log (last activity, typical cadence, on-rhythm/slowing/silent), extract one-sentence project description, goal, state, open commitments, blockers, next concrete action (labeled `[derived]` if not sourced), classify as active/stalled/blocked/deprioritized/done/abandoned-quietly, recommend continue/revive/close/hand-off/wait. Never recommends `continue` for stalled projects. Three depth modes (snapshot default, full, revive with 5-10 day sequence). Moved to `skills` in marketplace. Verify gate: typecheck + build pass. Paths touched: `plugin/skills/core/project-status/SKILL.md`, `plugin/.claude-plugin/marketplace.json`.
 - **2026-04-18** — `thalamus-calibration` core skill shipped (P1). 8-step process: parse current hook mapping, collect ground truth from archived transcripts, compute per-category precision/recall, find pattern-level issues (dead keywords, unmatched themes, co-firing categories, FP repeat offenders), propose up to 5 concrete changes with ≥2 citations each and risk notes, write dated calibration report under `HIPPOCAMPUS/short-term/`, apply-mode gated behind explicit user confirmation with dated backup + syntax check + auto-revert on failure. Minimum 10-session sample or skip. All changes L2 (draft + queue). Moved to `skills` in marketplace — completes the 4 P1 core skills. Verify gate: typecheck + build pass. Paths touched: `plugin/skills/core/thalamus-calibration/SKILL.md`, `plugin/.claude-plugin/marketplace.json`.
+- **2026-04-18** — `plugin/assets/` screenshots generated (P3). Three branded 1600x900 PNG placeholders rendered with PIL using the AI-OS palette (ink/paper/muted + green/orange/blue accents): `screenshot-welcome.png` (post-init confirmation, green accent), `screenshot-briefing.png` (morning briefing with priorities, orange), `screenshot-brain-map.png` (dashboard brain view, blue). All dimensions and filenames match the references in `marketplace.json`. README in `plugin/assets/` documents palette, dimensions, and replacement plan. Verify gate: typecheck + build pass. Paths touched: `plugin/assets/screenshot-welcome.png`, `plugin/assets/screenshot-briefing.png`, `plugin/assets/screenshot-brain-map.png`, `plugin/assets/README.md`.
 
 ## In Progress
 
@@ -16,9 +17,9 @@
 
 ## Next
 
-1. `plugin/assets/` placeholder screenshots (P3).
-2. Real-world dry-run of `/aios-init` against a temp dir (P3).
-3. Begin P2 skills — start with `relationship-check` (standalone, no integration dependency).
+1. Real-world dry-run of `/aios-init` against a temp dir (P3) — the biggest unverified piece.
+2. `/aios-update` skill scaffold (P3).
+3. Begin P2 skills — `relationship-check` (standalone, no integration dependency).
 
 ## Blockers
 
