@@ -35,6 +35,10 @@
           "description": "Bootstrap a new AI-OS in the current directory — conversational onboarding that scaffolds your brain, configures skills, and sets up the self-improvement loop."
         },
         {
+          "name": "aios-update",
+          "description": "Non-destructive update of an installed AI-OS — pulls new skills, hooks, and templates from the upgraded plugin without touching brain data. diff/apply modes, per-conflict prompts, automatic rollback on failure."
+        },
+        {
           "name": "brain-search",
           "description": "Search the AI-OS brain for relevant files, entities, and knowledge before starting work."
         },
