@@ -67,11 +67,16 @@
           "description": "Nightly calibration of the thalamus signal detector — compares predicted vs used brain regions across real transcripts, computes precision/recall per category, proposes concrete keyword changes with citations. observe/propose/apply modes; apply requires explicit confirmation."
         }
       ],
+      "optionalSkills": [
+        {
+          "name": "relationship-check",
+          "description": "Quick, honest read on one relationship — last contact, freshness verdict, open commitments both ways, specific next action. Reads SENSORY-CORTEX/people/ and cross-references decisions, projects, and optional Gmail/GCal/WhatsApp. No integration required."
+        }
+      ],
       "plannedSkills": [
         { "name": "morning-briefing",     "phase": "P2", "requires": ["gmail", "gcal"] },
         { "name": "email-triage",         "phase": "P2", "requires": ["gmail"] },
         { "name": "meeting-prep",         "phase": "P2", "requires": ["gcal"] },
-        { "name": "relationship-check",   "phase": "P2" },
         { "name": "brain-dump-content",   "phase": "P2" },
         { "name": "content-interview",    "phase": "P2" }
       ],
