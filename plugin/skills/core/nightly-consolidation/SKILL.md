@@ -7,7 +7,7 @@ description: End-of-day consolidation for the AI-OS brain — processes short-te
 
 This is the brain's sleep cycle. Short-term memory accumulates during the day as session files and archived transcripts. Consolidation reads that raw material, extracts what matters, routes it into long-term brain regions, and archives what has been processed. Done well, this is what makes the AI-OS get smarter with use.
 
-The AI-OS root defaults to `~/Desktop/AI-OS/`. If a different root is configured, use that. All paths below are relative to the brain root.
+All paths below are relative to the brain root — the directory containing CLAUDE.md. When invoked as a slash command inside Claude Code, the brain root is the current working directory.
 
 ## When to use
 

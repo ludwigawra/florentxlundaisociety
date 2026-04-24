@@ -7,7 +7,7 @@ description: Check prior decisions and patterns before committing to a new one �
 
 The brain's decision archive is one of its most valuable assets — and also the most under-read. This skill makes it useful. Before any meaningful decision is made (or re-made), query `memory/decisions/`, `learning/patterns.md`, and `MEMORY.md` for prior context, then give a clear recommendation.
 
-The AI-OS root defaults to `~/Desktop/AI-OS/`. If a different root is configured, use that. All paths below are relative to the brain root.
+All paths below are relative to the brain root — the directory containing CLAUDE.md. When invoked as a slash command inside Claude Code, the brain root is the current working directory.
 
 ## When to use
 

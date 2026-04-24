@@ -9,7 +9,7 @@ The thalamus is the `user-prompt-submit.sh` hook that runs on every user prompt 
 
 Calibration is how the thalamus gets better. It is not an on-the-fly decision — it is a review loop that runs against real data and proposes changes, not applies them silently.
 
-The AI-OS root is at `~/Desktop/AI-OS/` by default. If the user has configured a different root (check the plugin config or a root-level `CLAUDE.md` marker), use that path instead. All paths below are relative to the brain root unless noted.
+All paths below are relative to the brain root — the directory containing CLAUDE.md. When invoked as a slash command inside Claude Code, the brain root is the current working directory.
 
 ## When to use
 

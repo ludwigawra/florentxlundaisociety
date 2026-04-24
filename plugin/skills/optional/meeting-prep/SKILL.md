@@ -7,7 +7,7 @@ description: Produce a focused brief for an upcoming meeting — who the attende
 
 Walk in ready. The brief should be short enough to read in 90 seconds and specific enough that the first 2 minutes of the meeting aren't wasted rebuilding context. If the brief is longer than a screen, it has failed the reader.
 
-The AI-OS root is at `~/Desktop/AI-OS/` by default. If the user has configured a different root (check the plugin config or a root-level `CLAUDE.md` marker), use that path instead.
+All paths below are relative to the brain root — the directory containing CLAUDE.md.
 
 **Requires:** Google Calendar MCP (the `gcal` integration). If `gcal` was not enabled in `aios.config.json`, this skill should not have been installed — stop and suggest the user run `/aios-update` with gcal enabled.
 

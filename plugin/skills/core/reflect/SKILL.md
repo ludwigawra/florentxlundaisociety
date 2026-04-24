@@ -7,7 +7,7 @@ description: On-demand strategic reflection across goals, decisions, and learned
 
 Produce an honest, structured reflection on where the user actually stands versus where they intended to stand. The aim is not a recap — it is a re-calibration. Every reflection should leave the user with a sharper picture of what is working, what is not, and what to change.
 
-The AI-OS root is at `~/Desktop/AI-OS/` by default. If the user has configured a different root (check the plugin config or a root-level `CLAUDE.md` marker), use that path instead. All paths below are relative to the brain root unless noted.
+All paths below are relative to the brain root — the directory containing CLAUDE.md. When invoked as a slash command inside Claude Code, the brain root is the current working directory.
 
 ## When to use
 

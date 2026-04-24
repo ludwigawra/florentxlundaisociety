@@ -7,7 +7,7 @@ description: Quick read on the state of a relationship — who they are, last co
 
 Give a honest, compact read on one relationship. The goal is a usable snapshot — enough to write a real message or enter a real conversation without rereading everything. Not a CRM entry; a human picture.
 
-The AI-OS root is at `~/Desktop/AI-OS/` by default. If the user has configured a different root (check the plugin config or a root-level `CLAUDE.md` marker), use that path instead. People entities live at `knowledge/people/{slug}.md`.
+All paths below are relative to the brain root — the directory containing CLAUDE.md. People entities live at `knowledge/people/{slug}.md`.
 
 ## When to use
 

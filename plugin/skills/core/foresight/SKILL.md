@@ -7,7 +7,7 @@ description: Forward-looking strategic planning — ranked priorities for the we
 
 Turn everything the brain already knows into a short, ranked list of what matters next. The goal is not a to-do list — it is a deliberate allocation of the user's next window of attention, with explicit trade-offs named.
 
-The AI-OS root is at `~/Desktop/AI-OS/` by default. If the user has configured a different root (check the plugin config or a root-level `CLAUDE.md` marker), use that path instead. All paths below are relative to the brain root unless noted.
+All paths below are relative to the brain root — the directory containing CLAUDE.md. When invoked as a slash command inside Claude Code, the brain root is the current working directory.
 
 ## When to use
 

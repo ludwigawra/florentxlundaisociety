@@ -16,7 +16,7 @@ You, the user, never explicitly teach the system:
 
 Those behavioral patterns feed forward into: skill defaults, trigger timing, voice rules, autonomous-skill selection. The rest of the system gets sharper — automatically — because this skill ran.
 
-The AI-OS root is at `~/Desktop/AI-OS/` by default; use the configured root if different. All paths below are relative to that root.
+All paths below are relative to the brain root — the directory containing CLAUDE.md. When invoked via a slash command inside Claude Code, that is the user current working directory.
 
 ## When to use
 

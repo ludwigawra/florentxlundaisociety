@@ -7,7 +7,7 @@ description: Search the AI-OS brain for entities, context, prior decisions, and 
 
 Query the user's AI-OS brain to surface everything relevant before you start thinking or writing. The goal is to eliminate duplicate work, avoid contradicting prior decisions, and load the right context into the session.
 
-The AI-OS root is at `~/Desktop/AI-OS/` by default. If the user has configured a different root (check the plugin config or a root-level `CLAUDE.md` marker), use that path instead. All paths below are relative to the brain root unless noted.
+All paths below are relative to the brain root — the directory containing CLAUDE.md. When invoked as a slash command inside Claude Code, the brain root is the current working directory.
 
 ## When to use
 

@@ -11,7 +11,7 @@ This skill does both. Autonomously. Nightly. Into a queue.
 
 The user doesn't dictate who to reach out to or what to say. The brain picks from the contacts it already knows, scores who's stalest vs most relevant, writes drafts grounded in real interaction history, and queues them for a 5-minute morning triage.
 
-The AI-OS root is at `~/Desktop/AI-OS/` by default; use the configured root if different. All paths below are relative to that root.
+All paths below are relative to the brain root — the directory containing CLAUDE.md. When invoked via a slash command inside Claude Code, that is the user current working directory.
 
 ## When to use
 

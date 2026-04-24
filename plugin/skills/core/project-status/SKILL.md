@@ -7,7 +7,7 @@ description: Quick status check on any active project in projects — progress, 
 
 Produce an honest, compact status read on one project. The goal is a decision-grade snapshot — enough for the user to choose between continue, revive, close, or hand off. Not a status report for a stakeholder; a self-check for the operator.
 
-The AI-OS root is at `~/Desktop/AI-OS/` by default. If the user has configured a different root (check the plugin config or a root-level `CLAUDE.md` marker), use that path instead. All paths below are relative to the brain root unless noted. Projects live in `projects/{project-slug}/`, typically with their own `CLAUDE.md` and `MEMORY.md`.
+All paths below are relative to the brain root — the directory containing CLAUDE.md. When invoked as a slash command inside Claude Code, the brain root is the current working directory. Projects live in `projects/{project-slug}/`, typically with their own `CLAUDE.md` and `MEMORY.md`.
 
 ## When to use
 

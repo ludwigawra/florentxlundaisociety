@@ -9,7 +9,7 @@ The point of this skill is the promise: *you go to sleep — the brain works. Yo
 
 Every other "memory" product stores what happened. This one **does what's next.**
 
-The AI-OS root is at `~/Desktop/AI-OS/` by default; use the configured root if different. All paths below are relative to that root.
+All paths below are relative to the brain root — the directory containing CLAUDE.md. When invoked via a slash command inside Claude Code, that is the user current working directory.
 
 ## When to use
 
