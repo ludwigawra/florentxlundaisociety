@@ -11,7 +11,12 @@ set +e
 set -u
 
 ROOT="${CLAUDE_PROJECT_DIR:-$PWD}"
-[ -f "$ROOT/CLAUDE.md" ] || exit 0
+# Only fire inside an actual AI-OS brain. Guards on both CLAUDE.md AND memory/
+# so the plugin stays inert in unrelated repos that happen to have a CLAUDE.md
+# (and never silently creates a stray learning/ folder somewhere).
+if [ ! -f "$ROOT/CLAUDE.md" ] || [ ! -d "$ROOT/memory" ]; then
+  exit 0
+fi
 [ -d "$ROOT/learning" ] || mkdir -p "$ROOT/learning" >/dev/null 2>&1
 
 LOG="$ROOT/learning/tool-errors.log"
