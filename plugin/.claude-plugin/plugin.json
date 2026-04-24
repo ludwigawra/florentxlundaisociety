@@ -1,19 +1,16 @@
 {
-  "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
   "name": "aios",
   "version": "0.1.0",
   "description": "Your second brain for Claude Code — persistent memory, learned patterns, and skills that improve over time.",
   "author": {
-    "name": "AI-OS",
-    "url": "https://aios.dev"
+    "name": "AI-OS"
   },
   "license": "MIT",
-  "homepage": "https://aios.dev",
+  "homepage": "https://github.com/ludwigawra/florentxlundaisociety",
   "keywords": [
     "memory",
     "second-brain",
     "productivity",
-    "solo-founder",
     "knowledge-management",
     "personal-os"
   ]
