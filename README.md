@@ -189,15 +189,11 @@ If you prefer not to use Claude Code's plugin system, you can still install the 
 
 ## Pricing
 
-AI-OS ships as install fee + subscription.
+AI-OS is in early access. The plugin, skills pack, and docs in this repo are open source under MIT and free to install directly from GitHub.
 
-- **Starter** — starting at $X one-time + $Y/month. Core brain, skills pack, single machine.
-- **Pro** — starting at $X one-time + $Y/month. Everything in Starter, plus priority skill updates, multi-device sync.
-- **Team** — custom. Shared folders, team-level skills, admin controls.
+Paid tiers (Starter, Pro, Team) — install fee plus subscription for licensed update channels, multi-device sync, and team-shared folders — are in design. They will not change anything about how local data is stored: your data stays in your brain folder, on your machine, yours forever, regardless of plan.
 
-See the [pricing page](https://example.com/pricing) for current tiers.
-
-The plugin, skills pack, and docs in this repo are open source under MIT. The subscription covers licensed distribution, hosted update channels, and support — not your data or your brain folder. Your data is always local and yours.
+If you want to be notified when paid tiers ship, open an issue or contact the maintainers.
 
 ---
 

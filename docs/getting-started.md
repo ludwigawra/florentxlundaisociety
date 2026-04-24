@@ -6,159 +6,100 @@ This walkthrough takes you from zero to a running AI-OS in about five minutes.
 
 ## Prerequisites
 
-- Claude Code installed (`claude` on your path)
-- Node.js 20 or newer
-- A terminal you're comfortable in
+- Claude Code installed (`claude` on your `PATH`). If you don't have it: [docs.claude.com/en/docs/claude-code](https://docs.claude.com/en/docs/claude-code).
+
+That's all. No Node, no npm, no build step.
 
 ---
 
-## 1. Install the plugin
+## 1. Add the marketplace
+
+In any Claude Code session:
+
+```
+/plugin marketplace add ludwigkreisel/florentxlundaisociety
+```
+
+This tells Claude Code to treat this GitHub repo as a plugin marketplace. It clones the repo locally (cached), reads `.claude-plugin/marketplace.json`, and registers AI-OS as an installable plugin.
+
+---
+
+## 2. Install the plugin
+
+```
+/plugin install aios@aios
+```
+
+(Format: `plugin-name@marketplace-name` — both happen to be `aios` here.)
+
+Claude Code installs the plugin's skills, hooks, and slash commands into its plugin directory. Nothing touches your home directory or any project folder yet.
+
+---
+
+## 3. Bootstrap your brain
+
+Open Claude Code in the directory where you want your brain to live (examples use `~/my-brain`):
 
 ```bash
-claude plugin add aios
-```
-
-This registers the AI-OS plugin with your Claude Code installation. It does not yet create a brain — that happens next.
-
-> `[screenshot: install-plugin.png]`
-
----
-
-## 2. Activate your license
-
-On first use, AI-OS will prompt for a license key. Paste the key you received after purchase.
-
-```
-? Enter your AI-OS license key: ········
-  License validated. Tier: Pro. Expires: 2027-04-18.
-```
-
-Your license is stored in `~/.aios-license` as a signed file. It never leaves your machine except during initial verification. For details on the licensing model, grace periods, and what happens at expiration, see [`plugin/licensing/README.md`](../plugin/licensing/README.md).
-
-> `[screenshot: license-prompt.png]`
-
----
-
-## 3. Initialize the brain
-
-Run Claude Code in any directory and call the init command:
-
-```bash
+mkdir ~/my-brain && cd ~/my-brain
 claude
-> /aios-init
 ```
 
-This creates the brain scaffold at `~/AI-OS/` (or a custom path if you override it):
+Then run the bootstrap skill:
 
 ```
-~/AI-OS/
-├── CLAUDE.md
-├── MEMORY.md
-├── risks.md
-├── memory/
-├── learning/
-├── knowledge/
-├── projects/
-├── routines/
-├── blueprints/
-├── voice/
-├── system/
-└── archive/
+/aios-init
 ```
 
-The init skill will ask a handful of questions to personalize `CLAUDE.md` (your name, your work context, your preferences). Nothing is sent anywhere — answers are written directly to your brain folder.
+`/aios-init` is a short conversational onboarding (eight questions: name, role, company, use case, goals, integrations, content pillars, language, tone). When you confirm, it scaffolds your brain folder:
 
-> `[screenshot: aios-init-walkthrough.png]`
+```
+~/my-brain/
+├── CLAUDE.md           # Identity and protocols
+├── MEMORY.md           # Long-term memory (you trigger writes)
+├── risks.md            # Risk flags read before important actions
+├── memory/             # Decisions, sessions, transcripts
+├── learning/           # Corrections, patterns, skill feedback
+├── knowledge/          # People, companies, market notes
+├── projects/           # Active projects, each with its own CLAUDE.md
+├── routines/           # Daily, weekly, on-demand routines
+├── blueprints/         # Templates and reusable how-tos
+├── voice/              # Brand and communication style
+├── system/             # Goals, architecture, vital signs
+└── archive/            # Inactive but searchable
+```
+
+Hooks are already wired (the plugin install handles that automatically). From now on, every Claude Code session you start *inside* this folder loads your brain context at session start.
 
 ---
 
-## 4. Connect the brain stem
+## 4. First real session
 
-AI-OS reads your brain at the start of every session. For this to happen from any directory, add a one-line pointer to your global Claude Code instructions at `~/.claude/CLAUDE.md`:
+Stay inside `~/my-brain/` and ask Claude to do something substantive — plan a week, draft an email, research a topic, outline a project. Three things happen automatically:
 
-```markdown
-# My system is AI-OS. The brain lives at ~/AI-OS/.
-# On every session, read ~/AI-OS/CLAUDE.md before starting real work.
-```
-
-`/aios-init` offers to do this for you. If you prefer to manage your own global instructions, decline the prompt and add the pointer yourself.
-
----
-
-## 5. Launch the dashboard
-
-The dashboard is a local Next.js app that renders your brain.
-
-```bash
-git clone https://github.com/example/aios
-cd aios
-npm install
-AIOS_ROOT=~/AI-OS npm run dev
-```
-
-Open `http://localhost:3000`. You should see your brain's regions, recent short-term memory, and a graph view.
-
-> `[screenshot: dashboard-first-launch.png]`
-
----
-
-## 6. First real session
-
-Start Claude Code in any directory. Ask it to do something substantive — plan a week, draft an email, research a topic, outline a project.
-
-Three things happen automatically:
-
-1. The `SessionStart` hook creates `memory/short-term/session-YYYY-MM-DD-<topic>.md` and injects context.
+1. The `SessionStart` hook creates `memory/short-term/session-YYYY-MM-DD-<topic>.md` and injects vital signs and learned patterns.
 2. As you work, Claude writes decisions and learnings to that file.
 3. The `SessionEnd` hook archives the full transcript to `memory/short-term/transcripts/`.
 
-Open the dashboard and you'll see the session appear under "Short-term memory."
-
-> `[screenshot: first-session-short-term.png]`
-
 ---
 
-## 7. Let it consolidate
+## 5. Let it consolidate
 
-After a few sessions, let the nightly consolidation run. This is a scheduled skill that:
+After a few sessions, let the nightly consolidation run. It reads archived transcripts for feedback signals, routes feedback to `learning/skill-feedback/<skill>.md`, extracts patterns from corrections, and improves skills when enough feedback accumulates.
 
-- Reads archived transcripts for feedback signals.
-- Routes feedback to `learning/skill-feedback/<skill>.md`.
-- Extracts patterns from corrections.
-- Improves skills when enough feedback accumulates.
+Run it manually any time:
 
-You can run it manually any time:
-
-```bash
-claude
-> /nightly-consolidation
+```
+/nightly-consolidation
 ```
 
 Or schedule it (recommended). See [`docs/skills.md`](skills.md) for scheduling patterns.
-
-> `[screenshot: consolidation-output.png]`
 
 ---
 
 ## Next steps
 
-- Read [`docs/architecture.md`](architecture.md) to understand the brain model in depth.
-- Browse [`docs/skills.md`](skills.md) to see what ships out of the box.
-- Check [`docs/roadmap.md`](roadmap.md) for what's coming.
-- Start populating `knowledge/people/` and `knowledge/companies/` with the people and organizations in your world. This is where compound context comes from.
-
----
-
-## Troubleshooting
-
-**The session hook didn't create a short-term file.**
-Check `~/.claude/hooks.log` for errors. Most commonly this is a missing `AIOS_ROOT` env var or a plugin install that didn't fully link.
-
-**The dashboard shows "No brain found."**
-Ensure `AIOS_ROOT` points to your brain folder when launching `npm run dev`. The default is `~/AI-OS`.
-
-**My license stopped working.**
-Subscriptions have a 14-day grace window. Re-enter your license key or contact support. Your data is never locked — only the plugin's hooks pause.
-
-**Claude isn't reading the brain at session start.**
-Verify your `~/.claude/CLAUDE.md` contains the pointer from step 4. The brain stem pointer is what makes every session connect.
+- Run `/aios-explore` for the full menu of installed skills and when to use each.
+- Read [`docs/architecture.md`](architecture.md) for the design rationale behind the folder layout.
+- Start populating `knowledge/people/` and `knowledge/companies/` — this is where compound context comes from.
+- Connect an MCP (Gmail, Notion, Linear) and run `/forge-skill <mcp-name>` to auto-generate intent-wrapped skills for it.
