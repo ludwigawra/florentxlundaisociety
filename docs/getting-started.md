@@ -17,7 +17,7 @@ That's all. No Node, no npm, no build step.
 In any Claude Code session:
 
 ```
-/plugin marketplace add ludwigkreisel/florentxlundaisociety
+/plugin marketplace add ludwigawra/florentxlundaisociety
 ```
 
 This tells Claude Code to treat this GitHub repo as a plugin marketplace. It clones the repo locally (cached), reads `.claude-plugin/marketplace.json`, and registers AI-OS as an installable plugin.
