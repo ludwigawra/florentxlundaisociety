@@ -15,16 +15,16 @@ set -u
 ROOT="${CLAUDE_PROJECT_DIR:-$PWD}"
 
 # If we're not inside an AI-OS brain, stay silent and exit — do not disturb.
-if [ ! -f "$ROOT/CLAUDE.md" ] || [ ! -d "$ROOT/HIPPOCAMPUS" ]; then
+if [ ! -f "$ROOT/CLAUDE.md" ] || [ ! -d "$ROOT/memory" ]; then
   exit 0
 fi
 
 TODAY="$(date +%Y-%m-%d)"
-SHORT_DIR="$ROOT/HIPPOCAMPUS/short-term"
-CEREBELLUM_DIR="$ROOT/CEREBELLUM"
-DECISIONS_DIR="$ROOT/HIPPOCAMPUS/decisions"
+SHORT_DIR="$ROOT/memory/short-term"
+learning_DIR="$ROOT/learning"
+DECISIONS_DIR="$ROOT/memory/decisions"
 
-mkdir -p "$SHORT_DIR" "$CEREBELLUM_DIR" "$DECISIONS_DIR" >/dev/null 2>&1
+mkdir -p "$SHORT_DIR" "$learning_DIR" "$DECISIONS_DIR" >/dev/null 2>&1
 
 # --- Short UUID (portable, no uuidgen required) ------------------------------
 SHORT_UUID="$(
@@ -94,7 +94,7 @@ fi
 
 # Unextracted corrections: lines starting with "- " in corrections.md that don't have
 # a "[extracted]" marker. Fast, imperfect, good enough as a signal.
-CORRECTIONS_FILE="$CEREBELLUM_DIR/corrections.md"
+CORRECTIONS_FILE="$learning_DIR/corrections.md"
 UNEXTRACTED=0
 if [ -f "$CORRECTIONS_FILE" ]; then
   UNEXTRACTED=$(grep -c '^- ' "$CORRECTIONS_FILE" 2>/dev/null | tr -d ' ')
@@ -116,14 +116,14 @@ printf '  - Last consolidation: %s (%s days ago)\n' "$LAST_CONSOL" "$DAYS_SINCE_
 printf '  - Unextracted corrections: %s\n' "$UNEXTRACTED"
 printf '\n'
 
-PATTERNS_FILE="$CEREBELLUM_DIR/patterns.md"
+PATTERNS_FILE="$learning_DIR/patterns.md"
 if [ -f "$PATTERNS_FILE" ]; then
-  printf 'Active patterns (from CEREBELLUM/patterns.md):\n'
+  printf 'Active patterns (from learning/patterns.md):\n'
   # First 200 lines, indented for readability.
   head -n 200 "$PATTERNS_FILE" 2>/dev/null | sed 's/^/  /'
   printf '\n'
 else
-  printf 'Active patterns: (none yet — CEREBELLUM/patterns.md not found)\n\n'
+  printf 'Active patterns: (none yet — learning/patterns.md not found)\n\n'
 fi
 
 printf 'Reminder: write decisions, learnings, and feedback to the session file during this session.\n'

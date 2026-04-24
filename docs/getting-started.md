@@ -54,16 +54,16 @@ This creates the brain scaffold at `~/AI-OS/` (or a custom path if you override 
 ~/AI-OS/
 ├── CLAUDE.md
 ├── MEMORY.md
-├── AMYGDALA.md
-├── HIPPOCAMPUS/
-├── CEREBELLUM/
-├── SENSORY-CORTEX/
-├── MOTOR-CORTEX/
-├── BASAL-GANGLIA/
-├── PROCEDURAL-MEMORY/
-├── BROCA/
-├── META-COGNITION/
-└── LONG-TERM-STORAGE/
+├── risks.md
+├── memory/
+├── learning/
+├── knowledge/
+├── projects/
+├── routines/
+├── blueprints/
+├── voice/
+├── system/
+└── archive/
 ```
 
 The init skill will ask a handful of questions to personalize `CLAUDE.md` (your name, your work context, your preferences). Nothing is sent anywhere — answers are written directly to your brain folder.
@@ -108,9 +108,9 @@ Start Claude Code in any directory. Ask it to do something substantive — plan 
 
 Three things happen automatically:
 
-1. The `SessionStart` hook creates `HIPPOCAMPUS/short-term/session-YYYY-MM-DD-<topic>.md` and injects context.
+1. The `SessionStart` hook creates `memory/short-term/session-YYYY-MM-DD-<topic>.md` and injects context.
 2. As you work, Claude writes decisions and learnings to that file.
-3. The `SessionEnd` hook archives the full transcript to `HIPPOCAMPUS/short-term/transcripts/`.
+3. The `SessionEnd` hook archives the full transcript to `memory/short-term/transcripts/`.
 
 Open the dashboard and you'll see the session appear under "Short-term memory."
 
@@ -123,7 +123,7 @@ Open the dashboard and you'll see the session appear under "Short-term memory."
 After a few sessions, let the nightly consolidation run. This is a scheduled skill that:
 
 - Reads archived transcripts for feedback signals.
-- Routes feedback to `CEREBELLUM/skill-feedback/<skill>.md`.
+- Routes feedback to `learning/skill-feedback/<skill>.md`.
 - Extracts patterns from corrections.
 - Improves skills when enough feedback accumulates.
 
@@ -131,7 +131,7 @@ You can run it manually any time:
 
 ```bash
 claude
-> /nightly-brain-consolidation
+> /nightly-consolidation
 ```
 
 Or schedule it (recommended). See [`docs/skills.md`](skills.md) for scheduling patterns.
@@ -145,7 +145,7 @@ Or schedule it (recommended). See [`docs/skills.md`](skills.md) for scheduling p
 - Read [`docs/architecture.md`](architecture.md) to understand the brain model in depth.
 - Browse [`docs/skills.md`](skills.md) to see what ships out of the box.
 - Check [`docs/roadmap.md`](roadmap.md) for what's coming.
-- Start populating `SENSORY-CORTEX/people/` and `SENSORY-CORTEX/companies/` with the people and organizations in your world. This is where compound context comes from.
+- Start populating `knowledge/people/` and `knowledge/companies/` with the people and organizations in your world. This is where compound context comes from.
 
 ---
 

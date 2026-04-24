@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# AI-OS — UserPromptSubmit hook (the Thalamus)
+# AI-OS — UserPromptSubmit hook (the Signal)
 # Lightweight keyword routing: reads the user's prompt from stdin/env and
 # prints a single-line THALAMUS hint to stdout that is injected into Claude's
 # context. Suggests which brain regions to activate for the prompt.
@@ -70,8 +70,8 @@ case "$LC" in
   *decision*|*decide*|*should\ i*|*strategy*|*strategic*|*trade-off*|*tradeoff*|*priorit*|*roadmap*)
     add_cat "STRATEGY"
     add_region "MEMORY.md"
-    add_region "META-COGNITION/context/goals-metrics.md"
-    add_region "HIPPOCAMPUS/decisions/"
+    add_region "system/context/goals-metrics.md"
+    add_region "memory/decisions/"
     ;;
 esac
 
@@ -80,7 +80,7 @@ case "$LC" in
   *remember*|*recall*|*brain*|*memory*|*last\ time*|*previously*|*we\ discussed*|*what\ did*)
     add_cat "MEMORY"
     add_region "MEMORY.md"
-    add_region "HIPPOCAMPUS/"
+    add_region "memory/"
     ;;
 esac
 
@@ -88,8 +88,8 @@ esac
 case "$LC" in
   *meeting*|*intro*|*contact*|*reach\ out*|*follow\ up*|*follow-up*|*relationship*|*investor*|*partner*|*client*)
     add_cat "PEOPLE"
-    add_region "SENSORY-CORTEX/people/"
-    add_region "SENSORY-CORTEX/companies/"
+    add_region "knowledge/people/"
+    add_region "knowledge/companies/"
     ;;
 esac
 
@@ -97,8 +97,8 @@ esac
 case "$LC" in
   *project*|*ship*|*build*|*implement*|*deploy*|*release*|*feature*|*sprint*|*task*)
     add_cat "PROJECT"
-    add_region "MOTOR-CORTEX/"
-    add_region "PROCEDURAL-MEMORY/"
+    add_region "projects/"
+    add_region "blueprints/"
     ;;
 esac
 
@@ -106,8 +106,8 @@ esac
 case "$LC" in
   *post*|*linkedin*|*email*|*draft*|*copy*|*write*|*carousel*|*brand*|*voice*|*tone*)
     add_cat "WRITING"
-    add_region "BROCA/brand-guidelines.md"
-    add_region "PROCEDURAL-MEMORY/"
+    add_region "voice/brand-guidelines.md"
+    add_region "blueprints/"
     ;;
 esac
 
@@ -115,8 +115,8 @@ esac
 case "$LC" in
   *system*|*architecture*|*hook*|*skill*|*consolidation*|*ai-os*|*brain\ model*|*meta*)
     add_cat "SYSTEM"
-    add_region "META-COGNITION/architecture.md"
-    add_region "CEREBELLUM/patterns.md"
+    add_region "system/architecture.md"
+    add_region "learning/patterns.md"
     ;;
 esac
 
@@ -124,8 +124,8 @@ esac
 case "$LC" in
   *wrong*|*mistake*|*fix*|*correct*|*learn*|*pattern*|*feedback*)
     add_cat "LEARNING"
-    add_region "CEREBELLUM/corrections.md"
-    add_region "CEREBELLUM/patterns.md"
+    add_region "learning/corrections.md"
+    add_region "learning/patterns.md"
     ;;
 esac
 
@@ -133,7 +133,7 @@ esac
 case "$LC" in
   *risk*|*careful*|*sensitive*|*send\ to*|*before\ i*|*approve*|*publish*)
     add_cat "RISK"
-    add_region "AMYGDALA.md"
+    add_region "risks.md"
     ;;
 esac
 

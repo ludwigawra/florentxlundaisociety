@@ -1,6 +1,6 @@
 ---
 name: auto-outreach-queue
-description: Autonomously draft a queue of personalized follow-up messages for people in SENSORY-CORTEX/people/ who are overdue, have open commitments, or are relevant to an active goal. Each draft matches the user's voice (BROCA rules + behavioral-patterns), cites real prior context, and is queued under HIPPOCAMPUS/short-term/outreach-queue-YYYY-MM-DD.md for morning review. Nothing is sent — the user approves, edits, or discards. The proof that AI-OS acts like you.
+description: Autonomously draft a queue of personalized follow-up messages for people in knowledge/people/ who are overdue, have open commitments, or are relevant to an active goal. Each draft matches the user's voice (voice rules + behavioral-patterns), cites real prior context, and is queued under memory/short-term/outreach-queue-YYYY-MM-DD.md for morning review. Nothing is sent — the user approves, edits, or discards. The proof that AI-OS acts like you.
 ---
 
 # Auto Outreach Queue
@@ -23,9 +23,9 @@ Typically invoked nightly by the scheduler. Manual invocation is fine when:
 
 Do not invoke when:
 
-- SENSORY-CORTEX/people/ has fewer than 5 person files (insufficient signal)
+- knowledge/people/ has fewer than 5 person files (insufficient signal)
 - The last run was in the same calendar day (avoid duplication; check the ledger)
-- No active or at-risk goal exists in `META-COGNITION/context/goals-metrics.md` (drafts without a reason are noise)
+- No active or at-risk goal exists in `system/context/goals-metrics.md` (drafts without a reason are noise)
 
 ## Inputs
 
@@ -41,13 +41,13 @@ Optional caller hints:
 
 Read, in this order:
 
-1. `META-COGNITION/context/goals-metrics.md` — identify the 1–2 goals most dependent on external outreach (fundraise, hiring, sales, partnership — not internal execution)
-2. `SENSORY-CORTEX/people/` — every person file, including frontmatter (relationship, last-contact markers, open commitments)
-3. `SENSORY-CORTEX/companies/` — for context on who a person represents
-4. `HIPPOCAMPUS/decisions/` — pull any decision in the last 90 days that references outreach, a relationship, or a specific contact
-5. `CEREBELLUM/patterns.md` and `CEREBELLUM/behavioral-patterns.md` — voice and timing rules the drafts must respect
-6. `BROCA/` — voice, brand, tone guidelines; `voice-fingerprint.md` if present
-7. `AMYGDALA.md` — outreach red flags (people you should not contact, or contact only under specific conditions)
+1. `system/context/goals-metrics.md` — identify the 1–2 goals most dependent on external outreach (fundraise, hiring, sales, partnership — not internal execution)
+2. `knowledge/people/` — every person file, including frontmatter (relationship, last-contact markers, open commitments)
+3. `knowledge/companies/` — for context on who a person represents
+4. `memory/decisions/` — pull any decision in the last 90 days that references outreach, a relationship, or a specific contact
+5. `learning/patterns.md` and `learning/behavioral-patterns.md` — voice and timing rules the drafts must respect
+6. `voice/` — voice, brand, tone guidelines; `voice-fingerprint.md` if present
+7. `risks.md` — outreach red flags (people you should not contact, or contact only under specific conditions)
 
 ### Step 2 — Score every person
 
@@ -61,7 +61,7 @@ For each person file, compute a composite score:
 | Relevant to a goal currently flagged RED or falling behind | +3 |
 | Explicit follow-up date noted in their file, now reached | +5 |
 | Last interaction ended on an open question or next-step hook | +2 |
-| Person is in AMYGDALA.md as a sensitive contact | apply guardrails; only queue if the file explicitly permits this cycle |
+| Person is in risks.md as a sensitive contact | apply guardrails; only queue if the file explicitly permits this cycle |
 | Person is marked `archived` or `closed` | −10 |
 
 Take the top `N + 2` by score (you'll prune down in step 4).
@@ -78,8 +78,8 @@ For each candidate:
    - *Direct ask* — "I'm working on [goal]; would you [specific ask]?"
    - *Check-in with hook* — "quick check-in; also, [specific reason]"
 3. **Draft in the user's voice.** Respect:
-   - `BROCA/voice-fingerprint.md` rules (tone, sentence length, anti-patterns)
-   - `CEREBELLUM/behavioral-patterns.md` entries in the `voice` category
+   - `voice/voice-fingerprint.md` rules (tone, sentence length, anti-patterns)
+   - `learning/behavioral-patterns.md` entries in the `voice` category
    - Language preference from MEMORY.md (as configured by the user)
 4. **Keep it honest.** 2–5 sentences max for email; 1–2 sentences for LinkedIn; 1 sentence for WhatsApp. No fabricated specifics, no AI-ish hedging, no exclamation marks unless the voice fingerprint explicitly permits them.
 5. **Cite context** in a collapsed `<details>` block under each draft so the user can verify the grounding: "Last interaction: [file] · Open commitment: [quote from file] · Related decision: [[decision-title]]."
@@ -89,7 +89,7 @@ For each candidate:
 Drop any draft that:
 
 - Cannot cite a real prior interaction (you'd be cold-starting — wrong skill for that)
-- Triggers AMYGDALA guardrails on that specific contact
+- Triggers risks guardrails on that specific contact
 - Duplicates a draft already produced in a prior run this week (check `outreach-queue-*.md` files in short-term)
 - Would be the 3rd+ outreach to the same person in a rolling 30-day window (annoyance risk)
 
@@ -99,7 +99,7 @@ Keep the top `N` survivors.
 
 Write exactly one file:
 
-`HIPPOCAMPUS/short-term/outreach-queue-YYYY-MM-DD.md`
+`memory/short-term/outreach-queue-YYYY-MM-DD.md`
 
 Structure:
 
@@ -147,10 +147,10 @@ Approve → A · Edit → E · Discard → D · Skip tonight → S
 
 ### Step 6 — Log the autonomous run
 
-Append one line to `BASAL-GANGLIA/autonomous-runs.jsonl`:
+Append one line to `routines/autonomous-runs.jsonl`:
 
 ```json
-{"ts":"<ISO-8601>","skill":"auto-outreach-queue","mode":"<channel>","status":"pending-review","outputs":<N>,"trigger":"<cron|manual>","artifact":"HIPPOCAMPUS/short-term/outreach-queue-YYYY-MM-DD.md"}
+{"ts":"<ISO-8601>","skill":"auto-outreach-queue","mode":"<channel>","status":"pending-review","outputs":<N>,"trigger":"<cron|manual>","artifact":"memory/short-term/outreach-queue-YYYY-MM-DD.md"}
 ```
 
 This is what the dashboard reads for the "pending review" panel.
@@ -176,10 +176,10 @@ If not configured, skip silently.
 
 - **Do not fabricate.** If you can't cite a real prior touchpoint, drop the draft.
 - **Do not auto-send.** This skill queues; the user sends.
-- **Do not include someone flagged in AMYGDALA.md** unless the flag permits the specific cycle you're in.
+- **Do not include someone flagged in risks.md** unless the flag permits the specific cycle you're in.
 - **Do not over-score open commitments from very long ago.** An open commitment from 6 months ago is probably dead or already resolved off-record; weight recency.
 - **Do not produce generic openers.** "Hope you're well" is a voice anti-pattern by default; the voice fingerprint will usually exclude it.
-- **Do not touch the person's file.** You read from SENSORY-CORTEX; only the consolidation writes back.
+- **Do not touch the person's file.** You read from knowledge; only the consolidation writes back.
 
 ## Calibration
 

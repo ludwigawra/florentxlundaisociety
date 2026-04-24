@@ -47,7 +47,7 @@ Skills are the bridge between *what the user naturally says* and *which tools Cl
 - **Clear intent** — what the user wants in plain language ("reply to my most recent inbound email")
 - **Trigger phrases** — the 3–5 ways a user actually expresses that intent ("reply to X", "draft a response to X", "what should I say back")
 - **Tool choreography** — which MCP tools to call, in what order, to satisfy the intent
-- **Voice match** — how output should read (pulls from `BROCA/brand-guidelines.md` and `CEREBELLUM/behavioral-patterns.md` if present)
+- **Voice match** — how output should read (pulls from `voice/brand-guidelines.md` and `learning/behavioral-patterns.md` if present)
 
 Propose skills that cover the *most common jobs-to-be-done* for this domain. Do not propose skills that are trivial wrappers around a single tool unless the intent is genuinely useful in isolation.
 
@@ -164,17 +164,17 @@ Body template:
 
 ## Output format
 
-{{Describe the shape of the response — a summary, a draft, a list, etc. Keep voice matched to BROCA/brand-guidelines.md if it exists in the user's brain.}}
+{{Describe the shape of the response — a summary, a draft, a list, etc. Keep voice matched to voice/brand-guidelines.md if it exists in the user's brain.}}
 
 ## Never do
 
 - Send anything without the user's explicit approval (same rule as every other write-capable skill).
-- Skip voice matching. If BROCA/brand-guidelines.md exists, read it before drafting.
+- Skip voice matching. If voice/brand-guidelines.md exists, read it before drafting.
 - Over-summarize. The user wants signal, not a digest of everything.
 
 ## Improvement
 
-Feedback on this skill routes to `CEREBELLUM/skill-feedback/{{skill-name}}.md`. The nightly consolidation reads it and edits this file when three pending signals accumulate.
+Feedback on this skill routes to `learning/skill-feedback/{{skill-name}}.md`. The nightly consolidation reads it and edits this file when three pending signals accumulate.
 ```
 
 Adapt each skill's body to fit the actual tools and intent — do not leave `{{placeholder}}` tokens in the output file.
@@ -183,7 +183,7 @@ Adapt each skill's body to fit the actual tools and intent — do not leave `{{p
 
 ## Phase 5 — Log the run
 
-Append a new entry to `CEREBELLUM/skill-forge-history.md` (create the file with a H1 header if missing):
+Append a new entry to `learning/skill-forge-history.md` (create the file with a H1 header if missing):
 
 ```markdown
 ## {{today}} — forged from {{mcp-name}}

@@ -10,12 +10,12 @@ set -u
 
 ROOT="${CLAUDE_PROJECT_DIR:-$PWD}"
 
-if [ ! -f "$ROOT/CLAUDE.md" ] || [ ! -d "$ROOT/HIPPOCAMPUS" ]; then
+if [ ! -f "$ROOT/CLAUDE.md" ] || [ ! -d "$ROOT/memory" ]; then
   exit 0
 fi
 
 TODAY="$(date +%Y-%m-%d)"
-SHORT_DIR="$ROOT/HIPPOCAMPUS/short-term"
+SHORT_DIR="$ROOT/memory/short-term"
 TRANSCRIPT_DIR="$SHORT_DIR/transcripts"
 mkdir -p "$TRANSCRIPT_DIR" >/dev/null 2>&1
 

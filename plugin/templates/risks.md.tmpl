@@ -6,7 +6,7 @@ updated: {{today}}
 status: active
 ---
 
-# AMYGDALA — Risk Rules
+# risks — Risk Rules
 
 _Read this before any important action._ When a situation matches one of the rules below, treat the default behavior as "stop and ask" — even if the agent's authority level (L0–L3) would otherwise permit it.
 
@@ -28,13 +28,13 @@ The amygdala's job is to slow the agent down at moments where a mistake is expen
 - **Quotes, pricing, or scope changes sent to clients** → review before send.
 
 ### Data and destructive actions
-- **Deleting or archiving anything in the brain** (files in `HIPPOCAMPUS/`, `MOTOR-CORTEX/`, etc.) → confirm first. Prefer archive over delete.
-- **Overwriting existing entity files** (`SENSORY-CORTEX/people/*`, `companies/*`) → merge, don't replace. Flag conflicts.
-- **Changing system architecture** (`CLAUDE.md`, `AMYGDALA.md`, `META-COGNITION/architecture.md`) → always L3.
+- **Deleting or archiving anything in the brain** (files in `memory/`, `projects/`, etc.) → confirm first. Prefer archive over delete.
+- **Overwriting existing entity files** (`knowledge/people/*`, `companies/*`) → merge, don't replace. Flag conflicts.
+- **Changing system architecture** (`CLAUDE.md`, `risks.md`, `system/architecture.md`) → always L3.
 - **Pushing to `main`, force pushes, or rewriting git history** → require explicit approval.
 
 ### Identity and reputation
-- **Claims about {{user.name}} or {{user.company}}** in public content → verify against `MEMORY.md`, `META-COGNITION/context/goals-metrics.md`, and `BROCA/brand-guidelines.md` before publishing.
+- **Claims about {{user.name}} or {{user.company}}** in public content → verify against `MEMORY.md`, `system/context/goals-metrics.md`, and `voice/brand-guidelines.md` before publishing.
 - **Legal, medical, or financial claims** → never invent. Cite or ask.
 - **Anything that could be mistaken for an official statement** → flag.
 
@@ -46,7 +46,7 @@ The amygdala's job is to slow the agent down at moments where a mistake is expen
 
 ## Contradiction Rules
 
-- If a proposed action conflicts with `MEMORY.md` or a prior decision in `HIPPOCAMPUS/decisions/` → stop and flag the conflict.
+- If a proposed action conflicts with `MEMORY.md` or a prior decision in `memory/decisions/` → stop and flag the conflict.
 - If two recent inputs disagree (e.g., email vs. calendar vs. stated preference) → surface the disagreement instead of guessing.
 
 ---
@@ -61,6 +61,6 @@ The amygdala's job is to slow the agent down at moments where a mistake is expen
 
 _Add project-specific or personal red flags below. Keep each rule short, specific, and actionable._
 
-- _Example: "Before emailing anyone at [Company X], re-read the escalation notes in `HIPPOCAMPUS/decisions/`."_
+- _Example: "Before emailing anyone at [Company X], re-read the escalation notes in `memory/decisions/`."_
 - _Example: "Do not post on LinkedIn without a second pass on hook + first line."_
 - _Example: "Never auto-respond to anything labelled `urgent` — wake me instead."_

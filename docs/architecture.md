@@ -27,11 +27,11 @@ The tradeoff: retrieval has to be smart without being clever. Skills read the re
 
 Each region maps to a cognitive function. The boundaries are opinionated — they were chosen so that most things have an obvious home and very few things belong in two places.
 
-### Prefrontal Cortex — `CLAUDE.md` (root)
+### Identity — `CLAUDE.md` (root)
 
 Identity and executive control. Decision rules, protocols, the session lifecycle, the rules for what goes where. This is the file every session reads first.
 
-### Hippocampus — `HIPPOCAMPUS/`
+### Memory — `memory/`
 
 Episodic memory. What happened, when, and why.
 
@@ -41,7 +41,7 @@ Episodic memory. What happened, when, and why.
 
 `MEMORY.md` at the root is the consolidated long-term surface of the hippocampus — the distilled, persistent layer.
 
-### Cerebellum — `CEREBELLUM/`
+### Learning — `learning/`
 
 Error correction and learning.
 
@@ -52,7 +52,7 @@ Error correction and learning.
 
 The cerebellum is how the system learns. Feedback flows in. Patterns flow out. Skills update themselves based on what accumulates here.
 
-### Sensory Cortex — `SENSORY-CORTEX/`
+### Knowledge — `knowledge/`
 
 World knowledge — processed external data.
 
@@ -63,11 +63,11 @@ World knowledge — processed external data.
 
 Everything here is an entity. Every entity has frontmatter. Every reference between entities is a wiki-link. This is what makes the knowledge graph.
 
-### Motor Cortex — `MOTOR-CORTEX/`
+### Projects — `projects/`
 
 Active projects. Each project is a subfolder with its own `CLAUDE.md` and `MEMORY.md`. Projects have isolated memory and identity overrides so a session working on one project doesn't leak context from another.
 
-### Basal Ganglia — `BASAL-GANGLIA/`
+### Routines — `routines/`
 
 Habits and processes.
 
@@ -77,23 +77,23 @@ Habits and processes.
 
 The basal ganglia holds the "how we do things" — the documented routines that run on schedule or on demand.
 
-### Procedural Memory — `PROCEDURAL-MEMORY/`
+### Blueprints — `blueprints/`
 
-Templates and blueprints. How to make a thing. Distinct from Basal Ganglia (how we do things) — procedural memory is the artifact layer.
+Templates and blueprints. How to make a thing. Distinct from Routines (how we do things) — procedural memory is the artifact layer.
 
-### Broca — `BROCA/`
+### Voice — `voice/`
 
 Communication and expression. Brand guidelines, messaging, voice, visual assets. The part of the brain that handles output style.
 
-### Amygdala — `AMYGDALA.md` (root)
+### Risks — `risks.md` (root)
 
 Risk assessment. Read before important actions. One flat file because it should fit in context and be readable in ten seconds.
 
-### Meta-Cognition — `META-COGNITION/`
+### System — `system/`
 
 The system thinking about itself. Architecture docs, capabilities, vital signs, context files. Where the brain keeps its self-model.
 
-### Long-Term Storage — `LONG-TERM-STORAGE/`
+### Long-Term Storage — `archive/`
 
 Archive. Not active, but searchable. The place things go when they matter historically but not operationally.
 
@@ -104,27 +104,27 @@ Archive. Not active, but searchable. The place things go when they matter histor
 ### Session start
 
 1. Plugin `SessionStart` hook fires.
-2. Hook creates a short-term memory file: `HIPPOCAMPUS/short-term/session-YYYY-MM-DD-<topic>.md`.
+2. Hook creates a short-term memory file: `memory/short-term/session-YYYY-MM-DD-<topic>.md`.
 3. Hook injects vital signs and recent patterns into Claude's context.
-4. Claude reads (in order): `CLAUDE.md`, `MEMORY.md`, `CEREBELLUM/patterns.md`. Reads `AMYGDALA.md` if the session involves external action. Reads project `CLAUDE.md` if working on a project.
+4. Claude reads (in order): `CLAUDE.md`, `MEMORY.md`, `learning/patterns.md`. Reads `risks.md` if the session involves external action. Reads project `CLAUDE.md` if working on a project.
 5. Session begins with full context.
 
 ### During the session
 
-Claude writes to short-term memory as the session unfolds — decisions, corrections, new information, feedback. Skills read from the brain, do their work, and write back. The Cerebellum captures feedback on skill outputs in real time.
+Claude writes to short-term memory as the session unfolds — decisions, corrections, new information, feedback. Skills read from the brain, do their work, and write back. The Learning captures feedback on skill outputs in real time.
 
 ### Session end
 
 1. Plugin `SessionEnd` hook fires.
-2. Full transcript archived to `HIPPOCAMPUS/short-term/transcripts/`.
+2. Full transcript archived to `memory/short-term/transcripts/`.
 3. Session file is finalized.
 
 ### Nightly consolidation
 
-The `nightly-brain-consolidation` skill (invoked on schedule) processes everything that accumulated in short-term memory:
+The `nightly-consolidation` skill (invoked on schedule) processes everything that accumulated in short-term memory:
 
 - Reads archived transcripts for missed feedback signals.
-- Routes feedback to `CEREBELLUM/skill-feedback/<skill>.md`.
+- Routes feedback to `learning/skill-feedback/<skill>.md`.
 - When 3+ pending entries exist for a skill, edits the skill itself.
 - Extracts patterns from corrections.
 - Clears processed short-term files.

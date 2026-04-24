@@ -10,9 +10,9 @@ This repository is not a project — it is a **second brain** that Claude Code o
 
 - **Identity & protocols** → `CLAUDE.md`
 - **Long-term memory** → `MEMORY.md`
-- **Risk rules** → `AMYGDALA.md`
-- **Brain architecture** → `META-COGNITION/architecture.md`
-- **Health check** → `META-COGNITION/vital-signs.md`
+- **Risk rules** → `risks.md`
+- **Brain architecture** → `system/architecture.md`
+- **Health check** → `system/vital-signs.md`
 
 ---
 
@@ -20,12 +20,12 @@ This repository is not a project — it is a **second brain** that Claude Code o
 
 1. Open this folder in Claude Code.
 2. Start a session. Claude will:
-   - Read `CLAUDE.md`, `MEMORY.md`, and `CEREBELLUM/patterns.md` automatically.
-   - Create a short-term memory file under `HIPPOCAMPUS/short-term/`.
+   - Read `CLAUDE.md`, `MEMORY.md`, and `learning/patterns.md` automatically.
+   - Create a short-term memory file under `memory/short-term/`.
    - Run a quick vital-signs check.
 3. Work normally. As you go:
-   - The agent writes to `HIPPOCAMPUS/short-term/` in real time.
-   - Feedback you give flows into `CEREBELLUM/`.
+   - The agent writes to `memory/short-term/` in real time.
+   - Feedback you give flows into `learning/`.
    - Skills and patterns improve over time.
 4. Nightly consolidation processes working memory into decisions, patterns, and skill improvements.
 
@@ -36,18 +36,18 @@ This repository is not a project — it is a **second brain** that Claude Code o
 ```
 AI-OS/
 |-- CLAUDE.md ............ identity + protocols
-|-- AMYGDALA.md .......... risk rules
+|-- risks.md .......... risk rules
 |-- MEMORY.md ............ long-term memory
 |
-|-- HIPPOCAMPUS/ ......... memory (decisions, short-term, transcripts)
-|-- CEREBELLUM/ .......... learning (corrections, patterns, skill feedback)
-|-- SENSORY-CORTEX/ ...... world knowledge (people, companies, market)
-|-- BASAL-GANGLIA/ ....... habits (daily, weekly, on-demand)
-|-- MOTOR-CORTEX/ ........ active projects
-|-- PROCEDURAL-MEMORY/ ... templates & blueprints
-|-- BROCA/ ............... brand, voice, assets
-|-- META-COGNITION/ ...... goals, metrics, architecture, vital signs
-\-- LONG-TERM-STORAGE/ ... archive
+|-- memory/ ......... memory (decisions, short-term, transcripts)
+|-- learning/ .......... learning (corrections, patterns, skill feedback)
+|-- knowledge/ ...... world knowledge (people, companies, market)
+|-- routines/ ....... habits (daily, weekly, on-demand)
+|-- projects/ ........ active projects
+|-- blueprints/ ... templates & blueprints
+|-- voice/ ............... brand, voice, assets
+|-- system/ ...... goals, metrics, architecture, vital signs
+\-- archive/ ... archive
 ```
 
 ---
@@ -64,10 +64,10 @@ AI-OS/
 ## First steps
 
 1. Open `CLAUDE.md` and read the session protocol.
-2. Fill out `META-COGNITION/context/goals-metrics.md` with your current priorities.
-3. Add your first person or company to `SENSORY-CORTEX/` to see the graph start to form.
-4. Tune `BROCA/brand-guidelines.md` so any content the agent generates already sounds like you.
-5. Add your first risk rule to `AMYGDALA.md` — usually "don't send anything to [X] without me reviewing it first".
+2. Fill out `system/context/goals-metrics.md` with your current priorities.
+3. Add your first person or company to `knowledge/` to see the graph start to form.
+4. Tune `voice/brand-guidelines.md` so any content the agent generates already sounds like you.
+5. Add your first risk rule to `risks.md` — usually "don't send anything to [X] without me reviewing it first".
 
 ---
 

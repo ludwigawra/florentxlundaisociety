@@ -63,7 +63,7 @@ Follow-up prompt for drama:
 
 > "Check the status of Marcus. Use /relationship-check."
 
-Claude pulls `SENSORY-CORTEX/people/marcus-vogel.md`, sees the open commitment ("logo variations by 2026-04-24"), cross-references the brand-refresh project, and reports state + next action.
+Claude pulls `knowledge/people/marcus-vogel.md`, sees the open commitment ("logo variations by 2026-04-24"), cross-references the brand-refresh project, and reports state + next action.
 
 ---
 
@@ -81,8 +81,8 @@ Then open **http://localhost:3000** in the browser.
 
 **What to show**:
 - Home: 6 panels — vital signs, active context (from MEMORY.md), brain activity, patterns recognized, decisions made, memory load
-- `/r/HIPPOCAMPUS`: the 3 seeded decisions
-- `/r/SENSORY-CORTEX`: Maya, Marcus, Northfield
+- `/r/memory`: the 3 seeded decisions
+- `/r/knowledge`: Maya, Marcus, Northfield
 - `/memory`: the full MEMORY.md sectioned by `##` headers
 - Click a wiki-link inside a decision → navigates to the linked entity
 

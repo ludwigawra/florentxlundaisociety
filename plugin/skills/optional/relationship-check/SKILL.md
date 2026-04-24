@@ -1,13 +1,13 @@
 ---
 name: relationship-check
-description: Quick read on the state of a relationship — who they are, last contact, open commitments, unresolved threads, and a specific next action. Reads SENSORY-CORTEX/people/ and cross-references any mentions in HIPPOCAMPUS/decisions/, CEREBELLUM/corrections.md, and MOTOR-CORTEX/. Use before sending an email or message to someone you have not talked with in a while, before a meeting, when a name comes up and you need context, or when deciding whether a relationship needs attention.
+description: Quick read on the state of a relationship — who they are, last contact, open commitments, unresolved threads, and a specific next action. Reads knowledge/people/ and cross-references any mentions in memory/decisions/, learning/corrections.md, and projects/. Use before sending an email or message to someone you have not talked with in a while, before a meeting, when a name comes up and you need context, or when deciding whether a relationship needs attention.
 ---
 
 # Relationship Check
 
 Give a honest, compact read on one relationship. The goal is a usable snapshot — enough to write a real message or enter a real conversation without rereading everything. Not a CRM entry; a human picture.
 
-The AI-OS root is at `~/Desktop/AI-OS/` by default. If the user has configured a different root (check the plugin config or a root-level `CLAUDE.md` marker), use that path instead. People entities live at `SENSORY-CORTEX/people/{slug}.md`.
+The AI-OS root is at `~/Desktop/AI-OS/` by default. If the user has configured a different root (check the plugin config or a root-level `CLAUDE.md` marker), use that path instead. People entities live at `knowledge/people/{slug}.md`.
 
 ## When to use
 
@@ -25,7 +25,7 @@ Do not invoke for someone actively in the current session's context — that inf
 
 The caller should provide:
 
-- **Person** — name or slug. Accept partial matches against `SENSORY-CORTEX/people/` basenames and `name`/`aliases` fields in frontmatter.
+- **Person** — name or slug. Accept partial matches against `knowledge/people/` basenames and `name`/`aliases` fields in frontmatter.
 - **Purpose** — optional: what the user is about to do (reach out / prep for meeting / decide on status). Changes which sections of the output get expanded.
 
 If multiple people match a partial name, list the candidates (name + company + last contact) and ask. If no match, ask whether to create a new person file.
@@ -36,7 +36,7 @@ If multiple people match a partial name, list the candidates (name + company + l
 
 Resolve the file in this order:
 
-1. Exact filename match under `SENSORY-CORTEX/people/`
+1. Exact filename match under `knowledge/people/`
 2. Case-insensitive partial match on filename
 3. Match on the `name` field in frontmatter
 4. Match on any `aliases` list in frontmatter (if present)
@@ -58,11 +58,11 @@ Read the full file, parsing frontmatter and body. Expected frontmatter fields (f
 
 Search the rest of the brain for mentions of this person:
 
-1. `HIPPOCAMPUS/decisions/` — any decision whose frontmatter `related` lists this person's wiki-link, or whose body mentions the name. Note dates.
-2. `CEREBELLUM/corrections.md` — any correction that referenced this person (e.g., "sent too long an email to X" — context worth remembering).
-3. `MOTOR-CORTEX/*/` — any project whose files mention the person. Projects they're embedded in.
-4. `HIPPOCAMPUS/short-term/` — recent session files (last 30 days).
-5. `SENSORY-CORTEX/companies/` — if the person has a `company` field, load that company's file too. Relationships often sit in the intersection.
+1. `memory/decisions/` — any decision whose frontmatter `related` lists this person's wiki-link, or whose body mentions the name. Note dates.
+2. `learning/corrections.md` — any correction that referenced this person (e.g., "sent too long an email to X" — context worth remembering).
+3. `projects/*/` — any project whose files mention the person. Projects they're embedded in.
+4. `memory/short-term/` — recent session files (last 30 days).
+5. `knowledge/companies/` — if the person has a `company` field, load that company's file too. Relationships often sit in the intersection.
 6. Optional MCPs (if enabled and available):
    - Gmail: search for threads with this person (most recent 5)
    - GCal: meetings with this person (past 30 days + upcoming)
@@ -140,7 +140,7 @@ After the output, if anything surfaced that belongs in `MEMORY.md` (not in short
 If the person file does not exist:
 
 1. Search the brain for name mentions (they might be referenced in decisions or short-term without having a file yet)
-2. If found, offer to create a stub `SENSORY-CORTEX/people/{slug}.md` with the context extracted from mentions
+2. If found, offer to create a stub `knowledge/people/{slug}.md` with the context extracted from mentions
 3. If not found, say so plainly and ask whether to create a new person file from scratch with the user's input
 
 Never fabricate details. If the only evidence is "the user mentioned a Jane in a short-term file once", say that and nothing more.
@@ -159,4 +159,4 @@ Never fabricate details. If the only evidence is "the user mentioned a Jane in a
 - Pair with `meeting-prep` when the purpose is meeting preparation — meeting-prep handles the overall brief, relationship-check handles the person-by-person layer.
 - Pair with `decision-check` when the relationship has open decisions — surface whether any pending decision involves this person.
 - If the relationship has been dormant, consider whether `reflect` or `foresight` should promote a re-engage action into next week's priorities.
-- If the check surfaces a repeated pattern across multiple relationships (e.g., "every investor intro goes dormant after 3 weeks"), suggest persisting it to `CEREBELLUM/patterns.md` via consolidation — do not edit `patterns.md` here.
+- If the check surfaces a repeated pattern across multiple relationships (e.g., "every investor intro goes dormant after 3 weeks"), suggest persisting it to `learning/patterns.md` via consolidation — do not edit `patterns.md` here.

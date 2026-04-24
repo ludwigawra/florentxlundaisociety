@@ -5,7 +5,7 @@ description: Check prior decisions and patterns before committing to a new one �
 
 # Decision Check
 
-The brain's decision archive is one of its most valuable assets — and also the most under-read. This skill makes it useful. Before any meaningful decision is made (or re-made), query `HIPPOCAMPUS/decisions/`, `CEREBELLUM/patterns.md`, and `MEMORY.md` for prior context, then give a clear recommendation.
+The brain's decision archive is one of its most valuable assets — and also the most under-read. This skill makes it useful. Before any meaningful decision is made (or re-made), query `memory/decisions/`, `learning/patterns.md`, and `MEMORY.md` for prior context, then give a clear recommendation.
 
 The AI-OS root defaults to `~/Desktop/AI-OS/`. If a different root is configured, use that. All paths below are relative to the brain root.
 
@@ -46,17 +46,17 @@ Run these in parallel:
 
 **Filename match on decisions** (decisions are named as claims):
 
-- Glob `HIPPOCAMPUS/decisions/*{keyword}*.md` for each keyword
-- Glob `HIPPOCAMPUS/decisions/*.md` and scan the list if keywords are short or ambiguous
+- Glob `memory/decisions/*{keyword}*.md` for each keyword
+- Glob `memory/decisions/*.md` and scan the list if keywords are short or ambiguous
 
 **Content match on decisions:**
 
-- Grep case-insensitive across `HIPPOCAMPUS/decisions/` for each keyword
+- Grep case-insensitive across `memory/decisions/` for each keyword
 - Also grep `supersedes:` frontmatter — prior chains of decisions on the same topic are a strong signal
 
 **Patterns:**
 
-- Grep `CEREBELLUM/patterns.md` for the keywords. A pattern is a higher-order lesson — it often applies even when no specific decision exists
+- Grep `learning/patterns.md` for the keywords. A pattern is a higher-order lesson — it often applies even when no specific decision exists
 
 **Long-term memory:**
 
@@ -64,11 +64,11 @@ Run these in parallel:
 
 **Goals and current priorities:**
 
-- Read `META-COGNITION/context/goals-metrics.md` if it exists — does the proposed direction advance or conflict with a current goal?
+- Read `system/context/goals-metrics.md` if it exists — does the proposed direction advance or conflict with a current goal?
 
 **Corrections:**
 
-- Grep `CEREBELLUM/corrections.md` for the keywords. A prior mistake on this topic is a loud signal
+- Grep `learning/corrections.md` for the keywords. A prior mistake on this topic is a loud signal
 
 Exclude `.obsidian/`, `node_modules/`, `.git/`, and archived short-term files.
 
@@ -96,7 +96,7 @@ For each prior decision, compare it against the proposed direction:
 
 Also compare against:
 
-- **Patterns** — does `CEREBELLUM/patterns.md` say this approach tends to fail?
+- **Patterns** — does `learning/patterns.md` say this approach tends to fail?
 - **Corrections** — did a prior correction specifically warn against this?
 - **Goals** — does this advance current priorities or pull against them?
 
@@ -121,12 +121,12 @@ Present the result in this structure:
 If none: "No prior decisions on this topic."
 
 ### Relevant patterns
-- From `CEREBELLUM/patterns.md`: "{pattern statement}" — applies because {reason}.
+- From `learning/patterns.md`: "{pattern statement}" — applies because {reason}.
 
 If none: omit.
 
 ### Relevant corrections
-- From `CEREBELLUM/corrections.md` (YYYY-MM-DD): "{what went wrong}" — relevant because {reason}.
+- From `learning/corrections.md` (YYYY-MM-DD): "{what went wrong}" — relevant because {reason}.
 
 If none: omit.
 
@@ -157,7 +157,7 @@ Keep the report tight. If multiple sections are empty, cut them rather than writ
 After the recommendation, if the user decides to proceed or supersede, help create the decision record:
 
 1. **Filename** — write the claim as hyphenated lowercase, e.g., `charge-for-discovery-calls.md`. Filenames should read as statements, not categories.
-2. **Path** — `HIPPOCAMPUS/decisions/{claim}.md`
+2. **Path** — `memory/decisions/{claim}.md`
 3. **Frontmatter:**
 
 ```yaml
@@ -219,7 +219,7 @@ If the search reveals three or more active decisions on the same topic that don'
 ## Failure modes to avoid
 
 - Searching only by filename and missing content-level hits. A prior decision may live in a differently-named file.
-- Reporting "no prior decisions" when there is a clearly-relevant pattern in `CEREBELLUM/patterns.md`. Patterns count.
+- Reporting "no prior decisions" when there is a clearly-relevant pattern in `learning/patterns.md`. Patterns count.
 - Silently overwriting a prior decision's status without writing a new file. The superseding decision needs its own record.
 - Recommending "Proceed" when a correction warns against exactly this direction. Corrections outrank intuition.
 - Burying the recommendation under a wall of table output. The user should know within one sentence whether to continue, pause, or reconsider.

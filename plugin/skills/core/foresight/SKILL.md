@@ -39,13 +39,13 @@ If the user does not supply a window, ask one short clarifying question. A weekl
 
 Read in this order:
 
-1. `META-COGNITION/context/goals-metrics.md` — current goals and metrics. This is the anchor. If missing or stale (>30 days since `updated`), flag that the foresight will be informed by out-of-date goals.
+1. `system/context/goals-metrics.md` — current goals and metrics. This is the anchor. If missing or stale (>30 days since `updated`), flag that the foresight will be informed by out-of-date goals.
 2. `MEMORY.md` — the `## Active Context` section for what the user considers live.
-3. `HIPPOCAMPUS/decisions/` — recent decisions (last 14 days for a weekly window, 30 for monthly, 90 for quarterly). Note decisions that imply upcoming work.
-4. `CEREBELLUM/patterns.md` — active patterns, especially any related to capacity, energy, or scheduling.
-5. `MOTOR-CORTEX/` — active project folders. For each, check the most recent file and note what the obvious next step is.
+3. `memory/decisions/` — recent decisions (last 14 days for a weekly window, 30 for monthly, 90 for quarterly). Note decisions that imply upcoming work.
+4. `learning/patterns.md` — active patterns, especially any related to capacity, energy, or scheduling.
+5. `projects/` — active project folders. For each, check the most recent file and note what the obvious next step is.
 6. Calendar context if available (via Gmail/GCal MCP) — meetings, time blocks, travel. If the MCP is not connected, proceed without and note the gap.
-7. `HIPPOCAMPUS/short-term/` — the last 2–3 session files for signals the user did not explicitly add to goals.
+7. `memory/short-term/` — the last 2–3 session files for signals the user did not explicitly add to goals.
 
 Do not fail if an optional input is missing. State which sources informed the foresight and which were absent.
 
@@ -122,11 +122,11 @@ Do not pad with motivational language. The priorities are the output.
 
 ### 8. Cross-check against patterns
 
-Before finalizing, scan `CEREBELLUM/patterns.md` one last time with the draft plan in view. If a learned pattern warns against something in the plan (e.g., "scheduling deep work after 3pm never lands"), either remove the offender or flag it explicitly with an acknowledgement. Do not silently ignore patterns — that is how patterns become stale.
+Before finalizing, scan `learning/patterns.md` one last time with the draft plan in view. If a learned pattern warns against something in the plan (e.g., "scheduling deep work after 3pm never lands"), either remove the offender or flag it explicitly with an acknowledgement. Do not silently ignore patterns — that is how patterns become stale.
 
 ## Logging
 
-After producing the foresight, offer to save it as a dated note in `HIPPOCAMPUS/short-term/` with the filename pattern `foresight-YYYY-MM-DD-<window>.md`. Do not save without the user confirming.
+After producing the foresight, offer to save it as a dated note in `memory/short-term/` with the filename pattern `foresight-YYYY-MM-DD-<window>.md`. Do not save without the user confirming.
 
 If the user confirms, write the note with frontmatter:
 
@@ -157,4 +157,4 @@ A saved foresight feeds the next `reflect` cycle — the user can measure what a
 - If `reflect` produced course corrections, feed them directly into step 3 as candidate priorities.
 - If the plan reveals contradictions between goals and active decisions, hand off to `decision-check` before finalizing.
 - If any priority is a stalled project, pair with `project-status` to confirm the next concrete step before the user commits.
-- If the plan surfaces a repeated pattern (e.g., Mondays are overbooked for three weeks running), suggest persisting it to `CEREBELLUM/patterns.md` via consolidation — do not edit `patterns.md` yourself.
+- If the plan surfaces a repeated pattern (e.g., Mondays are overbooked for three weeks running), suggest persisting it to `learning/patterns.md` via consolidation — do not edit `patterns.md` yourself.

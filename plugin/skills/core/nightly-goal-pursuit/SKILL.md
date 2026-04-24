@@ -1,6 +1,6 @@
 ---
 name: nightly-goal-pursuit
-description: While the user sleeps, advance one long-term goal by doing preparatory work (research, drafts, list-building, brief notes) that removes friction from tomorrow's first move. Use at night (typically scheduled after nightly-brain-consolidation), when the user wants to wake up to visible progress, or when a goal has stalled because the next step is ambiguous. Produces a single morning-delivery file under HIPPOCAMPUS/short-term/ with a one-paragraph headline, 3–10 concrete outputs ready to review, and a clear "first move when you wake up" line.
+description: While the user sleeps, advance one long-term goal by doing preparatory work (research, drafts, list-building, brief notes) that removes friction from tomorrow's first move. Use at night (typically scheduled after nightly-consolidation), when the user wants to wake up to visible progress, or when a goal has stalled because the next step is ambiguous. Produces a single morning-delivery file under memory/short-term/ with a one-paragraph headline, 3–10 concrete outputs ready to review, and a clear "first move when you wake up" line.
 ---
 
 # Nightly Goal Pursuit
@@ -16,15 +16,15 @@ The AI-OS root is at `~/Desktop/AI-OS/` by default; use the configured root if d
 Invoke this skill when any of the following apply:
 
 - It is night (or the user is about to close for the day) and they've asked for the brain to "work overnight"
-- A long-term goal from `META-COGNITION/context/goals-metrics.md` has stalled and the next step is ambiguous
+- A long-term goal from `system/context/goals-metrics.md` has stalled and the next step is ambiguous
 - The user wants to wake up to visible progress rather than a blank morning
-- A scheduled run (cron / CronCreate) fires this skill as part of the nightly cycle — typically after `nightly-brain-consolidation`
+- A scheduled run (cron / CronCreate) fires this skill as part of the nightly cycle — typically after `nightly-consolidation`
 
 Do not invoke when:
 
 - It's morning (use `morning-briefing` or `foresight` instead — those read the output of this skill)
 - The user needs an interactive conversation (this skill produces a file, not a chat)
-- No goals exist yet in `META-COGNITION/context/goals-metrics.md` (flag to the user and stop)
+- No goals exist yet in `system/context/goals-metrics.md` (flag to the user and stop)
 
 ## Inputs
 
@@ -40,12 +40,12 @@ The caller may provide, but does not need to:
 
 Read, in this order:
 
-1. `META-COGNITION/context/goals-metrics.md` — the source of truth for goals, their current status, and target dates
+1. `system/context/goals-metrics.md` — the source of truth for goals, their current status, and target dates
 2. `MEMORY.md` — especially `## Active Context` and any sections referencing the target goal
-3. `HIPPOCAMPUS/decisions/` — filter to decisions tagged or referenced by the target goal's topic
-4. `SENSORY-CORTEX/people/` and `SENSORY-CORTEX/companies/` — pull anyone already relevant to the goal
-5. `CEREBELLUM/patterns.md` — recent patterns that should shape how the work is done
-6. The latest `HIPPOCAMPUS/short-term/consolidation-report-*.md` (if present) — what happened yesterday that might inform tonight's work
+3. `memory/decisions/` — filter to decisions tagged or referenced by the target goal's topic
+4. `knowledge/people/` and `knowledge/companies/` — pull anyone already relevant to the goal
+5. `learning/patterns.md` — recent patterns that should shape how the work is done
+6. The latest `memory/short-term/consolidation-report-*.md` (if present) — what happened yesterday that might inform tonight's work
 
 If any of the above are missing, continue without them — note the gap in the output.
 
@@ -93,7 +93,7 @@ If you need to make a judgment call on the user's behalf, *surface it* in the ou
 
 Write exactly one file:
 
-`HIPPOCAMPUS/short-term/morning-delivery-YYYY-MM-DD.md`
+`memory/short-term/morning-delivery-YYYY-MM-DD.md`
 
 Where `YYYY-MM-DD` is **tomorrow's date** (the user will see this when they wake up).
 
@@ -138,7 +138,7 @@ status: pending-review
 
 ### Step 6 — Update goal tracking
 
-Append a single line to `META-COGNITION/context/goals-metrics.md` under the target goal's section:
+Append a single line to `system/context/goals-metrics.md` under the target goal's section:
 
 ```
 - YYYY-MM-DD nightly-goal-pursuit: <mode> · <depth> · outputs: N · see morning-delivery-YYYY-MM-DD.md
@@ -158,7 +158,7 @@ If not configured, skip silently. Never fail the skill over a missing channel.
 
 ### Step 8 — Self-improvement log
 
-After the user has reviewed the morning delivery and given feedback (even implicit — "used as-is" or "edited heavily"), that signal will be routed by the nightly consolidation to `CEREBELLUM/skill-feedback/nightly-goal-pursuit.md`. No action needed inside this skill.
+After the user has reviewed the morning delivery and given feedback (even implicit — "used as-is" or "edited heavily"), that signal will be routed by the nightly consolidation to `learning/skill-feedback/nightly-goal-pursuit.md`. No action needed inside this skill.
 
 ## Format
 
@@ -177,6 +177,6 @@ After the user has reviewed the morning delivery and given feedback (even implic
 
 ## Calibration
 
-Initial state: **learning**. Expect the user to redirect the first 3–5 runs — mode choice, goal pick, output shape, tone. Log every redirect to short-term so the nightly consolidation can route it to `CEREBELLUM/skill-feedback/nightly-goal-pursuit.md`.
+Initial state: **learning**. Expect the user to redirect the first 3–5 runs — mode choice, goal pick, output shape, tone. Log every redirect to short-term so the nightly consolidation can route it to `learning/skill-feedback/nightly-goal-pursuit.md`.
 
 After 3+ approval signals in a row, this skill graduates to **calibrated** and can run autonomously on cron.

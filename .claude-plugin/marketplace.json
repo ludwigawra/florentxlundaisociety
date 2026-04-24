@@ -47,7 +47,7 @@
           "description": "Auto-generate intent-wrapped skills from a connected MCP. User connects a new MCP (Gmail, Notion, Linear, etc.), runs /forge-skill <mcp-name>, and the brain proposes 3-5 skill candidates that wrap its tools with natural-language intents. Every skill is approved before it's written. How AI-OS grows capabilities as the user connects new tools."
         },
         {
-          "name": "brain-search",
+          "name": "memory-search",
           "description": "Search the AI-OS brain for relevant files, entities, and knowledge before starting work."
         },
         {
@@ -55,7 +55,7 @@
           "description": "Search prior decisions on a topic — prevents contradictions and surfaces relevant history."
         },
         {
-          "name": "nightly-brain-consolidation",
+          "name": "nightly-consolidation",
           "description": "Nightly brain consolidation — processes short-term memory, extracts patterns, improves skills."
         },
         {
@@ -71,31 +71,31 @@
           "description": "Decision-grade status read on one project — cadence, state label (active/stalled/blocked/deprioritized/done/abandoned-quietly), next concrete action, and a continue/revive/close/hand-off/wait recommendation."
         },
         {
-          "name": "thalamus-calibration",
+          "name": "signal-calibration",
           "description": "Nightly calibration of the thalamus signal detector — compares predicted vs used brain regions across real transcripts, computes precision/recall per category, proposes concrete keyword changes with citations. observe/propose/apply modes; apply requires explicit confirmation."
         },
         {
           "name": "nightly-goal-pursuit",
-          "description": "Advance one long-term goal overnight — research, outreach prep, drafts, or list-building grounded in the brain. Writes a single morning-delivery file under HIPPOCAMPUS/short-term/ with a headline, the first move to take when waking up, concrete outputs, and a gap log. Turns sleep into compounding."
+          "description": "Advance one long-term goal overnight — research, outreach prep, drafts, or list-building grounded in the brain. Writes a single morning-delivery file under memory/short-term/ with a headline, the first move to take when waking up, concrete outputs, and a gap log. Turns sleep into compounding."
         },
         {
           "name": "behavioral-learning",
-          "description": "Observe how the user actually works — not what they say — and extract behavioral patterns that feed back into skills, triggers, and defaults. Reads archived transcripts, the autonomous-runs ledger, and usage frequency. Writes inferred patterns to CEREBELLUM/behavioral-patterns.md. The difference between 'memory' and 'an assistant that learns you'."
+          "description": "Observe how the user actually works — not what they say — and extract behavioral patterns that feed back into skills, triggers, and defaults. Reads archived transcripts, the autonomous-runs ledger, and usage frequency. Writes inferred patterns to learning/behavioral-patterns.md. The difference between 'memory' and 'an assistant that learns you'."
         },
         {
           "name": "auto-outreach-queue",
-          "description": "Autonomously draft a queue of personalized follow-ups for people in SENSORY-CORTEX/people/ who are overdue, have open commitments, or matter for an active goal. Voice-matched, grounded in prior interactions, queued for morning review. Nothing sent without the user's approval."
+          "description": "Autonomously draft a queue of personalized follow-ups for people in knowledge/people/ who are overdue, have open commitments, or matter for an active goal. Voice-matched, grounded in prior interactions, queued for morning review. Nothing sent without the user's approval."
         }
       ],
       "optionalSkills": [
         {
           "name": "relationship-check",
-          "description": "Quick, honest read on one relationship — last contact, freshness verdict, open commitments both ways, specific next action. Reads SENSORY-CORTEX/people/ and cross-references decisions, projects, and optional Gmail/GCal/WhatsApp. No integration required."
+          "description": "Quick, honest read on one relationship — last contact, freshness verdict, open commitments both ways, specific next action. Reads knowledge/people/ and cross-references decisions, projects, and optional Gmail/GCal/WhatsApp. No integration required."
         },
         {
           "name": "meeting-prep",
           "requires": ["gcal"],
-          "description": "One-screen brief for an upcoming meeting — purpose, desired outcome, attendees with freshness, open threads, your asks + their likely asks, risk flags. Pulls from GCal, SENSORY-CORTEX, decisions, and MOTOR-CORTEX."
+          "description": "One-screen brief for an upcoming meeting — purpose, desired outcome, attendees with freshness, open threads, your asks + their likely asks, risk flags. Pulls from GCal, knowledge, decisions, and projects."
         }
       ],
       "plannedSkills": [
@@ -113,12 +113,12 @@
         {
           "name": "session-end",
           "event": "SessionEnd",
-          "description": "Archives the session transcript into HIPPOCAMPUS/short-term/transcripts/ so nightly consolidation can read it."
+          "description": "Archives the session transcript into memory/short-term/transcripts/ so nightly consolidation can read it."
         },
         {
           "name": "post-tool-failure",
           "event": "PostToolUse",
-          "description": "Logs tool or MCP failures to CEREBELLUM/tool-errors.log so the system can learn from them."
+          "description": "Logs tool or MCP failures to learning/tool-errors.log so the system can learn from them."
         },
         {
           "name": "user-prompt-submit",

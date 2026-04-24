@@ -18,7 +18,7 @@ Invoke this skill whenever any of the following apply:
 - The user reports feeling scattered, unsure, or off-track
 - The user is considering a direction change and wants context on what prior thinking supports or undermines it
 - Goals-metrics has not been reviewed in 14+ days
-- A pattern in `CEREBELLUM/corrections.md` suggests something structural is off and it is worth pausing to look
+- A pattern in `learning/corrections.md` suggests something structural is off and it is worth pausing to look
 
 Do not invoke for tactical check-ins or status updates — those belong in `project-status` or `foresight`. Reflect is broader, longer horizon, and more honest about what is not working.
 
@@ -38,13 +38,13 @@ If the user does not supply scope or focus, ask a single clarifying question bef
 
 Read in this order and keep each in working memory:
 
-1. `META-COGNITION/context/goals-metrics.md` — the user's stated goals, priorities, and metrics. This is the yardstick. If the file is missing or mostly empty, flag this first — reflection without explicit goals is guesswork.
+1. `system/context/goals-metrics.md` — the user's stated goals, priorities, and metrics. This is the yardstick. If the file is missing or mostly empty, flag this first — reflection without explicit goals is guesswork.
 2. `MEMORY.md` — the `## Active Context` section for what the user considers currently top of mind.
-3. `HIPPOCAMPUS/decisions/` — all decision files modified within the scope window. Read each file's claim and rationale.
-4. `CEREBELLUM/corrections.md` — the full file. Look for corrections within the scope window.
-5. `CEREBELLUM/patterns.md` — active patterns. These are the rules the system has already learned.
-6. `HIPPOCAMPUS/short-term/` — recent session files. Skim for themes, not details.
-7. `MOTOR-CORTEX/` — top-level project folders. Note which have recent activity and which have gone quiet.
+3. `memory/decisions/` — all decision files modified within the scope window. Read each file's claim and rationale.
+4. `learning/corrections.md` — the full file. Look for corrections within the scope window.
+5. `learning/patterns.md` — active patterns. These are the rules the system has already learned.
+6. `memory/short-term/` — recent session files. Skim for themes, not details.
+7. `projects/` — top-level project folders. Note which have recent activity and which have gone quiet.
 
 If a folder is missing, note it and continue. Do not fail the reflection over a missing optional folder.
 
@@ -89,8 +89,8 @@ Each pattern should be named in one sentence with a citation of where you saw it
 Check for direct contradictions between recent decisions and either:
 
 - The stated goals in `goals-metrics.md`
-- Prior decisions in `HIPPOCAMPUS/decisions/`
-- Active patterns in `CEREBELLUM/patterns.md`
+- Prior decisions in `memory/decisions/`
+- Active patterns in `learning/patterns.md`
 
 Name contradictions plainly. The user does not need you to hedge. A contradiction is a signal — the goal may have changed, the decision may be wrong, or the pattern may be stale. Surface it and let the user choose.
 
@@ -145,7 +145,7 @@ Never flatter. Flattery in a reflection is a small betrayal — the user came he
 
 ## Logging
 
-After producing the reflection, offer to save it as a dated note in `HIPPOCAMPUS/short-term/` with the filename pattern `reflection-YYYY-MM-DD.md`. Do not save without the user confirming — reflections are private by default.
+After producing the reflection, offer to save it as a dated note in `memory/short-term/` with the filename pattern `reflection-YYYY-MM-DD.md`. Do not save without the user confirming — reflections are private by default.
 
 If the user confirms, write the note with frontmatter:
 
@@ -174,4 +174,4 @@ The consolidation skill will later decide whether to extract patterns or decisio
 - If the reflection reveals a decision that contradicts a prior one, pair with `decision-check` to surface the prior context before the user resolves it.
 - If the reflection reveals a direction for the next week, hand off to `foresight` for ranked priorities.
 - If the reflection reveals a project that has gone quiet, hand off to `project-status` for a focused look.
-- If the reflection reveals a pattern worth persisting, propose the user add it to `CEREBELLUM/patterns.md` using the standard pattern format. Do not edit `patterns.md` yourself — that is a consolidation-owned file.
+- If the reflection reveals a pattern worth persisting, propose the user add it to `learning/patterns.md` using the standard pattern format. Do not edit `patterns.md` yourself — that is a consolidation-owned file.

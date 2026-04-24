@@ -42,7 +42,7 @@ No standalone memory product ships hooks. No MCP-memory product runs nightly cod
 ### ✅ Shipped (and visible in the demo)
 
 **Persistence**
-- 13-region brain structure (HIPPOCAMPUS, CEREBELLUM, SENSORY-CORTEX, MOTOR-CORTEX, BROCA, BASAL-GANGLIA, PROCEDURAL-MEMORY, META-COGNITION, AMYGDALA, …)
+- 13-region brain structure (memory, learning, knowledge, projects, voice, routines, blueprints, system, risks, …)
 - Frontmatter-typed entities, wiki-linked graph
 - Git-backed, local, grep-able
 - Short-term → long-term promotion pipeline
@@ -57,14 +57,14 @@ No standalone memory product ships hooks. No MCP-memory product runs nightly cod
 **Connection**
 - Hook points for every claude.ai MCP (Gmail, GCal, Drive, Notion, Supabase, Miro)
 - Skills call those MCPs where relevant
-- `SENSORY-CORTEX/` is the structured store for external data once ingested
+- `knowledge/` is the structured store for external data once ingested
 
 **Agency**
-- `nightly-brain-consolidation` (11-phase consolidation, runs autonomously)
-- `thalamus-calibration` (intent detector tunes itself)
+- `nightly-consolidation` (11-phase consolidation, runs autonomously)
+- `signal-calibration` (intent detector tunes itself)
 - Skill self-improvement loop (3+ feedback signals → edits `SKILL.md`)
 - `nightly-goal-pursuit` (advances one stalled goal overnight)
-- `reflect` / `foresight` / `project-status` / `decision-check` / `brain-search` — decision-grade introspective skills
+- `reflect` / `foresight` / `project-status` / `decision-check` / `memory-search` — decision-grade introspective skills
 
 ### ⚠️ Demo-critical gaps — **72-hour build list**
 
@@ -73,17 +73,17 @@ These close the gap between "this is memory" and "this is a personal assistant t
 | Priority | Gap | What unblocks it | Cost |
 |---|---|---|---|
 | 🔴 P0 | **No scheduler** — nightly skills fire only when user invokes them. Undermines the "while you sleep" claim. | `plugin/scripts/schedule.sh` installs launchd (macOS) / cron (linux) entry. One-shot. | 1h |
-| 🔴 P0 | **No autonomous-run ledger** — invisible when things fire. | Shared `BASAL-GANGLIA/autonomous-runs.jsonl`. Every autonomous skill appends. Dashboard panel shows last 7 days. | 45m |
-| 🔴 P0 | **Only one "acts like you" skill** (`nightly-goal-pursuit`). Need a second to show range. | `auto-outreach-queue` — scans SENSORY-CORTEX/people, ranks by staleness × open commitments × goal relevance, drafts N personalized follow-ups. | 1h |
+| 🔴 P0 | **No autonomous-run ledger** — invisible when things fire. | Shared `routines/autonomous-runs.jsonl`. Every autonomous skill appends. Dashboard panel shows last 7 days. | 45m |
+| 🔴 P0 | **Only one "acts like you" skill** (`nightly-goal-pursuit`). Need a second to show range. | `auto-outreach-queue` — scans knowledge/people, ranks by staleness × open commitments × goal relevance, drafts N personalized follow-ups. | 1h |
 | 🟡 P1 | **No pending-review queue** in dashboard — user can't see "3 things my assistant did, waiting for me." | New panel reading the ledger filtered by `status=pending-review`. | 30m |
 | 🟡 P1 | **"Connection" is invisible in UI** — no "Gmail last seen 4m ago" signal. | `Connected sources` panel reading per-integration last-activity markers. Derives from tool-errors.log + hook state. | 30m |
 | 🟡 P1 | **Hero framing still reads "dashboard"** not "control center." | Headline copy tweak + one-line narrative blocks above each major panel. | 15m |
-| 🟡 P1 | **Behavioral-learning is a claim with no visible proof** | New skill `behavioral-learning` runs nightly after consolidation. Reads transcripts + autonomous-run outcomes + usage frequency. Writes inferred behavioral patterns to `CEREBELLUM/behavioral-patterns.md`. Dashboard panel surfaces the 5 most recent inferences. | 1.5h |
+| 🟡 P1 | **Behavioral-learning is a claim with no visible proof** | New skill `behavioral-learning` runs nightly after consolidation. Reads transcripts + autonomous-run outcomes + usage frequency. Writes inferred behavioral patterns to `learning/behavioral-patterns.md`. Dashboard panel surfaces the 5 most recent inferences. | 1.5h |
 
 ### 🟢 Post-demo (30-day build)
 
 **Voice that gets sharper over time**
-- `voice-fingerprint` skill — reads 20 past LinkedIn posts, 10 emails, 5 pitches. Extracts tone rules (sentence length, opener patterns, anti-patterns). Writes to `BROCA/voice-fingerprint.md`.
+- `voice-fingerprint` skill — reads 20 past LinkedIn posts, 10 emails, 5 pitches. Extracts tone rules (sentence length, opener patterns, anti-patterns). Writes to `voice/voice-fingerprint.md`.
 - Every draft any skill produces is run through the voice fingerprint before delivery.
 - Nightly: when new writing shows up, refresh the fingerprint.
 
@@ -92,7 +92,7 @@ These close the gap between "this is memory" and "this is a personal assistant t
 - Dashboard panel: precision/recall on region activation over time.
 
 **Source ingestion as a first-class pattern**
-- Every integration gets a `sensory-ingest-<source>` skill with a consistent contract: read source → write typed file to `SENSORY-CORTEX/<category>/` → log to ledger.
+- Every integration gets a `sensory-ingest-<source>` skill with a consistent contract: read source → write typed file to `knowledge/<category>/` → log to ledger.
 - Health view in dashboard: coverage, last ingest, error rate per source.
 
 **Autonomous-skill expansion pack**
@@ -113,7 +113,7 @@ These close the gap between "this is memory" and "this is a personal assistant t
 ### 🔵 The long vision (6-month bets)
 
 1. **MCP gateway** — AI-OS becomes an MCP provider. Any Claude client (desktop, mobile, third-party) can load the brain over MCP. Expands market from Claude Code users to every Claude user.
-2. **Team brains** — two users with overlapping `SENSORY-CORTEX/` (shared people, companies, decisions) but isolated CEREBELLUM/BROCA. Co-founders, agencies, partners.
+2. **Team brains** — two users with overlapping `knowledge/` (shared people, companies, decisions) but isolated learning/voice. Co-founders, agencies, partners.
 3. **Brain marketplace** — procedural-memory templates shared across users. "Install the founder-fundraise pack." Skills too.
 4. **Cross-model portability** — plugin layer so the brain works with GPT-5, Gemini, local models. Today it's Claude-specific; the folder is already model-agnostic.
 5. **Autonomous negotiation / execution** — the assistant doesn't just draft, it sends. Gates via a single approval channel (Telegram, mobile). Full L2 loop becomes real.

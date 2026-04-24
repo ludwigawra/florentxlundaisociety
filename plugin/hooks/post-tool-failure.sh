@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # AI-OS — PostToolUse failure hook
-# Appends one-line tool failures to CEREBELLUM/tool-errors.log.
+# Appends one-line tool failures to learning/tool-errors.log.
 #
 # Claude Code delivers the tool event as JSON on stdin. We extract tool name,
 # success flag, and a short error summary. If the tool succeeded we do nothing.
@@ -12,9 +12,9 @@ set -u
 
 ROOT="${CLAUDE_PROJECT_DIR:-$PWD}"
 [ -f "$ROOT/CLAUDE.md" ] || exit 0
-[ -d "$ROOT/CEREBELLUM" ] || mkdir -p "$ROOT/CEREBELLUM" >/dev/null 2>&1
+[ -d "$ROOT/learning" ] || mkdir -p "$ROOT/learning" >/dev/null 2>&1
 
-LOG="$ROOT/CEREBELLUM/tool-errors.log"
+LOG="$ROOT/learning/tool-errors.log"
 
 # Read up to 256KB of the event payload (bigger JSON is unusual; guard memory).
 PAYLOAD="$(head -c 262144 2>/dev/null)"

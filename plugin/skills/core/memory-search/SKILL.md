@@ -1,5 +1,5 @@
 ---
-name: brain-search
+name: memory-search
 description: Search the AI-OS brain for entities, context, prior decisions, and relevant files before starting work. Use when you need context about a person, company, project, topic, or decision — or any time a session begins referencing something that may already exist in the brain.
 ---
 
@@ -28,7 +28,7 @@ Do not invoke for trivial lookups already visible in the current session context
 The caller should provide:
 
 - **Query** — one or more entity names, topic keywords, or a natural-language question
-- **Optional scope** — a specific brain region to restrict the search to (e.g., `SENSORY-CORTEX/people/`)
+- **Optional scope** — a specific brain region to restrict the search to (e.g., `knowledge/people/`)
 - **Optional recency** — only return files modified within N days
 
 If only a fuzzy question is given ("what's going on with the pricing thing?"), extract the best keywords yourself before searching.
@@ -52,10 +52,10 @@ Prefer running these as a batch (multiple tool calls in a single message) for sp
 
 **Dedicated entity files** (highest-signal hit):
 
-- Glob `SENSORY-CORTEX/people/*TARGET*.md`
-- Glob `SENSORY-CORTEX/companies/*TARGET*.md`
-- Glob `MOTOR-CORTEX/*TARGET*/` (project directories)
-- Glob `HIPPOCAMPUS/decisions/*TARGET*.md`
+- Glob `knowledge/people/*TARGET*.md`
+- Glob `knowledge/companies/*TARGET*.md`
+- Glob `projects/*TARGET*/` (project directories)
+- Glob `memory/decisions/*TARGET*.md`
 
 **Wiki-link references** (the graph):
 
@@ -63,8 +63,8 @@ Prefer running these as a batch (multiple tool calls in a single message) for sp
 
 **Content mentions** (may include plain text references):
 
-- Grep `TARGET` (case-insensitive) across `SENSORY-CORTEX/`, `HIPPOCAMPUS/decisions/`, `MOTOR-CORTEX/`, and `MEMORY.md`
-- Also search `BASAL-GANGLIA/` and `PROCEDURAL-MEMORY/` if the query is about a process, routine, or template
+- Grep `TARGET` (case-insensitive) across `knowledge/`, `memory/decisions/`, `projects/`, and `MEMORY.md`
+- Also search `routines/` and `blueprints/` if the query is about a process, routine, or template
 
 **Frontmatter matches** (typed lookups):
 
@@ -75,21 +75,21 @@ Prefer running these as a batch (multiple tool calls in a single message) for sp
 **Memory surface:**
 
 - Read relevant lines from `MEMORY.md` — grep the target and include two lines of context around each hit
-- Grep `CEREBELLUM/patterns.md` for patterns that reference the entity or topic
+- Grep `learning/patterns.md` for patterns that reference the entity or topic
 
-Exclude `.obsidian/`, `node_modules/`, `.git/`, and `HIPPOCAMPUS/short-term/archive/` from all searches unless explicitly asked to include them.
+Exclude `.obsidian/`, `node_modules/`, `.git/`, and `memory/short-term/archive/` from all searches unless explicitly asked to include them.
 
 ### 3. Rank the hits
 
 Score results by likely usefulness, not just recency:
 
-1. **Dedicated entity files** — `SENSORY-CORTEX/people/{name}.md`, `SENSORY-CORTEX/companies/{name}.md`, `MOTOR-CORTEX/{project}/CLAUDE.md`. Read these in full.
-2. **Decision files** — `HIPPOCAMPUS/decisions/*.md` matching the topic. Read in full; these are frequently under-used.
+1. **Dedicated entity files** — `knowledge/people/{name}.md`, `knowledge/companies/{name}.md`, `projects/{project}/CLAUDE.md`. Read these in full.
+2. **Decision files** — `memory/decisions/*.md` matching the topic. Read in full; these are frequently under-used.
 3. **MEMORY.md hits** — Pull the exact lines with two lines of context.
-4. **Pattern hits** — `CEREBELLUM/patterns.md` entries referencing the topic. Always relevant to how you should approach the work.
-5. **Project CLAUDE.md / MEMORY.md** under `MOTOR-CORTEX/` — Load if the query is project-scoped.
-6. **Routine or template hits** under `BASAL-GANGLIA/` or `PROCEDURAL-MEMORY/`.
-7. **Short-term session files** in `HIPPOCAMPUS/short-term/` — Only if recent (within ~7 days) and directly relevant. Archived short-term files are lower priority.
+4. **Pattern hits** — `learning/patterns.md` entries referencing the topic. Always relevant to how you should approach the work.
+5. **Project CLAUDE.md / MEMORY.md** under `projects/` — Load if the query is project-scoped.
+6. **Routine or template hits** under `routines/` or `blueprints/`.
+7. **Short-term session files** in `memory/short-term/` — Only if recent (within ~7 days) and directly relevant. Archived short-term files are lower priority.
 
 Drop duplicates (a file that matches by both filename and content is one hit, not two).
 
@@ -118,9 +118,9 @@ Present the results in this structure:
 
 ### Files worth reading in full
 
-1. `SENSORY-CORTEX/people/{name}.md` — one-line summary
-2. `HIPPOCAMPUS/decisions/{claim}.md` — one-line summary
-3. `MOTOR-CORTEX/{project}/CLAUDE.md` — one-line summary
+1. `knowledge/people/{name}.md` — one-line summary
+2. `memory/decisions/{claim}.md` — one-line summary
+3. `projects/{project}/CLAUDE.md` — one-line summary
 
 ### Relationships to follow
 
@@ -134,7 +134,7 @@ Present the results in this structure:
 
 ### Patterns that apply
 
-- From `CEREBELLUM/patterns.md`: {short pattern statement}
+- From `learning/patterns.md`: {short pattern statement}
   If none: omit the section.
 
 ### Gaps
@@ -188,6 +188,6 @@ The user should feel that you already know the relevant background without being
 
 - Reporting a long list of filenames without reading any of them. If you list a decision file, you should be able to summarize the decision.
 - Missing the wiki-link search. Many entities are only referenced through `[[Name]]` — a plain text grep will miss these if the name is abbreviated elsewhere.
-- Ignoring `CEREBELLUM/patterns.md`. Patterns are often the highest-leverage context for how to approach a task.
+- Ignoring `learning/patterns.md`. Patterns are often the highest-leverage context for how to approach a task.
 - Surfacing stale files without flagging the staleness. An out-of-date fact presented confidently is worse than no answer.
 - Reading every archived short-term session file. These are high-volume, low-signal — only load if directly relevant and recent.

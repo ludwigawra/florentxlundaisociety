@@ -68,7 +68,7 @@ When you connect an MCP, nothing changes in your brain folder. But when you run 
 
 - The skills appear in `/aios-explore` alongside the built-in ones.
 - They use the MCP's tools to do real work (read your inbox, pull your calendar, etc.).
-- They log feedback to `CEREBELLUM/skill-feedback/` like every other skill — the nightly consolidation improves them over time.
+- They log feedback to `learning/skill-feedback/` like every other skill — the nightly consolidation improves them over time.
 - They're inspectable. Open `.claude/skills/generated/{skill-name}/SKILL.md` to see exactly what a skill will do before you run it.
 
 This is how AI-OS grows capabilities as your life grows tools.
@@ -85,4 +85,4 @@ If you can't find an MCP for a tool you use, you can write one. See [docs.claude
 
 Generated skills live at `.claude/skills/generated/`. To remove one, delete the folder. They're not referenced by any hook or core skill — safe to delete individually.
 
-If a generated skill turns out to be low-quality, note it in `CEREBELLUM/corrections.md` so the nightly consolidation can learn why and do better next time you forge.
+If a generated skill turns out to be low-quality, note it in `learning/corrections.md` so the nightly consolidation can learn why and do better next time you forge.

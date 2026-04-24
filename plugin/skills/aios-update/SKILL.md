@@ -1,13 +1,13 @@
 ---
 name: aios-update
-description: Non-destructive update for an installed AI-OS. Pulls new skills, hooks, and templates from the current plugin version into the user's `.claude/` directory without ever touching the brain folders (HIPPOCAMPUS, CEREBELLUM, MEMORY.md, etc.). Use after the user upgrades the plugin (`npm update @aios/plugin` or plugin marketplace auto-update) to sync their local AI-OS with the new plugin version. Handles added skills, changed core skills, removed skills, new hooks, and template changes. Prompts before overwriting any file the user has modified.
+description: Non-destructive update for an installed AI-OS. Pulls new skills, hooks, and templates from the current plugin version into the user's `.claude/` directory without ever touching the brain folders (memory, learning, MEMORY.md, etc.). Use after the user upgrades the plugin (`npm update @aios/plugin` or plugin marketplace auto-update) to sync their local AI-OS with the new plugin version. Handles added skills, changed core skills, removed skills, new hooks, and template changes. Prompts before overwriting any file the user has modified.
 ---
 
 # AI-OS Update
 
 Sync an installed AI-OS with the current plugin version. This is the mechanism that makes the subscription model honest — users keep getting new skills and hook improvements without ever losing their data or their customizations.
 
-The rule that governs every step: **the brain belongs to the user.** The plugin owns `.claude/skills/`, `.claude/hooks/`, `.claude/settings.json` (hook entries only), and the plugin-shipped templates. Everything else — `HIPPOCAMPUS/`, `CEREBELLUM/` content, `MEMORY.md`, `MOTOR-CORTEX/`, `SENSORY-CORTEX/`, `BROCA/`, `META-COGNITION/context/`, `AMYGDALA.md` — is user data and must never be touched by an update.
+The rule that governs every step: **the brain belongs to the user.** The plugin owns `.claude/skills/`, `.claude/hooks/`, `.claude/settings.json` (hook entries only), and the plugin-shipped templates. Everything else — `memory/`, `learning/` content, `MEMORY.md`, `projects/`, `knowledge/`, `voice/`, `system/context/`, `risks.md` — is user data and must never be touched by an update.
 
 ## When to use
 
@@ -142,10 +142,10 @@ If rollback itself fails for some reason, leave the staging copy in place and in
 
 To make this rule unmissable — the update MUST NOT touch any of the following:
 
-- `HIPPOCAMPUS/` (anything inside)
-- `CEREBELLUM/corrections.md`, `CEREBELLUM/patterns.md`, `CEREBELLUM/skill-feedback/`, `CEREBELLUM/tool-errors.log`
-- `MEMORY.md`, `AMYGDALA.md`, `CLAUDE.md` (the user's root instructions)
-- `SENSORY-CORTEX/`, `MOTOR-CORTEX/`, `PROCEDURAL-MEMORY/`, `BROCA/`, `META-COGNITION/context/`, `LONG-TERM-STORAGE/`
+- `memory/` (anything inside)
+- `learning/corrections.md`, `learning/patterns.md`, `learning/skill-feedback/`, `learning/tool-errors.log`
+- `MEMORY.md`, `risks.md`, `CLAUDE.md` (the user's root instructions)
+- `knowledge/`, `projects/`, `blueprints/`, `voice/`, `system/context/`, `archive/`
 - Any file with a user-added frontmatter marker `aios-owned: user`
 
 If the plugin ever ships a file with a name that would land inside one of these directories, stop and flag. That is a plugin packaging bug, not an update action.
@@ -162,6 +162,6 @@ If the plugin ever ships a file with a name that would land inside one of these 
 ## Integration with other skills
 
 - If the plugin adds a new hook category, the next session's `session-start.sh` will surface it in its banner — no explicit action from this skill.
-- If `thalamus-calibration` is one of the updated skills and the keyword mapping changed, flag this in the update log so the user knows to recalibrate.
-- `nightly-brain-consolidation` reads from the brain folders only and is unaffected by plugin updates (but the skill itself may be updated — the file, not the data it processes).
+- If `signal-calibration` is one of the updated skills and the keyword mapping changed, flag this in the update log so the user knows to recalibrate.
+- `nightly-consolidation` reads from the brain folders only and is unaffected by plugin updates (but the skill itself may be updated — the file, not the data it processes).
 - If the update introduces a breaking change that requires user migration (rare), the plugin ships a migration script under `plugin/scripts/migrate-<from>-<to>.sh` which this skill invokes after the file sync.

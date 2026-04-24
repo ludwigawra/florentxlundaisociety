@@ -14,7 +14,7 @@ AI-OS is built in five phases. Each phase is complete before the next begins —
 - [x] Transcript archiving on session end
 - [x] Brain-stem pointer pattern (global `~/.claude/CLAUDE.md`)
 - [x] `/aios-init` installer skill
-- [x] Root `CLAUDE.md`, `MEMORY.md`, `AMYGDALA.md` templates
+- [x] Root `CLAUDE.md`, `MEMORY.md`, `risks.md` templates
 - [x] Basic plugin manifest
 
 **Outcome:** A user can install AI-OS, run `/aios-init`, and have Claude read their brain at every session start.
@@ -25,16 +25,16 @@ AI-OS is built in five phases. Each phase is complete before the next begins —
 
 **Goal:** Compound value through skills that read and write to the brain.
 
-- [x] `brain-search` — context retrieval before work starts
+- [x] `memory-search` — context retrieval before work starts
 - [x] `decision-check` — contradiction prevention
 - [x] `morning-briefing` — daily prioritization
 - [x] `email-triage` — inbox processing
 - [x] `meeting-prep`, `relationship-check`, `project-status` — relational/operational skills
 - [x] `brain-dump-content`, `content-interview` — content pipeline
 - [x] `reflect`, `foresight` — strategic reflection and planning
-- [x] `nightly-brain-consolidation` — the learning loop
-- [x] `thalamus-calibration` — meta-level self-improvement
-- [x] Skill feedback file convention (`CEREBELLUM/skill-feedback/<skill>.md`)
+- [x] `nightly-consolidation` — the learning loop
+- [x] `signal-calibration` — meta-level self-improvement
+- [x] Skill feedback file convention (`learning/skill-feedback/<skill>.md`)
 - [x] Calibration status progression (`learning` → `calibrated` → `graduated`)
 
 **Outcome:** A user has a working, improving skill set out of the box. Skills read from and write to the brain. Feedback flows into calibration automatically.
@@ -65,7 +65,7 @@ AI-OS is built in five phases. Each phase is complete before the next begins —
 - [ ] Brain regions browser — navigate the folder structure
 - [ ] Markdown rendering with frontmatter parsing and wiki-link navigation
 - [ ] Short-term memory view — active sessions and recent activity
-- [ ] Decisions timeline — chronological view of `HIPPOCAMPUS/decisions/`
+- [ ] Decisions timeline — chronological view of `memory/decisions/`
 - [ ] Skill calibration panel — usage, approval rates, calibration status per skill
 - [ ] Graph view — entities and their links across the brain
 - [ ] Search — full-text across the brain folder

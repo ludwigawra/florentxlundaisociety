@@ -16,7 +16,7 @@ _If any signal is **Red**, run maintenance before any other work._
 ## The Three Checks
 
 ### 1. Short-Term Memory Load
-**What:** Count files in `HIPPOCAMPUS/short-term/` (exclude `README.md`, `consolidation-report-*.md`, and `dream-*.md`).
+**What:** Count files in `memory/short-term/` (exclude `README.md`, `consolidation-report-*.md`, and `dream-*.md`).
 
 | Status | File count | Meaning | Action |
 |---|---|---|---|
@@ -25,7 +25,7 @@ _If any signal is **Red**, run maintenance before any other work._
 | Red | 11+ | Overloaded | Run consolidation before other work |
 
 ### 2. Consolidation Freshness
-**What:** Check the date of the most recent `consolidation-report-*.md` in `HIPPOCAMPUS/short-term/`.
+**What:** Check the date of the most recent `consolidation-report-*.md` in `memory/short-term/`.
 
 | Status | Days since last | Meaning | Action |
 |---|---|---|---|
@@ -34,7 +34,7 @@ _If any signal is **Red**, run maintenance before any other work._
 | Red | 5+ | Stalled | Run consolidation before other work |
 
 ### 3. Unextracted Corrections
-**What:** Count entries in `CEREBELLUM/corrections.md` that do **not** end with the `[extracted]` tag.
+**What:** Count entries in `learning/corrections.md` that do **not** end with the `[extracted]` tag.
 
 | Status | Count | Meaning | Action |
 |---|---|---|---|
@@ -49,9 +49,9 @@ _If any signal is **Red**, run maintenance before any other work._
 At session start (step 8 in the Session Protocol), scan quickly:
 
 ```
-1. ls HIPPOCAMPUS/short-term/    -> count session files (exclude reports, dreams, README)
+1. ls memory/short-term/    -> count session files (exclude reports, dreams, README)
 2. Read most recent consolidation-report date
-3. Scan CEREBELLUM/corrections.md -> count entries without [extracted]
+3. Scan learning/corrections.md -> count entries without [extracted]
 ```
 
 Report format (append to the short-term memory file when relevant):

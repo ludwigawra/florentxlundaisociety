@@ -1,5 +1,5 @@
 ---
-name: nightly-brain-consolidation
+name: nightly-consolidation
 description: End-of-day consolidation for the AI-OS brain — processes short-term memory, extracts decisions and patterns, routes new entities, logs skill feedback and corrections, archives processed files, and writes a summary report. Use at the end of a working day, on a scheduled trigger, or on-demand when short-term memory has accumulated enough signal to consolidate.
 ---
 
@@ -12,7 +12,7 @@ The AI-OS root defaults to `~/Desktop/AI-OS/`. If a different root is configured
 ## When to use
 
 - At the end of a working day (scheduled or on-demand)
-- When `HIPPOCAMPUS/short-term/` has more than a handful of unprocessed files
+- When `memory/short-term/` has more than a handful of unprocessed files
 - When the user says "consolidate", "process today", "do the nightly", or similar
 - After a long session where a lot of decisions, feedback, and new entities surfaced
 
@@ -21,7 +21,7 @@ Avoid running this repeatedly in the same day unless new short-term files were a
 ## Core principles (non-negotiable)
 
 - **Never delete user data.** Archive, don't erase. The only things this skill may remove are empty directories it created.
-- **Append-only where possible.** Prefer adding new files over editing existing ones, especially under `HIPPOCAMPUS/decisions/`.
+- **Append-only where possible.** Prefer adding new files over editing existing ones, especially under `memory/decisions/`.
 - **Flag rather than guess.** If two short-term notes contradict each other, surface the contradiction in the report — don't pick a winner.
 - **Respect scope.** Only process short-term files from today and any prior days still marked unconsolidated. Don't touch files already archived.
 - **Idempotent.** Running twice on the same day should not duplicate decisions, skill-feedback entries, or entity stubs. Check before writing.
@@ -36,15 +36,15 @@ Execute the phases in order. Each phase may be skipped if there is nothing to do
 
 1. Confirm the brain root exists and is writable. If not, stop and report the path issue.
 2. Ensure these directories exist (create if missing):
-   - `HIPPOCAMPUS/short-term/`
-   - `HIPPOCAMPUS/short-term/archive/`
-   - `HIPPOCAMPUS/short-term/transcripts/`
-   - `HIPPOCAMPUS/decisions/`
-   - `CEREBELLUM/skill-feedback/`
-   - `SENSORY-CORTEX/people/`
-   - `SENSORY-CORTEX/companies/`
+   - `memory/short-term/`
+   - `memory/short-term/archive/`
+   - `memory/short-term/transcripts/`
+   - `memory/decisions/`
+   - `learning/skill-feedback/`
+   - `knowledge/people/`
+   - `knowledge/companies/`
 3. Determine today's date in `YYYY-MM-DD` format. Use this as the run date.
-4. Check whether a consolidation report already exists for today at `HIPPOCAMPUS/short-term/consolidation-report-{date}.md`. If it does, switch to append mode (add a new "Re-run at {time}" section) instead of overwriting.
+4. Check whether a consolidation report already exists for today at `memory/short-term/consolidation-report-{date}.md`. If it does, switch to append mode (add a new "Re-run at {time}" section) instead of overwriting.
 
 ---
 
@@ -52,12 +52,12 @@ Execute the phases in order. Each phase may be skipped if there is nothing to do
 
 Read, but do not yet modify:
 
-1. **Today's short-term session files** — every `.md` file in `HIPPOCAMPUS/short-term/` whose filename or frontmatter indicates today's date, and any older files without a `status: consolidated` frontmatter field.
-2. **Recent transcripts** — `.jsonl` or `.md` files in `HIPPOCAMPUS/short-term/transcripts/` created today. If transcripts are large, sample the most recent and any that match today's session file timestamps.
-3. **Current patterns** — `CEREBELLUM/patterns.md`, so new extractions don't duplicate existing ones.
-4. **Current corrections** — `CEREBELLUM/corrections.md`, to count unextracted entries.
-5. **Current goals** — `META-COGNITION/context/goals-metrics.md` if present, so decisions and entities can be tagged for alignment.
-6. **Existing skill feedback files** — list of `CEREBELLUM/skill-feedback/*.md`, to know which skills have pending entries before this run.
+1. **Today's short-term session files** — every `.md` file in `memory/short-term/` whose filename or frontmatter indicates today's date, and any older files without a `status: consolidated` frontmatter field.
+2. **Recent transcripts** — `.jsonl` or `.md` files in `memory/short-term/transcripts/` created today. If transcripts are large, sample the most recent and any that match today's session file timestamps.
+3. **Current patterns** — `learning/patterns.md`, so new extractions don't duplicate existing ones.
+4. **Current corrections** — `learning/corrections.md`, to count unextracted entries.
+5. **Current goals** — `system/context/goals-metrics.md` if present, so decisions and entities can be tagged for alignment.
+6. **Existing skill feedback files** — list of `learning/skill-feedback/*.md`, to know which skills have pending entries before this run.
 
 Keep the raw content in working memory throughout the run.
 
@@ -70,14 +70,14 @@ For each short-term file from Phase 1, classify its content into five signal typ
 1. **Decisions** — a choice was made, a direction was set, a stance was taken. Look for phrases like "we decided", "going with", "locked in", "picked X over Y", or clear first-person resolutions.
 2. **Corrections** — something went wrong, was misjudged, or required rework. Look for "should have", "wrong approach", "wasted time", user corrections, or errors that surfaced.
 3. **Skill feedback** — explicit or implicit reaction to a skill's output. Positive: "perfect", "great", used as-is. Negative: "no", "not like that", rewritten. Redirect: "actually", "more like".
-4. **New entities** — a person, company, product, or project that is not yet a file under `SENSORY-CORTEX/people/`, `SENSORY-CORTEX/companies/`, or `MOTOR-CORTEX/`.
+4. **New entities** — a person, company, product, or project that is not yet a file under `knowledge/people/`, `knowledge/companies/`, or `projects/`.
 5. **Facts worth remembering** — durable context that belongs in `MEMORY.md` but is not a decision. Flag these, do not auto-write them (see Phase 7).
 
 Apply a **significance filter** — if a signal is trivial, transient, or already captured elsewhere, drop it. When in doubt on durable value, keep it.
 
 ---
 
-### Phase 3 — Route decisions to `HIPPOCAMPUS/decisions/`
+### Phase 3 — Route decisions to `memory/decisions/`
 
 For each decision extracted:
 
@@ -85,7 +85,7 @@ For each decision extracted:
 2. Check whether a file with that name (or a near-duplicate) already exists. If yes:
    - If the new signal is consistent with the existing decision, update only `updated:` in its frontmatter and add a note in the report.
    - If it contradicts the existing decision, create a new decision file with `supersedes: [[old-claim]]` and set the old file's `status: superseded` and `superseded_by: [[new-claim]]`. Do not rewrite the body of the old file.
-3. Otherwise, create the file at `HIPPOCAMPUS/decisions/{claim}.md` with this structure:
+3. Otherwise, create the file at `memory/decisions/{claim}.md` with this structure:
 
 ```yaml
 ---
@@ -114,7 +114,7 @@ status: active
 {What changes because of this.}
 
 ## Source
-Extracted from `HIPPOCAMPUS/short-term/{source-file}.md` on {run-date}.
+Extracted from `memory/short-term/{source-file}.md` on {run-date}.
 ```
 
 Reference by `[[wiki-link]]` any entity that has (or will get) a file. Do not invent entities.
@@ -126,7 +126,7 @@ Reference by `[[wiki-link]]` any entity that has (or will get) a file. Do not in
 For each skill-feedback signal:
 
 1. Identify the skill name. If unclear, skip and note in the report.
-2. Ensure `CEREBELLUM/skill-feedback/{skill-name}.md` exists. If not, create it with frontmatter:
+2. Ensure `learning/skill-feedback/{skill-name}.md` exists. If not, create it with frontmatter:
 
 ```yaml
 ---
@@ -187,20 +187,20 @@ If feedback entries contradict each other, do not edit the skill. Flag the contr
 
 ### Phase 6 — Log corrections and extract patterns
 
-1. For each correction signal from Phase 2, append to `CEREBELLUM/corrections.md` as a dated entry:
+1. For each correction signal from Phase 2, append to `learning/corrections.md` as a dated entry:
 
 ```
 ### {run-date}
 - **What happened:** {brief description}
 - **What should have happened:** {the correct behavior}
 - **Why:** {root cause}
-- **Source:** `HIPPOCAMPUS/short-term/{file}.md`
+- **Source:** `memory/short-term/{file}.md`
 - **Status:** unextracted
 ```
 
 2. Count unextracted corrections (those without `Status: extracted`). If **5 or more** exist, perform pattern extraction:
    - Group related corrections by theme
-   - For each group with 2+ members, write a pattern to `CEREBELLUM/patterns.md` in this format:
+   - For each group with 2+ members, write a pattern to `learning/patterns.md` in this format:
 
 ```
 ### {pattern name in imperative form}
@@ -224,9 +224,9 @@ For each new entity from Phase 2:
 
 1. Determine the entity type: `person`, `company`, `project`.
 2. Compute the stub path:
-   - Person → `SENSORY-CORTEX/people/{entity-name-hyphenated}.md`
-   - Company → `SENSORY-CORTEX/companies/{entity-name-hyphenated}.md`
-   - Project → Flag for user; do not auto-create a `MOTOR-CORTEX/{project}/` directory, since that's a larger commitment
+   - Person → `knowledge/people/{entity-name-hyphenated}.md`
+   - Company → `knowledge/companies/{entity-name-hyphenated}.md`
+   - Project → Flag for user; do not auto-create a `projects/{project}/` directory, since that's a larger commitment
 3. If the stub file does not exist, create it with minimal frontmatter and a skeleton body:
 
 ```yaml
@@ -237,7 +237,7 @@ related: []
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
 status: active
-source: "HIPPOCAMPUS/short-term/{source-file}.md"
+source: "memory/short-term/{source-file}.md"
 ---
 ```
 
@@ -276,16 +276,16 @@ Run these passes, but be conservative:
 For each short-term file fully processed by this run:
 
 1. Set its frontmatter `status: consolidated` and `consolidated: {run-date}`.
-2. Move it from `HIPPOCAMPUS/short-term/` to `HIPPOCAMPUS/short-term/archive/` using the filesystem move (preserve filename). Do not rename or rewrite.
+2. Move it from `memory/short-term/` to `memory/short-term/archive/` using the filesystem move (preserve filename). Do not rename or rewrite.
 3. If a file was partially processed (some signals extracted, some skipped), leave it in `short-term/` and set `status: partial` with a note in the report — do not archive.
 
-Never touch files in `HIPPOCAMPUS/short-term/transcripts/` in this phase. Transcripts have their own lifecycle and may be needed by future runs.
+Never touch files in `memory/short-term/transcripts/` in this phase. Transcripts have their own lifecycle and may be needed by future runs.
 
 ---
 
 ### Phase 10 — Write the consolidation report
 
-Create or append `HIPPOCAMPUS/short-term/consolidation-report-{run-date}.md` with this structure:
+Create or append `memory/short-term/consolidation-report-{run-date}.md` with this structure:
 
 ```yaml
 ---
@@ -321,8 +321,8 @@ status: complete
 - {If patterns extracted this run, list them with one-line summaries.}
 
 ## New entities
-- `SENSORY-CORTEX/people/{name}.md` — stub created
-- `SENSORY-CORTEX/companies/{name}.md` — stub created
+- `knowledge/people/{name}.md` — stub created
+- `knowledge/companies/{name}.md` — stub created
 - Flagged as project (not auto-created): {name}
 
 ## Long-term memory candidates
@@ -332,7 +332,7 @@ status: complete
 - {Any contradictions between short-term notes, between feedback entries, or against prior decisions.}
 
 ## Files archived
-- {count} short-term files moved to `HIPPOCAMPUS/short-term/archive/`
+- {count} short-term files moved to `memory/short-term/archive/`
 - {count} left in place as `status: partial`
 
 ## Graph hygiene
@@ -351,8 +351,8 @@ Keep sections that have nothing to report out of the final file rather than writ
 Before declaring the run complete, verify:
 
 - Every short-term file from today is either archived (`status: consolidated`) or intentionally left behind (`status: partial`)
-- Every decision signal extracted has a file in `HIPPOCAMPUS/decisions/`
-- Every skill-feedback signal has an entry in the right `CEREBELLUM/skill-feedback/{skill}.md`
+- Every decision signal extracted has a file in `memory/decisions/`
+- Every skill-feedback signal has an entry in the right `learning/skill-feedback/{skill}.md`
 - Every new entity has a stub file or is flagged as project-level
 - The consolidation report exists at the expected path
 - No existing file has had its body content rewritten (frontmatter updates are allowed)
@@ -363,7 +363,7 @@ If any verification fails, note the failure in the report — do not silently co
 
 - **Archive, never delete.** Processed short-term files are moved, not erased. Decision files are superseded, not overwritten.
 - **Never write to `MEMORY.md`.** It is user-triggered. Surface candidates in the report.
-- **Never edit `AMYGDALA.md`** (if the brain has one). Risk entries are a user-approval zone.
+- **Never edit `risks.md`** (if the brain has one). Risk entries are a user-approval zone.
 - **Idempotency check before writing.** Every file you create must be checked for prior existence first.
 - **No skill edit without 3+ feedback entries**, and no significant skill edit without explicit user review.
 - **Contradictions are surfaced, not resolved.** The user decides.

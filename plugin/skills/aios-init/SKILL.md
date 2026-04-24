@@ -19,8 +19,8 @@ Before asking anything, check the current working directory.
 
 **Detect an existing AI-OS.** If the cwd already contains any of the following, the user already has an AI-OS installed:
 - `CLAUDE.md` at the repo root that references "AI-OS" or "brain"
-- A `HIPPOCAMPUS/` directory
-- A `CEREBELLUM/` directory
+- A `memory/` directory
+- A `learning/` directory
 - An `.aios-license` file (already scaffolded)
 - A `.claude/aios.config.json` file
 
@@ -92,7 +92,7 @@ Normalize to one of: `solo-founder`, `operator`, `researcher`, `creator`, or a s
 
 > What are your top three goals for the next 90 days? A short phrase for each — one goal per line is easiest.
 
-Parse up to three goals into `user.goals` as an array of strings. If the user gives more than three, keep the first three and tell them gently that the rest can live in `META-COGNITION/context/goals-metrics.md` after setup.
+Parse up to three goals into `user.goals` as an array of strings. If the user gives more than three, keep the first three and tell them gently that the rest can live in `system/context/goals-metrics.md` after setup.
 
 ### Q5 — Integrations
 
@@ -173,11 +173,11 @@ For every file in `plugin/templates/**`, copy it into the user's cwd at the same
 
 Replace all occurrences. If a token appears but has no value, substitute an em-dash `—`.
 
-**Important:** Only render files from `plugin/templates/`. The folder structure in `plugin/templates/` mirrors the final brain layout, so copying it verbatim (after substitution) gives the user the full brain regions: `BASAL-GANGLIA/`, `BROCA/`, `CEREBELLUM/`, `HIPPOCAMPUS/`, `LONG-TERM-STORAGE/`, `META-COGNITION/`, `MOTOR-CORTEX/`, `PROCEDURAL-MEMORY/`, `SENSORY-CORTEX/`, plus root-level `CLAUDE.md`, `MEMORY.md`, and `AMYGDALA.md` if templates for those exist.
+**Important:** Only render files from `plugin/templates/`. The folder structure in `plugin/templates/` mirrors the final brain layout, so copying it verbatim (after substitution) gives the user the full brain regions: `routines/`, `voice/`, `learning/`, `memory/`, `archive/`, `system/`, `projects/`, `blueprints/`, `knowledge/`, plus root-level `CLAUDE.md`, `MEMORY.md`, and `risks.md` if templates for those exist.
 
 ### 4.2 — Install core skills
 
-Copy every directory inside `plugin/skills/core/` into `.claude/skills/` in the user's cwd. Preserve directory structure. These are the always-on skills (`brain-search`, `decision-check`, `nightly-brain-consolidation`, `reflect`, `foresight`, `thalamus-calibration`).
+Copy every directory inside `plugin/skills/core/` into `.claude/skills/` in the user's cwd. Preserve directory structure. These are the always-on skills (`memory-search`, `decision-check`, `nightly-consolidation`, `reflect`, `foresight`, `signal-calibration`).
 
 ### 4.3 — Install opt-in skills (gated by integrations)
 
@@ -241,7 +241,7 @@ Write `.claude/aios.config.json` with the full onboarding answers plus metadata,
   "version": "0.1.0",
   "installed_at": "{{today}}",
   "user": { ...the object from Phase 2... },
-  "installed_skills": ["brain-search", "decision-check", "..."],
+  "installed_skills": ["memory-search", "decision-check", "..."],
   "hooks": ["SessionStart", "SessionEnd", "PostToolUseFailure"]
 }
 ```
@@ -291,7 +291,7 @@ Five things to try next, {{user.name}}:
 1. /aios-explore
    The full menu of every skill AI-OS has installed for you.
 
-2. /brain-search "a person or topic you care about"
+2. /memory-search "a person or topic you care about"
    Pulls anything your brain already knows.
 
 3. /reflect

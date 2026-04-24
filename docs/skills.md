@@ -1,6 +1,6 @@
 # Skills catalog
 
-AI-OS ships with a curated set of skills that know how to use the brain. Skills are named behaviors Claude can invoke — they read specific regions, do specific work, and write specific outputs. Each skill has a feedback file in `CEREBELLUM/skill-feedback/` and improves over time.
+AI-OS ships with a curated set of skills that know how to use the brain. Skills are named behaviors Claude can invoke — they read specific regions, do specific work, and write specific outputs. Each skill has a feedback file in `learning/skill-feedback/` and improves over time.
 
 This document catalogs the skills that ship in the box.
 
@@ -8,13 +8,13 @@ This document catalogs the skills that ship in the box.
 
 ## Core skills
 
-### `brain-search`
+### `memory-search`
 
-Search the AI-OS brain for relevant files, entities, and knowledge before starting work. Invoked automatically when a session begins on a new topic, or manually when you need context about a person, company, decision, project, or concept. Reads across `SENSORY-CORTEX/`, `HIPPOCAMPUS/decisions/`, `MOTOR-CORTEX/`, and surfaces the five to ten most relevant files with a one-line summary each. This is the first skill most sessions touch.
+Search the AI-OS brain for relevant files, entities, and knowledge before starting work. Invoked automatically when a session begins on a new topic, or manually when you need context about a person, company, decision, project, or concept. Reads across `knowledge/`, `memory/decisions/`, `projects/`, and surfaces the five to ten most relevant files with a one-line summary each. This is the first skill most sessions touch.
 
 ### `decision-check`
 
-Search prior decisions on a topic before making a new one. Invoked when a session is about to commit to a direction on something the brain might have prior context on. Reads `HIPPOCAMPUS/decisions/` and `CEREBELLUM/patterns.md`, surfaces contradictions or supporting precedent, and flags them before the new decision lands. Prevents the system from quietly disagreeing with itself.
+Search prior decisions on a topic before making a new one. Invoked when a session is about to commit to a direction on something the brain might have prior context on. Reads `memory/decisions/` and `learning/patterns.md`, surfaces contradictions or supporting precedent, and flags them before the new decision lands. Prevents the system from quietly disagreeing with itself.
 
 ### `aios-init`
 
@@ -26,23 +26,23 @@ One-shot install and setup. Invoked once per machine, right after the plugin is 
 
 ### `morning-briefing`
 
-Daily morning briefing. Scans Gmail, calendar, and any configured task sources, then produces a prioritized summary of what needs attention today. Reads `META-COGNITION/context/goals-metrics.md` to weight priorities. Output can be delivered in-session, to a local file, or to a messaging channel you configure. The skill calibrates to your rhythm over time — what surfaces as "priority" shifts based on what you actually act on.
+Daily morning briefing. Scans Gmail, calendar, and any configured task sources, then produces a prioritized summary of what needs attention today. Reads `system/context/goals-metrics.md` to weight priorities. Output can be delivered in-session, to a local file, or to a messaging channel you configure. The skill calibrates to your rhythm over time — what surfaces as "priority" shifts based on what you actually act on.
 
 ### `email-triage`
 
-Daily email triage. Categorizes inbox into action tiers, drafts priority replies, and flags anything that needs escalation. Reads `SENSORY-CORTEX/people/` to add relationship context to incoming mail. Drafts are queued for review, not sent. Calibrates on what you actually send versus what you rewrite.
+Daily email triage. Categorizes inbox into action tiers, drafts priority replies, and flags anything that needs escalation. Reads `knowledge/people/` to add relationship context to incoming mail. Drafts are queued for review, not sent. Calibrates on what you actually send versus what you rewrite.
 
 ### `meeting-prep`
 
-Prepare a meeting brief by activating `SENSORY-CORTEX/people/`, `SENSORY-CORTEX/companies/`, and relevant `HIPPOCAMPUS/decisions/`. Invoked before any meeting. Produces: last interaction summary, open commitments, relevant prior decisions, suggested agenda or opening. The goal is that you walk into every conversation having pre-loaded the full relationship context.
+Prepare a meeting brief by activating `knowledge/people/`, `knowledge/companies/`, and relevant `memory/decisions/`. Invoked before any meeting. Produces: last interaction summary, open commitments, relevant prior decisions, suggested agenda or opening. The goal is that you walk into every conversation having pre-loaded the full relationship context.
 
 ### `relationship-check`
 
-Check the status of a single relationship. Last contact, open commitments, interaction cadence, suggested next action. Invoked on demand when you realize you haven't thought about someone in a while or want to know where you left things. Reads `SENSORY-CORTEX/people/<name>.md` and correlates with recent messaging and calendar data.
+Check the status of a single relationship. Last contact, open commitments, interaction cadence, suggested next action. Invoked on demand when you realize you haven't thought about someone in a while or want to know where you left things. Reads `knowledge/people/<name>.md` and correlates with recent messaging and calendar data.
 
 ### `project-status`
 
-Quick status check on any active project. Progress, blockers, days since last activity, next actions. Reads `MOTOR-CORTEX/<project>/MEMORY.md` and surfaces anything that's gone stale. Invoked on demand or at the start of a session on the project.
+Quick status check on any active project. Progress, blockers, days since last activity, next actions. Reads `projects/<project>/MEMORY.md` and surfaces anything that's gone stale. Invoked on demand or at the start of a session on the project.
 
 ---
 
@@ -50,7 +50,7 @@ Quick status check on any active project. Progress, blockers, days since last ac
 
 ### `brain-dump-content`
 
-Process a brain dump into structured content drafts. You talk or type freely into the session. The skill extracts ideas, clusters them, does light research to validate or complicate each, and drafts posts in your configured voice. Reads `BROCA/` for tone and style. Calibrates on what you publish versus what you discard.
+Process a brain dump into structured content drafts. You talk or type freely into the session. The skill extracts ideas, clusters them, does light research to validate or complicate each, and drafts posts in your configured voice. Reads `voice/` for tone and style. Calibrates on what you publish versus what you discard.
 
 ### `content-interview`
 
@@ -62,7 +62,7 @@ Structured interview to extract great content. Claude asks a sequence of questio
 
 ### `reflect`
 
-On-demand reflection. A goal-by-goal progress check against `META-COGNITION/context/goals-metrics.md`, correlated with recent decisions, corrections, and short-term memory. Surfaces patterns in what you've actually spent time on and how it aligns (or doesn't) with what you said mattered. Ends with a short set of strategic course-corrections.
+On-demand reflection. A goal-by-goal progress check against `system/context/goals-metrics.md`, correlated with recent decisions, corrections, and short-term memory. Surfaces patterns in what you've actually spent time on and how it aligns (or doesn't) with what you said mattered. Ends with a short set of strategic course-corrections.
 
 ### `foresight`
 
@@ -72,11 +72,11 @@ Forward-looking strategic planning. Ranked priorities for the week ahead based o
 
 ## System self-improvement
 
-### `nightly-brain-consolidation`
+### `nightly-consolidation`
 
-The brain processing its own day. Reads archived transcripts from `HIPPOCAMPUS/short-term/transcripts/`, extracts feedback signals the session may have missed, routes them to the right `CEREBELLUM/skill-feedback/<skill>.md`, and when 3+ pending entries accumulate on a skill, edits the skill itself. Also extracts patterns from corrections, clears processed short-term files, and updates vital signs. Run nightly on a schedule.
+The brain processing its own day. Reads archived transcripts from `memory/short-term/transcripts/`, extracts feedback signals the session may have missed, routes them to the right `learning/skill-feedback/<skill>.md`, and when 3+ pending entries accumulate on a skill, edits the skill itself. Also extracts patterns from corrections, clears processed short-term files, and updates vital signs. Run nightly on a schedule.
 
-### `thalamus-calibration`
+### `signal-calibration`
 
 Nightly self-improvement for the signal detector — the mechanism that decides what's important enough to surface into a session's context. Compares what the thalamus flagged versus what actually mattered, identifies misses, and proposes pattern improvements. Meta-level: this skill improves how the system decides what to improve.
 
@@ -84,7 +84,7 @@ Nightly self-improvement for the signal detector — the mechanism that decides 
 
 ## Skill calibration
 
-Every skill has a file at `CEREBELLUM/skill-feedback/<skill-name>.md` with frontmatter tracking:
+Every skill has a file at `learning/skill-feedback/<skill-name>.md` with frontmatter tracking:
 
 - `usage_count` — how often the skill has been invoked
 - `approval_rate` — how often the output was accepted without edit

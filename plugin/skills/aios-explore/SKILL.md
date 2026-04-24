@@ -29,7 +29,7 @@ Only list skills that are actually installed. Check `.claude/aios.config.json` f
 Use this canonical grouping and copy:
 
 **Every day**
-- `/brain-search` — pull context from the brain before you start. Use when you want Claude to know the backstory.
+- `/memory-search` — pull context from the brain before you start. Use when you want Claude to know the backstory.
 - `/reflect` — an honest, goal-by-goal progress check. Use when you feel scattered or at the end of a week.
 - `/foresight` — 3–7 ranked priorities for the window ahead. Use when planning a new week or recovering focus.
 - `/project-status` — decision-grade read on one project: cadence, state, next action. Use before status meetings or when something feels stuck.
@@ -42,11 +42,11 @@ Use this canonical grouping and copy:
 - `/content-interview` *(if installed)* — Claude asks, you answer, a draft gets made.
 
 **Autonomous**
-- `/nightly-brain-consolidation` — process short-term memory, extract patterns, improve skills. Runs nightly if you install the scheduler.
+- `/nightly-consolidation` — process short-term memory, extract patterns, improve skills. Runs nightly if you install the scheduler.
 - `/nightly-goal-pursuit` — advance one long-term goal overnight. Writes a morning-delivery file to act on at wake-up.
 - `/behavioral-learning` — extract behavioral patterns from archived transcripts. The brain watching how you actually work.
 - `/auto-outreach-queue` — draft personalized follow-ups for people in your brain. Nothing is sent without your approval.
-- `/thalamus-calibration` — tune the signal detector that routes context into sessions.
+- `/signal-calibration` — tune the signal detector that routes context into sessions.
 
 **System**
 - `/aios-init` — already run. Refuses to re-run (won't overwrite your brain).

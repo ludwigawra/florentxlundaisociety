@@ -100,10 +100,10 @@ mkdir -p "$(dirname "$LOG_FILE")"
   # the three skills in the order behavioral-learning expects.
   claude --print <<'PROMPT'
 Run the nightly cycle now, in this order:
-1. Invoke /nightly-brain-consolidation to process today's short-term memory.
+1. Invoke /nightly-consolidation to process today's short-term memory.
 2. Then invoke /behavioral-learning in observe mode to extract inferred patterns from today's transcripts and autonomous runs.
 3. Then invoke /nightly-goal-pursuit with depth=standard to advance one stalled goal.
-Log each run's completion to BASAL-GANGLIA/autonomous-runs.jsonl with trigger="cron".
+Log each run's completion to routines/autonomous-runs.jsonl with trigger="cron".
 PROMPT
 
   echo "=== $(date -Iseconds) AI-OS nightly cycle end ==="

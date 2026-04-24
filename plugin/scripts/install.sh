@@ -218,23 +218,23 @@ if [[ $WITH_DEMO -eq 1 && -d "$PLUGIN_ROOT/demo-data" ]]; then
   echo "seeding demo data"
   DEMO="$PLUGIN_ROOT/demo-data"
 
-  # Copy tree structures: HIPPOCAMPUS/decisions, HIPPOCAMPUS/short-term,
-  # SENSORY-CORTEX/people, SENSORY-CORTEX/companies, MOTOR-CORTEX/*
-  for sub in HIPPOCAMPUS/decisions HIPPOCAMPUS/short-term \
-             SENSORY-CORTEX/people SENSORY-CORTEX/companies; do
+  # Copy tree structures: memory/decisions, memory/short-term,
+  # knowledge/people, knowledge/companies, projects/*
+  for sub in memory/decisions memory/short-term \
+             knowledge/people knowledge/companies; do
     if [[ -d "$DEMO/$sub" ]]; then
       mkdir -p "$TARGET/$sub"
       cp "$DEMO/$sub"/*.md "$TARGET/$sub/" 2>/dev/null || true
     fi
   done
 
-  # MOTOR-CORTEX projects (each is a subdir)
-  if [[ -d "$DEMO/MOTOR-CORTEX" ]]; then
-    for proj in "$DEMO/MOTOR-CORTEX"/*/; do
+  # projects projects (each is a subdir)
+  if [[ -d "$DEMO/projects" ]]; then
+    for proj in "$DEMO/projects"/*/; do
       [[ -d "$proj" ]] || continue
       projname=$(basename "$proj")
-      mkdir -p "$TARGET/MOTOR-CORTEX/$projname"
-      cp "$proj"*.md "$TARGET/MOTOR-CORTEX/$projname/" 2>/dev/null || true
+      mkdir -p "$TARGET/projects/$projname"
+      cp "$proj"*.md "$TARGET/projects/$projname/" 2>/dev/null || true
     done
   fi
 
@@ -253,9 +253,9 @@ mem_path.write_text(new)
 PYEOF
   fi
 
-  # Append pattern additions to CEREBELLUM/patterns.md
-  if [[ -f "$DEMO/CEREBELLUM/patterns-additions.md" ]]; then
-    cat "$DEMO/CEREBELLUM/patterns-additions.md" >> "$TARGET/CEREBELLUM/patterns.md"
+  # Append pattern additions to learning/patterns.md
+  if [[ -f "$DEMO/learning/patterns-additions.md" ]]; then
+    cat "$DEMO/learning/patterns-additions.md" >> "$TARGET/learning/patterns.md"
   fi
 
   echo "  seeded 3 decisions, 2 people, 1 company, 1 project, 1 short-term, 2 patterns"
@@ -274,7 +274,7 @@ cat <<MSG
 AI-OS is live at: $TARGET
 
 Try these next:
-  - /brain-search      load context before starting work
+  - /memory-search      load context before starting work
   - /reflect           honest checkpoint on your goals
   - /foresight         ranked priorities for the week ahead
 

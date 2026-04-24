@@ -34,12 +34,12 @@ A skill is a named behavior Claude can invoke. Each skill lives in `plugin/skill
 
 1. **Does this belong as a skill, or is it a one-off?** Skills are for repeated, compound behaviors — not single commands.
 2. **What brain region does it read from, and what does it write to?** Every skill should name its reads and writes. A skill that doesn't touch the brain is usually a raw tool, not a skill.
-3. **How will it improve?** Every skill has a feedback file at `CEREBELLUM/skill-feedback/<skill-name>.md`. If you can't describe what good vs. bad output looks like, the skill won't calibrate.
+3. **How will it improve?** Every skill has a feedback file at `learning/skill-feedback/<skill-name>.md`. If you can't describe what good vs. bad output looks like, the skill won't calibrate.
 
 **Process:**
 
 1. Open an issue proposing the skill. Describe the trigger, the inputs, the outputs, and the brain regions it touches.
-2. Create `plugin/skills/<skill-name>/SKILL.md` following the format of existing skills (start with `brain-search` or `morning-briefing` as references).
+2. Create `plugin/skills/<skill-name>/SKILL.md` following the format of existing skills (start with `memory-search` or `morning-briefing` as references).
 3. Add an entry to `docs/skills.md`.
 4. If the skill produces files, add any templates to `plugin/templates/`.
 5. Submit a PR with an example invocation in the description.
@@ -48,7 +48,7 @@ A skill is a named behavior Claude can invoke. Each skill lives in `plugin/skill
 
 ## Adding a new brain region
 
-Brain regions are top-level folders in the user's AI-OS directory. They are opinionated — adding one is a design decision, not a feature request. The current regions (Hippocampus, Cerebellum, Sensory Cortex, Motor Cortex, Basal Ganglia, Procedural Memory, Broca, Amygdala, Meta-Cognition) were chosen to cover distinct cognitive functions without overlap.
+Brain regions are top-level folders in the user's AI-OS directory. They are opinionated — adding one is a design decision, not a feature request. The current regions (Memory, Learning, Knowledge, Projects, Routines, Blueprints, Voice, Risks, System) were chosen to cover distinct cognitive functions without overlap.
 
 **Before proposing a new region, ask:**
 

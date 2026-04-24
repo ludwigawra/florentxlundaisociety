@@ -1,6 +1,6 @@
 ---
 name: meeting-prep
-description: Produce a focused brief for an upcoming meeting — who the attendees are, why this meeting exists, what was agreed last time, what is still open, and the one outcome that makes this meeting worth having. Pulls meeting metadata from Google Calendar, attendee context from SENSORY-CORTEX/people/ and /companies/, and open threads from HIPPOCAMPUS/decisions/ + MOTOR-CORTEX. Use when a meeting is coming up (next 60 minutes, today, or tomorrow) and you want to walk in prepared without rereading history.
+description: Produce a focused brief for an upcoming meeting — who the attendees are, why this meeting exists, what was agreed last time, what is still open, and the one outcome that makes this meeting worth having. Pulls meeting metadata from Google Calendar, attendee context from knowledge/people/ and /companies/, and open threads from memory/decisions/ + projects. Use when a meeting is coming up (next 60 minutes, today, or tomorrow) and you want to walk in prepared without rereading history.
 ---
 
 # Meeting Prep
@@ -52,7 +52,7 @@ If the event is a recurring meeting, also fetch the previous occurrence. The las
 
 For each attendee that is not the user:
 
-1. Match against `SENSORY-CORTEX/people/` by email alias, name, or aliases frontmatter field
+1. Match against `knowledge/people/` by email alias, name, or aliases frontmatter field
 2. If no match, search the brain broadly for mentions (decisions, short-term, corrections)
 3. If still nothing, mark them as `unknown` — do not fabricate context
 
@@ -60,17 +60,17 @@ For each matched person, pull the same information `relationship-check` would: s
 
 ### 3. Identify the company context
 
-If attendees share a company (from their `company` frontmatter field), load `SENSORY-CORTEX/companies/{slug}.md`. The company context often carries as much weight as the person context — especially for external meetings.
+If attendees share a company (from their `company` frontmatter field), load `knowledge/companies/{slug}.md`. The company context often carries as much weight as the person context — especially for external meetings.
 
-If the meeting references a specific project, product, or deal, identify it and load the relevant `MOTOR-CORTEX/{project}/` files.
+If the meeting references a specific project, product, or deal, identify it and load the relevant `projects/{project}/` files.
 
 ### 4. Pull open threads
 
 Search for open threads involving the attendees or the named topic:
 
-1. `HIPPOCAMPUS/decisions/` — decisions related to any attendee or topic, especially ones marked `status: pending` or touched recently
-2. `MOTOR-CORTEX/*/MEMORY.md` — if the meeting is about a project, read the project memory for current state
-3. Previous meetings with these attendees — use GCal to search past events and pull notes from matching `HIPPOCAMPUS/short-term/` files if references exist
+1. `memory/decisions/` — decisions related to any attendee or topic, especially ones marked `status: pending` or touched recently
+2. `projects/*/MEMORY.md` — if the meeting is about a project, read the project memory for current state
+3. Previous meetings with these attendees — use GCal to search past events and pull notes from matching `memory/short-term/` files if references exist
 4. Gmail (if the `gmail` integration is enabled) — most recent 3 threads with attendees, surface unresolved threads
 
 ### 5. Derive the purpose and desired outcome
@@ -98,7 +98,7 @@ Look for anything that should give pause:
 - An attendee's last contact ended on a correction or a hard conversation
 - A prior commitment from you is past due
 - A prior commitment from them is past due, and the meeting is where it would normally land — expect the follow-up
-- A decision documented in `HIPPOCAMPUS/decisions/` contradicts something the meeting might land
+- A decision documented in `memory/decisions/` contradicts something the meeting might land
 
 If no risks, write "none flagged" — do not pad.
 
@@ -139,7 +139,7 @@ Use this structure. Target: one screen, 250-400 words total.
 
 ### 9. Offer to save
 
-Offer to save the brief to `HIPPOCAMPUS/short-term/meeting-prep-YYYY-MM-DD-{slug}.md` with frontmatter:
+Offer to save the brief to `memory/short-term/meeting-prep-YYYY-MM-DD-{slug}.md` with frontmatter:
 
 ```yaml
 ---
@@ -151,7 +151,7 @@ tags: [meeting-prep, prep]
 ---
 ```
 
-This gives `nightly-brain-consolidation` material to learn from — the patterns of what you actually got versus what you prepped for.
+This gives `nightly-consolidation` material to learn from — the patterns of what you actually got versus what you prepped for.
 
 ### 10. Post-meeting follow-up handoff
 
@@ -172,5 +172,5 @@ At the end of the brief, offer a follow-up path: "After the meeting, run `/meeti
 - Attendee layers are handled by `relationship-check` logic — this skill summarizes the output, not reproduces it. If the user wants the deeper read on one attendee, hand off.
 - If prep surfaces a contradiction with a prior decision, pair with `decision-check` before the meeting.
 - If the meeting is the landing moment for a project, pair with `project-status` so the current state is fresh.
-- After the meeting, the decisions + commitments that landed should flow into `HIPPOCAMPUS/decisions/` (via the user writing or consolidation extracting from the session transcript). This skill doesn't write decisions itself.
+- After the meeting, the decisions + commitments that landed should flow into `memory/decisions/` (via the user writing or consolidation extracting from the session transcript). This skill doesn't write decisions itself.
 - `morning-briefing` usually surfaces the day's meetings first; meeting-prep drills into one.

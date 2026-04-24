@@ -1,6 +1,6 @@
 ---
 name: behavioral-learning
-description: Observe how the user actually works — not what they say — and extract behavioral patterns the system can use to adapt its own triggers, defaults, and voice. Runs nightly after nightly-brain-consolidation. Reads archived transcripts, the autonomous-runs ledger, and usage frequency signals. Writes inferred patterns to CEREBELLUM/behavioral-patterns.md. The difference between "memory" and "an assistant that learns you" — no one writes these rules, the brain infers them.
+description: Observe how the user actually works — not what they say — and extract behavioral patterns the system can use to adapt its own triggers, defaults, and voice. Runs nightly after nightly-consolidation. Reads archived transcripts, the autonomous-runs ledger, and usage frequency signals. Writes inferred patterns to learning/behavioral-patterns.md. The difference between "memory" and "an assistant that learns you" — no one writes these rules, the brain infers them.
 ---
 
 # Behavioral Learning
@@ -20,7 +20,7 @@ The AI-OS root is at `~/Desktop/AI-OS/` by default; use the configured root if d
 
 ## When to use
 
-This skill is designed to run **autonomously on cron**, typically 10–20 minutes after `nightly-brain-consolidation` so it can read that night's freshly-routed data.
+This skill is designed to run **autonomously on cron**, typically 10–20 minutes after `nightly-consolidation` so it can read that night's freshly-routed data.
 
 Do not invoke manually unless:
 
@@ -44,13 +44,13 @@ Default mode is **observe**. The confidence thresholds and review gates are desc
 
 Read, in this order:
 
-1. `HIPPOCAMPUS/short-term/transcripts/` — all transcripts within the window. These are the honest record of what happened, not a summary.
-2. `BASAL-GANGLIA/autonomous-runs.jsonl` — every autonomous skill fire in the window, including what it produced and the user's response (approved / edited / ignored)
-3. `CEREBELLUM/corrections.md` and `CEREBELLUM/patterns.md` — already-known content patterns (so behavioral inferences don't duplicate them)
-4. `CEREBELLUM/skill-feedback/*.md` — existing per-skill feedback, especially approval rates
-5. `CEREBELLUM/tool-errors.log` — tool failure signals (behavioral pattern: "user avoids Chrome MCP after 3 consecutive failures")
-6. `META-COGNITION/context/goals-metrics.md` — which goals are getting attention vs not
-7. `HIPPOCAMPUS/decisions/` timestamps — decision cadence
+1. `memory/short-term/transcripts/` — all transcripts within the window. These are the honest record of what happened, not a summary.
+2. `routines/autonomous-runs.jsonl` — every autonomous skill fire in the window, including what it produced and the user's response (approved / edited / ignored)
+3. `learning/corrections.md` and `learning/patterns.md` — already-known content patterns (so behavioral inferences don't duplicate them)
+4. `learning/skill-feedback/*.md` — existing per-skill feedback, especially approval rates
+5. `learning/tool-errors.log` — tool failure signals (behavioral pattern: "user avoids Chrome MCP after 3 consecutive failures")
+6. `system/context/goals-metrics.md` — which goals are getting attention vs not
+7. `memory/decisions/` timestamps — decision cadence
 
 If the transcripts directory has fewer than 3 sessions in the window, stop. Note in the output: *"insufficient behavioral data — need ≥3 sessions to infer."*
 
@@ -76,7 +76,7 @@ For each of the six signal categories below, scan the loaded data and emit raw s
 - Idle gaps — when does the user stop for the day; when do they come back?
 
 **D. Relationship-engagement signals**
-- Which people in `SENSORY-CORTEX/people/` are mentioned, drafted to, or checked on vs not?
+- Which people in `knowledge/people/` are mentioned, drafted to, or checked on vs not?
 - Frequency-of-contact baselines per person — who has drifted?
 - Who does the user edit drafts to more vs less (a behavioral proxy for care / stakes)?
 
@@ -133,7 +133,7 @@ followed by:
 
 Be strict about what counts as an observation. "The user deleted an exclamation mark once" is not an observation of a voice pattern — it's noise. "The user edited out exclamation marks in 4 of 5 drafts across 3 sessions" is.
 
-### Step 4 — Write to `CEREBELLUM/behavioral-patterns.md`
+### Step 4 — Write to `learning/behavioral-patterns.md`
 
 Append new patterns (do not overwrite the file — it grows over time). If an existing pattern has the same `pattern_id`, update its `observations`, `last_seen`, and evidence list; do not duplicate.
 
@@ -143,23 +143,23 @@ The file's top 3 patterns (by confidence + recency) surface in the dashboard `Be
 
 For each pattern with `confidence: medium` or higher, propose a concrete change to a downstream file:
 
-- **Voice pattern** → edit to `BROCA/voice-fingerprint.md`
+- **Voice pattern** → edit to `voice/voice-fingerprint.md`
 - **Skill-usage pattern** → edit to the relevant `SKILL.md` (adjust the defaults or the trigger conditions)
 - **Timing pattern** → edit to the scheduler config (`.claude/scheduled-runs.json` if present) — never edit cron directly
-- **Relationship pattern** → edit to the relevant `SENSORY-CORTEX/people/<person>.md` (update the "engagement cadence" field)
-- **Tool-preference pattern** → add or update an entry in `AMYGDALA.md` (risk flags) if the pattern is "avoid X"
-- **Goal pattern** → note in `META-COGNITION/context/goals-metrics.md` under the relevant goal
+- **Relationship pattern** → edit to the relevant `knowledge/people/<person>.md` (update the "engagement cadence" field)
+- **Tool-preference pattern** → add or update an entry in `risks.md` (risk flags) if the pattern is "avoid X"
+- **Goal pattern** → note in `system/context/goals-metrics.md` under the relevant goal
 
-If `mode: propose`, write the proposed diff to `HIPPOCAMPUS/short-term/behavioral-proposals-YYYY-MM-DD.md` for the user to review.
+If `mode: propose`, write the proposed diff to `memory/short-term/behavioral-proposals-YYYY-MM-DD.md` for the user to review.
 
 If `mode: apply`, apply only the `confidence: high` edits. Log each edit in the `autonomous-runs.jsonl` ledger with `artifact` pointing at the edited file.
 
 ### Step 6 — Log the run
 
-Append one line to `BASAL-GANGLIA/autonomous-runs.jsonl`:
+Append one line to `routines/autonomous-runs.jsonl`:
 
 ```json
-{"ts":"<ISO-8601>","skill":"behavioral-learning","mode":"<mode>","status":"completed","outputs":<N new/updated patterns>,"trigger":"<cron|manual>","artifact":"CEREBELLUM/behavioral-patterns.md"}
+{"ts":"<ISO-8601>","skill":"behavioral-learning","mode":"<mode>","status":"completed","outputs":<N new/updated patterns>,"trigger":"<cron|manual>","artifact":"learning/behavioral-patterns.md"}
 ```
 
 If mode was `propose` or `apply` with staged edits, status is `pending-review` and `artifact` is the proposals file.
@@ -176,7 +176,7 @@ If mode was `propose` or `apply` with staged edits, status is `pending-review` a
 - **Do not infer from a single observation.** The whole point of this skill is that behavioral claims need supporting weight.
 - **Do not treat stated preferences as behavior.** If MEMORY.md says "user prefers X" but behavior shows "user does Y", record the behavioral pattern and flag the contradiction. Don't overwrite the stated preference — surface the tension.
 - **Do not edit skills in `mode: observe`.** Observation is the safe default.
-- **Do not propose an action that contradicts AMYGDALA.md risk flags.** The amygdala wins; behavioral patterns adapt around it.
+- **Do not propose an action that contradicts risks.md risk flags.** The amygdala wins; behavioral patterns adapt around it.
 
 ## Calibration
 

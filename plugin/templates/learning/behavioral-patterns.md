@@ -33,7 +33,7 @@ Stop writing exclamation marks in drafts by default. Treat them as a known anti-
 - No counter-examples (no drafts where `!` was added)
 
 ## Proposed action
-Add "no exclamation marks unless explicitly requested" to BROCA/voice-fingerprint.md.
+Add "no exclamation marks unless explicitly requested" to voice/voice-fingerprint.md.
 ```
 
 ## Current patterns

@@ -1,9 +1,9 @@
 ---
-name: thalamus-calibration
+name: signal-calibration
 description: Nightly self-improvement for the thalamus signal detector — the pre-prompt hook that suggests which brain regions to activate based on keyword signals. Compares what the thalamus predicted vs what actually got loaded or mattered in each session, measures hits and misses, and proposes concrete updates to the keyword mapping. Use on the nightly cycle after consolidation, or on demand when the signal detector feels off (wrong activations, missed categories, or too noisy).
 ---
 
-# Thalamus Calibration
+# Signal Calibration
 
 The thalamus is the `user-prompt-submit.sh` hook that runs on every user prompt and emits a compact `THALAMUS [CATEGORY]: Activate: <regions>` hint. It is the system's attempt to pre-load the right context before Claude reads the prompt. When it misses, the session starts colder than it should. When it over-fires, context gets crowded with irrelevant regions.
 
@@ -15,7 +15,7 @@ The AI-OS root is at `~/Desktop/AI-OS/` by default. If the user has configured a
 
 Invoke this skill whenever any of the following apply:
 
-- Nightly cycle, after `nightly-brain-consolidation` has archived transcripts
+- Nightly cycle, after `nightly-consolidation` has archived transcripts
 - The user reports the thalamus is firing for the wrong things or missing the right ones
 - A new brain region has been added and the thalamus has not been taught about it
 - A session transcript shows the thalamus activated a region that was never touched, or did not activate a region that was central
@@ -43,7 +43,7 @@ If the file is missing or does not parse, stop and flag. Calibration cannot run 
 
 ### 2. Collect the ground truth from transcripts
 
-Read transcripts from `HIPPOCAMPUS/short-term/transcripts/` within the window. For each session:
+Read transcripts from `memory/short-term/transcripts/` within the window. For each session:
 
 1. Find the user prompts (usually `role: user` turns without tool results)
 2. For each user prompt, extract:
@@ -101,11 +101,11 @@ Do not propose more than 5 changes per calibration. The thalamus is a compact ar
 
 ### 6. Output a calibration report
 
-Write to `HIPPOCAMPUS/short-term/thalamus-calibration-YYYY-MM-DD.md` with frontmatter:
+Write to `memory/short-term/signal-calibration-YYYY-MM-DD.md` with frontmatter:
 
 ```yaml
 ---
-type: thalamus-calibration
+type: signal-calibration
 window: <window>
 mode: <observe | propose | apply>
 sessions_analyzed: <count>
@@ -118,7 +118,7 @@ tags: [thalamus, calibration, meta-cognition]
 Report structure:
 
 ```
-# Thalamus Calibration — YYYY-MM-DD
+# Signal Calibration — YYYY-MM-DD
 
 ## Sample
 <sessions, prompts, fallbacks if any>
@@ -150,7 +150,7 @@ If and only if the user explicitly ran with `mode=apply` or approved the propose
 2. Make a dated backup at `.claude/hooks/backups/user-prompt-submit-YYYY-MM-DD.sh` — never overwrite a backup
 3. Apply the proposed changes exactly as written in the report
 4. Re-run a quick syntax check (`bash -n user-prompt-submit.sh`)
-5. Write an `improvement-log` entry appending to `CEREBELLUM/skill-feedback/thalamus-calibration.md` (or a dedicated `thalamus-improvement-log.md`) with: timestamp, calibration report filename, diff summary
+5. Write an `improvement-log` entry appending to `learning/skill-feedback/signal-calibration.md` (or a dedicated `thalamus-improvement-log.md`) with: timestamp, calibration report filename, diff summary
 6. Flag to the user that the change is live and to watch for regressions
 
 If the syntax check fails, revert to backup and report the failure — never ship a broken hook.
@@ -159,7 +159,7 @@ If the syntax check fails, revert to backup and report the failure — never shi
 
 If the window had too few sessions or too few prompts to compute meaningful stats, say so plainly and recommend a re-run with a wider window. Do not invent precision/recall from 3 prompts.
 
-If no material changes are warranted, say so. "Thalamus is calibrated — no changes recommended this cycle" is a valid and valuable report.
+If no material changes are warranted, say so. "Signal is calibrated — no changes recommended this cycle" is a valid and valuable report.
 
 ## What to avoid
 
@@ -172,7 +172,7 @@ If no material changes are warranted, say so. "Thalamus is calibrated — no cha
 
 ## Integration with other skills
 
-- `nightly-brain-consolidation` runs first and archives transcripts. Calibration runs after, reading those archives.
-- If calibration surfaces a pattern worth persisting (e.g., "Mondays the user prompts always start with retrospective language"), propose the user add it to `CEREBELLUM/patterns.md` via consolidation — do not edit `patterns.md` here.
-- If the window reveals that a new skill was used frequently without any thalamus support, pair with `brain-search` and `reflect` to understand the skill's context before proposing a new category.
+- `nightly-consolidation` runs first and archives transcripts. Calibration runs after, reading those archives.
+- If calibration surfaces a pattern worth persisting (e.g., "Mondays the user prompts always start with retrospective language"), propose the user add it to `learning/patterns.md` via consolidation — do not edit `patterns.md` here.
+- If the window reveals that a new skill was used frequently without any thalamus support, pair with `memory-search` and `reflect` to understand the skill's context before proposing a new category.
 - Report `apply` actions to the user clearly in the next session start — they should know the signal router was updated.

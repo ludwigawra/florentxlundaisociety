@@ -21,7 +21,7 @@ Format:
 **Pattern**: [if this generalizes — what to watch for]
 ```
 
-After extracting a correction into `CEREBELLUM/patterns.md`, append `[extracted]` to the end of the **Pattern** line so the vital-signs check knows to stop counting it.
+After extracting a correction into `learning/patterns.md`, append `[extracted]` to the end of the **Pattern** line so the vital-signs check knows to stop counting it.
 
 Review for patterns after every 5 new corrections.
 

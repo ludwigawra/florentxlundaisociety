@@ -13,12 +13,12 @@ Each task is sized to fit in one `/loop` iteration (with verify step).
 
 ## P1 — Missing core skills (shipped-with-plugin, always on)
 
-Currently shipped in `plugin/skills/core/`: `brain-search`, `decision-check`, `nightly-brain-consolidation`.
+Currently shipped in `plugin/skills/core/`: `memory-search`, `decision-check`, `nightly-consolidation`.
 
 - [ ] `reflect` — on-demand strategic reflection across goals, decisions, corrections.
 - [ ] `foresight` — forward-looking weekly priorities from goals, calendar, pipeline, patterns.
-- [ ] `project-status` — quick status check on any active project in `MOTOR-CORTEX/`.
-- [ ] `thalamus-calibration` — nightly improvement of the signal detector that injects context.
+- [ ] `project-status` — quick status check on any active project in `projects/`.
+- [ ] `signal-calibration` — nightly improvement of the signal detector that injects context.
 
 ## P2 — Optional (integration-gated) skills
 
@@ -27,7 +27,7 @@ Under `plugin/skills/optional/`, gated at install time by the integrations the u
 - [ ] `morning-briefing` (requires Gmail + GCal).
 - [ ] `email-triage` (requires Gmail).
 - [ ] `meeting-prep` (requires GCal).
-- [ ] `relationship-check` (standalone — reads `SENSORY-CORTEX/people/`).
+- [ ] `relationship-check` (standalone — reads `knowledge/people/`).
 - [ ] `brain-dump-content` (requires content pillars set).
 - [ ] `content-interview` (requires content pillars set).
 

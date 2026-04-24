@@ -24,30 +24,31 @@ AI-OS fixes this by giving Claude a file-system-native brain. A folder on your m
 
 ### 1. The brain (a folder on your machine)
 
-One folder, structured like a brain. Each region has a purpose. Each file has a place.
+One folder, modeled on the brain but named in plain language. Each folder has one purpose. Each file has a place.
 
-| Region | Role |
+| Folder | What lives there |
 |---|---|
-| **Prefrontal Cortex** (`CLAUDE.md`) | Identity, decision rules, executive control |
-| **Hippocampus** (`HIPPOCAMPUS/`) | Episodic memory — decisions, sessions, transcripts |
-| **Cerebellum** (`CEREBELLUM/`) | Error correction — corrections, patterns, skill feedback |
-| **Sensory Cortex** (`SENSORY-CORTEX/`) | World knowledge — people, companies, markets |
-| **Motor Cortex** (`MOTOR-CORTEX/`) | Active projects, each with its own CLAUDE.md |
-| **Basal Ganglia** (`BASAL-GANGLIA/`) | Habits and routines — daily, weekly, on-demand |
-| **Procedural Memory** (`PROCEDURAL-MEMORY/`) | Templates and blueprints |
-| **Broca** (`BROCA/`) | Voice, brand, communication style |
-| **Amygdala** (`AMYGDALA.md`) | Risk flags — read before important actions |
-| **Meta-Cognition** (`META-COGNITION/`) | The system thinking about itself |
+| `CLAUDE.md` | Identity, decision rules, executive control |
+| `MEMORY.md` | Long-term memory — user-triggered writes only |
+| `risks.md` | Risk flags — read before important actions |
+| `memory/` | Decisions, sessions, transcripts |
+| `learning/` | Corrections, patterns, skill feedback |
+| `knowledge/` | People, companies, market notes |
+| `projects/` | Active projects, each with its own CLAUDE.md |
+| `routines/` | Daily, weekly, and on-demand routines |
+| `blueprints/` | Templates and reusable how-tos |
+| `voice/` | Brand and communication style |
+| `system/` | Goals, architecture, vital signs |
 
-The folder **is** the brain. No database, no cloud, no vendor lock-in.
+No database, no cloud, no vendor lock-in. The folder is the brain — but you can read every file with a normal editor.
 
 ### 2. The skills pack
 
 A curated set of skills that ship with the plugin and know how to use the brain.
 
-- `brain-search` — search the brain before starting work
+- `memory-search` — search the brain before starting work
 - `decision-check` — prevent contradictions by surfacing prior decisions
-- `nightly-brain-consolidation` — process short-term memory, extract patterns, improve skills
+- `nightly-consolidation` — process short-term memory, extract patterns, improve skills
 - `morning-briefing` — daily prioritized summary
 - `email-triage` — categorize and draft replies
 - `meeting-prep` — surface relationship and decision context
@@ -57,7 +58,7 @@ A curated set of skills that ship with the plugin and know how to use the brain.
 - `content-interview` — Claude asks, you answer, drafts get made
 - `reflect` — goal-by-goal progress and course correction
 - `foresight` — forward-looking priorities
-- `thalamus-calibration` — the brain tuning its own signal detector
+- `signal-calibration` — the brain tuning its own signal detector
 - `aios-init` — one-shot install and setup
 
 Skills improve over time. When you give feedback, the nightly consolidation edits the skill itself.
@@ -109,13 +110,13 @@ When it finishes, you have a brain. Every future Claude Code session started ins
 ### Step 4 — Try your first skills
 
 ```
-/brain-search      load context about a person, project, or decision
+/memory-search      load context about a person, project, or decision
 /reflect           honest checkpoint on your goals
 /foresight         ranked priorities for the week ahead
 /project-status    status read on any project
 ```
 
-Skills write back as you use them: decisions land in `HIPPOCAMPUS/decisions/`, patterns in `CEREBELLUM/patterns.md`, people in `SENSORY-CORTEX/people/`. Your context compounds across sessions.
+Skills write back as you use them: decisions land in `memory/decisions/`, patterns in `learning/patterns.md`, people in `knowledge/people/`. Your context compounds across sessions.
 
 ### Updates
 
@@ -165,10 +166,11 @@ If you prefer not to use Claude Code's plugin system, you can still install the 
   │  (the brain — your      │
   │   folder, your files)   │
   │                         │
-  │  HIPPOCAMPUS/           │
-  │  CEREBELLUM/            │
-  │  SENSORY-CORTEX/        │
-  │  MOTOR-CORTEX/          │
+  │  memory/                │
+  │  learning/              │
+  │  knowledge/             │
+  │  projects/              │
+  │  routines/              │
   │  ...                    │
   └─────────────────────────┘
 ```
@@ -191,7 +193,7 @@ AI-OS ships as install fee + subscription.
 
 - **Starter** — starting at $X one-time + $Y/month. Core brain, skills pack, single machine.
 - **Pro** — starting at $X one-time + $Y/month. Everything in Starter, plus priority skill updates, multi-device sync.
-- **Team** — custom. Shared brain regions, team-level skills, admin controls.
+- **Team** — custom. Shared folders, team-level skills, admin controls.
 
 See the [pricing page](https://example.com/pricing) for current tiers.
 
@@ -211,7 +213,7 @@ The plugin, skills pack, and docs in this repo are open source under MIT. The su
 
 ## Contributing
 
-We welcome contributions to skills and brain regions. See [`CONTRIBUTING.md`](CONTRIBUTING.md).
+We welcome contributions to skills and brain folders. See [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
 ---
 
