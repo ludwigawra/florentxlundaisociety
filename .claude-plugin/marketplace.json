@@ -39,6 +39,14 @@
           "description": "Non-destructive update of an installed AI-OS — pulls new skills, hooks, and templates from the upgraded plugin without touching brain data. diff/apply modes, per-conflict prompts, automatic rollback on failure."
         },
         {
+          "name": "aios-explore",
+          "description": "Show every AI-OS skill available in this session, grouped by purpose, with one-line descriptions and when to use each. Use any time the user asks \"what can this do\" or at the end of /aios-init to orient a fresh install."
+        },
+        {
+          "name": "forge-skill",
+          "description": "Auto-generate intent-wrapped skills from a connected MCP. User connects a new MCP (Gmail, Notion, Linear, etc.), runs /forge-skill <mcp-name>, and the brain proposes 3-5 skill candidates that wrap its tools with natural-language intents. Every skill is approved before it's written. How AI-OS grows capabilities as the user connects new tools."
+        },
+        {
           "name": "brain-search",
           "description": "Search the AI-OS brain for relevant files, entities, and knowledge before starting work."
         },

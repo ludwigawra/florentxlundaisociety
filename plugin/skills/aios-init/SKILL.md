@@ -96,9 +96,11 @@ Parse up to three goals into `user.goals` as an array of strings. If the user gi
 
 ### Q5 — Integrations
 
-> Which of these do you want to connect? Gmail, Google Calendar, Notion, Slack, WhatsApp, or none. Pick any combination.
+> Which of these do you want to connect? Gmail, Google Calendar, Notion, Slack, WhatsApp, or none. Pick any combination — you can always add more later.
 
 Parse into `user.integrations` as an array of lowercase slugs (`gmail`, `gcal`, `notion`, `slack`, `whatsapp`). If the user says "none" or lists nothing, set it to `[]`.
+
+If the user lists any integration, remember to mention in Phase 5 that connecting the MCP itself happens inside Claude Code (`/mcp` command or the plus menu) and that they can run `/forge-skill <mcp-name>` after connecting to auto-generate intent-wrapped skills for it. See `plugin/docs/mcp-directory.md` for the full list of recommended MCPs.
 
 ### Q6 — Content pillars (conditional)
 
@@ -284,15 +286,22 @@ Your brain lives at:  .
 Your config:          .claude/aios.config.json
 Your skills:          .claude/skills/
 
-Three things to try next, {{user.name}}:
+Five things to try next, {{user.name}}:
 
-1. /brain-search "a person or topic you care about"
+1. /aios-explore
+   The full menu of every skill AI-OS has installed for you.
+
+2. /brain-search "a person or topic you care about"
    Pulls anything your brain already knows.
 
-2. /reflect
+3. /reflect
    A short, honest progress check against your three goals.
 
-3. Just work.
+4. Connect an MCP, then /forge-skill <mcp-name>
+   Gmail, Notion, Linear, Supabase — each one you connect, the brain can
+   auto-generate intent-wrapped skills for it. See docs/mcp-directory.md.
+
+5. Just work.
    Every session writes to short-term memory automatically.
    Patterns emerge. Skills improve. The brain remembers.
 

@@ -80,7 +80,7 @@ For each candidate:
 3. **Draft in the user's voice.** Respect:
    - `BROCA/voice-fingerprint.md` rules (tone, sentence length, anti-patterns)
    - `CEREBELLUM/behavioral-patterns.md` entries in the `voice` category
-   - Language preference from MEMORY.md (English for business / Swedish for internal, or as configured)
+   - Language preference from MEMORY.md (as configured by the user)
 4. **Keep it honest.** 2–5 sentences max for email; 1–2 sentences for LinkedIn; 1 sentence for WhatsApp. No fabricated specifics, no AI-ish hedging, no exclamation marks unless the voice fingerprint explicitly permits them.
 5. **Cite context** in a collapsed `<details>` block under each draft so the user can verify the grounding: "Last interaction: [file] · Open commitment: [quote from file] · Related decision: [[decision-title]]."
 

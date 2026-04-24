@@ -78,7 +78,7 @@ From the loaded context, extract:
 - **Blockers** — anything explicitly labeled blocked, or obviously stalled (waiting on X, can't progress until Y)
 - **Next concrete action** — the single most specific next step. If the file does not name one, derive the smallest plausible next action and flag that you derived it.
 
-Be strict about specificity. "Continue working on the design" is not a next action. "Send v2 of the landing hero to Matthias for review" is.
+Be strict about specificity. "Continue working on the design" is not a next action. "Send v2 of the landing hero to the designer by Friday for review" is.
 
 ### 5. Classify the state
 

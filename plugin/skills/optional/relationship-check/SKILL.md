@@ -143,7 +143,7 @@ If the person file does not exist:
 2. If found, offer to create a stub `SENSORY-CORTEX/people/{slug}.md` with the context extracted from mentions
 3. If not found, say so plainly and ask whether to create a new person file from scratch with the user's input
 
-Never fabricate details. If the only evidence is "Ludwig mentioned a Jane in a short-term file once", say that and nothing more.
+Never fabricate details. If the only evidence is "the user mentioned a Jane in a short-term file once", say that and nothing more.
 
 ## What to avoid
 

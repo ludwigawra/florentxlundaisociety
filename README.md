@@ -2,7 +2,7 @@
 
 **Your second brain for Claude Code. Persistent memory, learned patterns, skills that improve over time.**
 
-AI-OS is a Claude Code plugin paired with a local dashboard that installs a brain-inspired operating system on your machine. It gives Claude a persistent place to remember, reason, and improve — across every session, in every repo, for as long as you keep using it.
+AI-OS is a Claude Code plugin that installs a brain-inspired operating system on your machine. It gives Claude a persistent place to remember, reason, and improve — across every session, in every repo, for as long as you keep using it.
 
 Install once. Keep everything.
 
@@ -62,75 +62,82 @@ A curated set of skills that ship with the plugin and know how to use the brain.
 
 Skills improve over time. When you give feedback, the nightly consolidation edits the skill itself.
 
-### 3. The dashboard
-
-A local-first web dashboard that renders your brain. No account. No cloud. Runs on `localhost`.
-
-- Browse regions, read files, follow wiki-links
-- Inspect short-term memory and decisions
-- Watch skills calibrate
-- See the graph
-
 ---
 
-## Quick start — install in 3 minutes
+## Install — three commands, two minutes
 
-Prerequisites: `git`, `bash`, Node.js 20+ (for the dashboard), and [Claude Code](https://docs.claude.com/en/docs/claude-code).
+AI-OS is a Claude Code plugin distributed directly from this GitHub repo. No Anthropic marketplace submission, no gatekeeper, no shell script. Anyone with Claude Code installed can add it as a plugin marketplace in one line.
 
-### 1. Clone and install
+### Prerequisites
 
-```bash
-git clone https://github.com/ludwigawra/florentxlundaisociety.git
-cd florentxlundaisociety
-./plugin/scripts/install.sh \
-  --target ~/my-brain \
-  --name "Your Name" \
-  --role "Your role" \
-  --company "Your company" \
-  --integrations "gmail,gcal" \
-  --with-demo-data
-```
+| Requirement | Check | Install |
+|---|---|---|
+| Claude Code | `claude --version` | [docs.claude.com/en/docs/claude-code](https://docs.claude.com/en/docs/claude-code) |
 
-This scaffolds a fresh brain in `~/my-brain/` — 9 regions, 10 skills, 4 session hooks, first git commit included. `--with-demo-data` seeds realistic example content (decisions, people, a project, patterns) so you can see what a lived-in brain looks like from minute one. Drop the flag to start empty.
+That's it. No `git`, no `bash`, no `node`, no `python3` required.
 
-### 2. Talk to your brain via Claude Code
+### Step 1 — Add the marketplace
 
-```bash
-cd ~/my-brain
-claude
-```
-
-The `SessionStart` hook fires automatically, prints your vital signs, and loads learned patterns into context. Then try any shipped skill:
+In any Claude Code session, run:
 
 ```
-/reflect            honest checkpoint on your goals
-/foresight          ranked priorities for the week ahead
+/plugin marketplace add ludwigawra/florentxlundaisociety
+```
+
+This tells Claude Code to treat this GitHub repo as a plugin marketplace. Claude Code clones it locally (cached), reads `.claude-plugin/marketplace.json`, and registers AI-OS as an installable plugin.
+
+### Step 2 — Install AI-OS
+
+```
+/plugin install aios@aios
+```
+
+(Format: `plugin-name@marketplace-name` — both happen to be `aios` here.) Claude Code installs the plugin's skills, hooks, and commands into your Claude Code config. Nothing touches your system outside of Claude Code's plugin directory.
+
+### Step 3 — Bootstrap your brain
+
+Open a Claude Code session in the folder where you want your brain to live (examples use `~/my-brain`), then run:
+
+```
+/aios-init
+```
+
+This is a conversational onboarding skill — Claude walks you through a short setup (name, role, company, which integrations you use), then scaffolds your brain folder: 10 regions, templates, initial `MEMORY.md`, `CLAUDE.md` personalized to you, session hooks wired up, optional demo data if you want to see the system populated.
+
+When it finishes, you have a brain. Every future Claude Code session started inside this folder loads your brain automatically via the `SessionStart` hook.
+
+### Step 4 — Try your first skills
+
+```
 /brain-search      load context about a person, project, or decision
+/reflect           honest checkpoint on your goals
+/foresight         ranked priorities for the week ahead
 /project-status    status read on any project
 ```
 
-Skills write back to the brain. Decisions land in `HIPPOCAMPUS/decisions/`. Patterns land in `CEREBELLUM/patterns.md`. Your context compounds.
+Skills write back as you use them: decisions land in `HIPPOCAMPUS/decisions/`, patterns in `CEREBELLUM/patterns.md`, people in `SENSORY-CORTEX/people/`. Your context compounds across sessions.
 
-### 3. See your brain (optional)
+### Updates
 
-```bash
-# from the cloned repo
-cd dashboard
-npm install
-AIOS_ROOT=~/my-brain npm run dev
-open http://localhost:3000
-```
-
-Local-first dashboard. No account, no cloud. The files on disk are the source of truth; the dashboard is just a viewer.
-
-### Coming soon: one-command install
+When a new version ships, update with:
 
 ```
-# Not yet — pending plugin marketplace submission
-claude plugin add aios
+/plugin marketplace update aios
+/plugin update aios@aios
 ```
 
-See [`docs/getting-started.md`](docs/getting-started.md) for the detailed walkthrough and [`install.sh --help`](plugin/scripts/install.sh) for all options.
+Your brain folder is never touched — updates only change skills, hooks, and commands. Your memory is yours forever.
+
+### Troubleshooting
+
+- **`command not found: claude`** — Claude Code isn't installed or isn't on your `PATH`. See prerequisites.
+- **Skills don't appear after install** — run `/plugin reload` or restart your Claude Code session.
+- **`/aios-init` can't find templates** — plugin install didn't complete cleanly. Re-run `/plugin install aios@aios`.
+- **SessionStart hook is silent** — make sure you're running Claude Code *inside* the brain folder (`cd ~/my-brain` first). Hooks scope to the current directory.
+
+### Alternative: shell-script install *(fallback)*
+
+If you prefer not to use Claude Code's plugin system, you can still install the classic way by cloning this repo and running `./plugin/scripts/install.sh --target ~/my-brain --name "Your Name"`. See [`plugin/scripts/install.sh --help`](plugin/scripts/install.sh) for all flags. This path is maintained for backwards compatibility but the plugin flow above is the recommended way in.
 
 ---
 
@@ -163,14 +170,6 @@ See [`docs/getting-started.md`](docs/getting-started.md) for the detailed walkth
   │  SENSORY-CORTEX/        │
   │  MOTOR-CORTEX/          │
   │  ...                    │
-  └────────────┬────────────┘
-               │
-               │  renders
-               ▼
-  ┌─────────────────────────┐
-  │   Local Dashboard       │
-  │   (Next.js, localhost)  │
-  │   browse, search, graph │
   └─────────────────────────┘
 ```
 
@@ -186,37 +185,17 @@ See [`docs/getting-started.md`](docs/getting-started.md) for the detailed walkth
 
 ---
 
-## Screenshots
-
-> _Dashboard — brain region browser_
->
-> `[screenshot: dashboard-regions.png]`
-
-> _Short-term memory view_
->
-> `[screenshot: dashboard-short-term.png]`
-
-> _Skill calibration panel_
->
-> `[screenshot: dashboard-skills.png]`
-
-> _Knowledge graph_
->
-> `[screenshot: dashboard-graph.png]`
-
----
-
 ## Pricing
 
 AI-OS ships as install fee + subscription.
 
 - **Starter** — starting at $X one-time + $Y/month. Core brain, skills pack, single machine.
-- **Pro** — starting at $X one-time + $Y/month. Everything in Starter, plus dashboard pro views, priority skill updates, multi-device sync.
+- **Pro** — starting at $X one-time + $Y/month. Everything in Starter, plus priority skill updates, multi-device sync.
 - **Team** — custom. Shared brain regions, team-level skills, admin controls.
 
 See the [pricing page](https://example.com/pricing) for current tiers.
 
-The plugin, skills pack, dashboard, and docs in this repo are open source under MIT. The subscription covers licensed distribution, hosted update channels, and support — not your data or your brain folder. Your data is always local and yours.
+The plugin, skills pack, and docs in this repo are open source under MIT. The subscription covers licensed distribution, hosted update channels, and support — not your data or your brain folder. Your data is always local and yours.
 
 ---
 
@@ -232,7 +211,7 @@ The plugin, skills pack, dashboard, and docs in this repo are open source under 
 
 ## Contributing
 
-We welcome contributions to skills, brain regions, and dashboard views. See [`CONTRIBUTING.md`](CONTRIBUTING.md).
+We welcome contributions to skills and brain regions. See [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
 ---
 
@@ -240,4 +219,4 @@ We welcome contributions to skills, brain regions, and dashboard views. See [`CO
 
 MIT for the open-source components in this repository. See [`LICENSE`](LICENSE).
 
-The MIT license covers the plugin, skills, dashboard, and docs. It does not cover the subscription services (licensing server, hosted update channel, support). Those are governed by the terms of your subscription.
+The MIT license covers the plugin, skills, and docs. It does not cover the subscription services (licensing server, hosted update channel, support). Those are governed by the terms of your subscription.

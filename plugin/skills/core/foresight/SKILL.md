@@ -83,7 +83,7 @@ Output 3–7 priorities. Fewer if the window is a week and capacity is light. Mo
 - **Signal of progress** — how the user will know by end of window whether this moved ("pricing doc v2 in Notion" not "worked on pricing")
 - **Risk if skipped** — one sentence — what breaks, slips, or worsens if the user does not do this. If nothing, the item should not be on the list.
 
-Be concrete. "Follow up with leads" is not useful. "Reply to Georgia and Kaveh — both waiting >5 days, decay risk high" is useful.
+Be concrete. "Follow up with leads" is not useful. "Reply to the two leads from last week — both waiting >5 days, decay risk high" is useful.
 
 ### 5. The single drop
 

@@ -14,7 +14,7 @@ The exact script we use to demonstrate AI-OS on stage or in a one-on-one.
 ## Step 1 — Install (60 seconds)
 
 ```bash
-git clone https://github.com/ludwigawra/florentxlundaisociety.git aios-demo
+git clone https://github.com/<your-org>/aios.git aios-demo
 cd aios-demo
 
 ./plugin/scripts/install.sh \

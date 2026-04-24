@@ -131,7 +131,7 @@ followed by:
 - **medium** = 3–5 observations, consistent. Propose an action but do not apply it automatically.
 - **high** = 6+ observations, consistent across at least two distinct sessions/contexts. Safe to auto-apply if the caller passed `mode: apply`.
 
-Be strict about what counts as an observation. "Ludwig deleted an exclamation mark once" is not an observation of a voice pattern — it's noise. "Ludwig edited out exclamation marks in 4 of 5 drafts across 3 sessions" is.
+Be strict about what counts as an observation. "The user deleted an exclamation mark once" is not an observation of a voice pattern — it's noise. "The user edited out exclamation marks in 4 of 5 drafts across 3 sessions" is.
 
 ### Step 4 — Write to `CEREBELLUM/behavioral-patterns.md`
 

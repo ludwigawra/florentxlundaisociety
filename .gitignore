@@ -9,3 +9,6 @@ node_modules/
 
 # Personal / not for commit
 docs/pitch.md
+docs/pitch-strategy.md
+docs/pitch-deck/
+docs/demo-video/

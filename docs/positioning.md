@@ -63,12 +63,12 @@ The pitch-ready comparison of every product that could be confused for AI-OS.
 - **Stack Overflow 2025 survey**: devs spend ~23% of AI interaction time re-supplying context
 - **Supermemory**: sub-300ms recall, "10x faster than Zep" (vendor-reported)
 
-**No authoritative retention/DAU data exists for any personal-memory product.** That's whitespace — position Awra as the first with a mature cohort.
+**No authoritative retention/DAU data exists for any personal-memory product.** That's whitespace — AI-OS has the opportunity to be the first with a mature cohort.
 
 ## Why this wins
 
 1. **One assistant, every workflow.** Today every AI tool is an island. Cursor has your code context. ChatGPT has your chat context. Notion has your workspace context. Claude has nothing of yours. You re-explain yourself every time you switch surfaces. AI-OS collapses that: the *same* brain is loaded into every Claude session, across every repo, every project, every task. Coding, writing, research, pitches, email — one context, one assistant. Stop onboarding your AI over and over.
-2. **Composability**: AI-OS is the *substrate* every future personal-AI automation will need. Every automation Ludwig built for clients failed on context. AI-OS fixes that — automations inherit the whole brain instead of being rebuilt from zero each time.
+2. **Composability**: AI-OS is the *substrate* every future personal-AI automation will need. Most automations built on top of chat assistants fail on context — they have to be re-fed who the user is, what they care about, and what already happened, every time. AI-OS fixes that — automations inherit the whole brain instead of being rebuilt from zero each time.
 3. **Portability**: the brain is a folder, not a vendor. Switch from Claude to Opus 5 to GPT-6 — the brain comes with you.
 4. **Compounding**: the skill-feedback loop means usage → improvement → better usage. Competitors plateau; AI-OS accelerates.
 5. **Trust**: local files, zero telemetry, git-tracked. The opposite of the Rewind story.

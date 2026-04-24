@@ -47,7 +47,7 @@ No standalone memory product ships hooks. No MCP-memory product runs nightly cod
 - Git-backed, local, grep-able
 - Short-term → long-term promotion pipeline
 - MEMORY.md as explicit user-triggered long-term store
-- 28 real decisions, 33 real people/companies, 53 archived sessions in Ludwig's brain after 18 days
+- Reference brain has accumulated 28 decisions, 33 people/companies, and 53 archived sessions within the first 18 days of use
 
 **Ubiquity**
 - Global brain-stem at `~/.claude/CLAUDE.md` — every Claude session loads the brain regardless of cwd

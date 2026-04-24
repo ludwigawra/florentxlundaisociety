@@ -177,6 +177,6 @@ After the user has reviewed the morning delivery and given feedback (even implic
 
 ## Calibration
 
-Initial state: **learning**. Expect Ludwig to redirect the first 3–5 runs — mode choice, goal pick, output shape, tone. Log every redirect to short-term so the nightly consolidation can route it to `CEREBELLUM/skill-feedback/nightly-goal-pursuit.md`.
+Initial state: **learning**. Expect the user to redirect the first 3–5 runs — mode choice, goal pick, output shape, tone. Log every redirect to short-term so the nightly consolidation can route it to `CEREBELLUM/skill-feedback/nightly-goal-pursuit.md`.
 
 After 3+ approval signals in a row, this skill graduates to **calibrated** and can run autonomously on cron.
