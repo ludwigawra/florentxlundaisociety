@@ -16,15 +16,21 @@
 - **2026-04-18** — `relationship-check` optional skill shipped (P2, standalone). 9-step process: locate person (exact → partial → name → aliases → first-name with ambiguity refusal), load full person frontmatter + body, cross-reference decisions / corrections / projects / short-term / companies / optional Gmail+GCal+WhatsApp, compute freshness (days + cadence verdict: on-rhythm/slipping/dormant/fresh/never), extract open commitments both directions, recent topics, structured output with `do-not-contact` respected before anything else. Purpose-tailored (reach-out/prep-meeting/decide-on-status). Offers to create stub person file if only mentions found. Never writes to person file without confirmation. Added `optionalSkills` section to marketplace.json and moved entry out of `plannedSkills`. Verify gate: typecheck + build pass. Paths touched: `plugin/skills/optional/relationship-check/SKILL.md`, `plugin/.claude-plugin/marketplace.json`.
 - **2026-04-18** — `meeting-prep` optional skill shipped (P2, requires GCal). 10-step process: fetch event from GCal (+previous occurrence for recurring meetings), identify attendees via knowledge/people/ (don't fabricate unknowns), load company + project context, pull open threads from decisions and recent gmail, derive explicit purpose / desired outcome / anti-outcome (or flag when not derivable), identify asks and likely-their-asks, surface risk flags (do-not-contact, past-due commitments, contradicting decisions), one-screen brief with structured 9-section output (250-400 words), offer to save to short-term for nightly consolidation to learn from, hint at future `--post` mode for meeting follow-up extraction. Hard rule: brief longer than one screen has failed. Refuses to run if gcal not in aios.config.json integrations. Moved into `optionalSkills` in marketplace with `requires: ["gcal"]`. Verify gate: typecheck + build pass. Paths touched: `plugin/skills/optional/meeting-prep/SKILL.md`, `plugin/.claude-plugin/marketplace.json`.
 
+- **2026-04-23** — Five-pillar autonomy upgrade: `aios-explore`, `forge-skill`, `nightly-goal-pursuit`, `behavioral-learning`, `auto-outreach-queue` skills shipped. Scheduler script (`plugin/scripts/schedule.sh`). MCP directory at `plugin/docs/mcp-directory.md`. Positioning + autonomy roadmap docs. (commit 7f5c8c1)
+- **2026-04-24** — Dropped dashboard workspace and root `package.json` — scope is now CLI-only plugin. Moved `marketplace.json` from `plugin/.claude-plugin/` to repo-root `/.claude-plugin/` (correct location per Claude Code marketplace spec; the repo *is* the marketplace, the plugin lives under `./plugin`). Removed `smoke-dashboard.sh`. (commit 51b35cf)
+- **2026-04-24** — Renamed all brain-region folders and skills to plain English so non-Ludwig users opening their installed brain don't have to look up "basal ganglia". Folders: `HIPPOCAMPUS→memory`, `CEREBELLUM→learning`, `SENSORY-CORTEX→knowledge`, `MOTOR-CORTEX→projects`, `BASAL-GANGLIA→routines`, `PROCEDURAL-MEMORY→blueprints`, `BROCA→voice`, `META-COGNITION→system`, `LONG-TERM-STORAGE→archive`, `AMYGDALA.md→risks.md`. Skills: `brain-search→memory-search`, `nightly-brain-consolidation→nightly-consolidation`, `thalamus-calibration→signal-calibration`. Bulk content rewrite across 71 files. CLAUDE.md/README/architecture tables redesigned. End-to-end smoke test passed: `install.sh` scaffolds all folders correctly, all 13 skills install with new names, `session-start.sh` hook fires and creates a session file under `memory/short-term/`. Marketing copy keeps the brain metaphor — only identifiers are plain. (commit 11789b3 + d7d50b0)
+
 ## In Progress
 
 - (none)
 
-## Next
+## Next (toward production-readiness)
 
-1. `morning-briefing` optional skill (P2, requires Gmail + GCal).
-2. `email-triage` optional skill (P2, requires Gmail).
-3. `brain-dump-content` optional skill (P2, standalone).
+1. **README polish** — replace `$X / $Y` placeholder pricing with real tiers (or remove pricing block until ready); fix `example.com/pricing` link; verify docs/getting-started.md walks through the renamed folders.
+2. **Plugin install end-to-end** — install the local marketplace into a real Claude Code session (`/plugin marketplace add ./` against a worktree clone), confirm `/aios-init` runs as a slash command and not just as a file.
+3. **Licensing replace stub** — implement real ed25519 verification in `plugin/licensing/check.ts`, embed a real public key, document rotation, add 14-day grace. Currently the stub passes everything.
+4. **New-skill audit** — sanity-read each of the autonomy skills (`forge-skill`, `nightly-goal-pursuit`, `behavioral-learning`, `auto-outreach-queue`) end-to-end against the renamed brain to confirm no path drift, and verify they fail gracefully when their preconditions aren't met (no goals, no people files, no autonomous-runs ledger yet).
+5. **Demo + landing** — record install→init→first session→consolidation walkthrough; build pricing page; submit to Anthropic plugin marketplace.
 
 ## Blockers
 
