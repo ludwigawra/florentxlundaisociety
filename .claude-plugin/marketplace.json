@@ -1,131 +1,27 @@
 {
-  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "aios",
-  "description": "Your second brain for Claude Code — persistent memory, learned patterns, and skills that improve over time.",
   "owner": {
-    "name": "AI-OS",
-    "url": "https://aios.dev"
+    "name": "AI-OS"
   },
-  "homepage": "https://aios.dev",
-  "category": "productivity",
-  "keywords": [
-    "memory",
-    "second-brain",
-    "productivity",
-    "solo-founder",
-    "knowledge-management",
-    "personal-os"
-  ],
   "plugins": [
     {
       "name": "aios",
+      "source": "./plugin",
       "description": "Your second brain for Claude Code — persistent memory, learned patterns, and skills that improve over time.",
       "version": "0.1.0",
-      "category": "productivity",
-      "source": "./plugin",
-      "homepage": "https://aios.dev",
-      "screenshots": [
-        "./plugin/assets/screenshot-welcome.png",
-        "./plugin/assets/screenshot-briefing.png",
-        "./plugin/assets/screenshot-brain-map.png"
+      "author": {
+        "name": "AI-OS"
+      },
+      "license": "MIT",
+      "homepage": "https://github.com/ludwigawra/florentxlundaisociety",
+      "keywords": [
+        "memory",
+        "second-brain",
+        "productivity",
+        "knowledge-management",
+        "personal-os"
       ],
-      "skills": [
-        {
-          "name": "aios-init",
-          "description": "Bootstrap a new AI-OS in the current directory — conversational onboarding that scaffolds your brain, configures skills, and sets up the self-improvement loop."
-        },
-        {
-          "name": "aios-update",
-          "description": "Non-destructive update of an installed AI-OS — pulls new skills, hooks, and templates from the upgraded plugin without touching brain data. diff/apply modes, per-conflict prompts, automatic rollback on failure."
-        },
-        {
-          "name": "aios-explore",
-          "description": "Show every AI-OS skill available in this session, grouped by purpose, with one-line descriptions and when to use each. Use any time the user asks \"what can this do\" or at the end of /aios-init to orient a fresh install."
-        },
-        {
-          "name": "forge-skill",
-          "description": "Auto-generate intent-wrapped skills from a connected MCP. User connects a new MCP (Gmail, Notion, Linear, etc.), runs /forge-skill <mcp-name>, and the brain proposes 3-5 skill candidates that wrap its tools with natural-language intents. Every skill is approved before it's written. How AI-OS grows capabilities as the user connects new tools."
-        },
-        {
-          "name": "memory-search",
-          "description": "Search the AI-OS brain for relevant files, entities, and knowledge before starting work."
-        },
-        {
-          "name": "decision-check",
-          "description": "Search prior decisions on a topic — prevents contradictions and surfaces relevant history."
-        },
-        {
-          "name": "nightly-consolidation",
-          "description": "Nightly brain consolidation — processes short-term memory, extracts patterns, improves skills."
-        },
-        {
-          "name": "reflect",
-          "description": "On-demand strategic reflection — goal-by-goal progress, patterns observed, course corrections. Use at checkpoints or when feeling scattered."
-        },
-        {
-          "name": "foresight",
-          "description": "Forward-looking planning — 3-7 ranked priorities for the week or window ahead with explicit cost, progress signals, and one drop. Use when planning a new window or recovering from scatter."
-        },
-        {
-          "name": "project-status",
-          "description": "Decision-grade status read on one project — cadence, state label (active/stalled/blocked/deprioritized/done/abandoned-quietly), next concrete action, and a continue/revive/close/hand-off/wait recommendation."
-        },
-        {
-          "name": "signal-calibration",
-          "description": "Nightly calibration of the thalamus signal detector — compares predicted vs used brain regions across real transcripts, computes precision/recall per category, proposes concrete keyword changes with citations. observe/propose/apply modes; apply requires explicit confirmation."
-        },
-        {
-          "name": "nightly-goal-pursuit",
-          "description": "Advance one long-term goal overnight — research, outreach prep, drafts, or list-building grounded in the brain. Writes a single morning-delivery file under memory/short-term/ with a headline, the first move to take when waking up, concrete outputs, and a gap log. Turns sleep into compounding."
-        },
-        {
-          "name": "behavioral-learning",
-          "description": "Observe how the user actually works — not what they say — and extract behavioral patterns that feed back into skills, triggers, and defaults. Reads archived transcripts, the autonomous-runs ledger, and usage frequency. Writes inferred patterns to learning/behavioral-patterns.md. The difference between 'memory' and 'an assistant that learns you'."
-        },
-        {
-          "name": "auto-outreach-queue",
-          "description": "Autonomously draft a queue of personalized follow-ups for people in knowledge/people/ who are overdue, have open commitments, or matter for an active goal. Voice-matched, grounded in prior interactions, queued for morning review. Nothing sent without the user's approval."
-        }
-      ],
-      "optionalSkills": [
-        {
-          "name": "relationship-check",
-          "description": "Quick, honest read on one relationship — last contact, freshness verdict, open commitments both ways, specific next action. Reads knowledge/people/ and cross-references decisions, projects, and optional Gmail/GCal/WhatsApp. No integration required."
-        },
-        {
-          "name": "meeting-prep",
-          "requires": ["gcal"],
-          "description": "One-screen brief for an upcoming meeting — purpose, desired outcome, attendees with freshness, open threads, your asks + their likely asks, risk flags. Pulls from GCal, knowledge, decisions, and projects."
-        }
-      ],
-      "plannedSkills": [
-        { "name": "morning-briefing",     "phase": "P2", "requires": ["gmail", "gcal"] },
-        { "name": "email-triage",         "phase": "P2", "requires": ["gmail"] },
-        { "name": "brain-dump-content",   "phase": "P2" },
-        { "name": "content-interview",    "phase": "P2" }
-      ],
-      "hooks": [
-        {
-          "name": "session-start",
-          "event": "SessionStart",
-          "description": "Creates a short-term memory file for the session and injects vital signs plus learned patterns into context."
-        },
-        {
-          "name": "session-end",
-          "event": "SessionEnd",
-          "description": "Archives the session transcript into memory/short-term/transcripts/ so nightly consolidation can read it."
-        },
-        {
-          "name": "post-tool-failure",
-          "event": "PostToolUse",
-          "description": "Logs tool or MCP failures to learning/tool-errors.log so the system can learn from them."
-        },
-        {
-          "name": "user-prompt-submit",
-          "event": "UserPromptSubmit",
-          "description": "Emits a lightweight THALAMUS routing hint based on keyword signals in the prompt."
-        }
-      ]
+      "category": "productivity"
     }
   ]
 }
