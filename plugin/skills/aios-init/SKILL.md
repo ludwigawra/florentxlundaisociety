@@ -195,42 +195,13 @@ For each directory inside `plugin/skills/optional/`, read its `SKILL.md` frontma
 
 Skills that fail their gate are silently skipped. Later, if the user connects a new integration, they can run `/aios-update` (future skill) to install the now-eligible ones.
 
-### 4.4 — Write settings.json
+### 4.4 — Hook wiring (handled by the plugin, not by you)
 
-Create or merge `.claude/settings.json` in the user's cwd.
+**Do not write hooks into `.claude/settings.json`.** When the user installed this plugin via `/plugin install`, Claude Code auto-discovered `plugin/hooks/hooks.json` and wired all four hooks (SessionStart, SessionEnd, PostToolUse, UserPromptSubmit) using `${CLAUDE_PLUGIN_ROOT}` paths. Writing them again here would fire every event twice.
 
-**If the file does not exist**, write a fresh one containing:
+The legacy `install.sh` shell flow is the one path that does write `settings.json` hooks (because it runs without the plugin system). That logic stays in the script, not here.
 
-```json
-{
-  "$schema": "https://anthropic.com/claude-code/settings.schema.json",
-  "hooks": {
-    "SessionStart": [
-      {
-        "hooks": [
-          { "type": "command", "command": "${CLAUDE_PLUGIN_ROOT}/hooks/session-start.sh" }
-        ]
-      }
-    ],
-    "SessionEnd": [
-      {
-        "hooks": [
-          { "type": "command", "command": "${CLAUDE_PLUGIN_ROOT}/hooks/session-end.sh" }
-        ]
-      }
-    ],
-    "PostToolUseFailure": [
-      {
-        "hooks": [
-          { "type": "command", "command": "${CLAUDE_PLUGIN_ROOT}/hooks/post-tool-failure.sh" }
-        ]
-      }
-    ]
-  }
-}
-```
-
-**If the file already exists**, load it as JSON, deep-merge the `hooks` key by appending AI-OS's hook entries (do not overwrite the user's existing hooks), then write it back with 2-space indentation. If the user already has an AI-OS hook registered under the same command path, skip it — do not duplicate.
+If `.claude/settings.json` does not already exist in the user's cwd, you may create an empty one (`{}`) so future per-project overrides have a place to land. Do not put anything else in it.
 
 ### 4.5 — Write aios.config.json
 
@@ -242,7 +213,7 @@ Write `.claude/aios.config.json` with the full onboarding answers plus metadata,
   "installed_at": "{{today}}",
   "user": { ...the object from Phase 2... },
   "installed_skills": ["memory-search", "decision-check", "..."],
-  "hooks": ["SessionStart", "SessionEnd", "PostToolUseFailure"]
+  "hooks": ["SessionStart", "SessionEnd", "PostToolUse", "UserPromptSubmit"]
 }
 ```
 
@@ -263,13 +234,14 @@ Do not add any co-author trailer. Do not skip hooks. If git commit fails because
 While installing, show a single running block. Update it in place where possible:
 
 ```
-Scaffolding brain regions   done
+Scaffolding brain folders   done
 Installing core skills      done
 Installing opt-in skills    3 of 7 eligible
-Wiring hooks                done
 Writing config              done
 Committing                  done
 ```
+
+(Hook wiring is not listed because the plugin install already handled it.)
 
 Keep it under 80 columns. No spinners, no emojis.
 
