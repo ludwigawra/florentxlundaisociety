@@ -29,8 +29,10 @@ claude
 Inside Claude Code:
 
 ```
-/plugin marketplace add ~/Desktop/Awra/Github/ludwigkreisel_florentxlundaisociety
+/plugin marketplace add ~/Desktop/Awra/Github/bas-pugin-aios
 ```
+
+(Or, to test the published path Anthropic users will hit: `/plugin marketplace add ludwigawra/AIOS`.)
 
 Expected: marketplace `aios` registers, lists 1 plugin (`aios v0.1.0`).
 
@@ -120,5 +122,5 @@ All 7 steps succeed without errors. Any of:
 ## Known issues to watch for
 
 1. **Skill duplication** — `/plugin install` exposes skills as `/aios:reflect` etc; `/aios-init` ALSO copies them to `<brain>/.claude/skills/reflect/`. Both work but local takes precedence in Claude Code's resolution. May become an update-conflict source. Open architectural question — see PLAN.md.
-2. **Homepage URL** in `marketplace.json` and `plugin.json` points to `github.com/ludwigawra/florentxlundaisociety` — will 404 after the planned repo rename. Update before submitting to Anthropic marketplace.
+2. ~~Homepage URL~~ — resolved 2026-05-05. Repo renamed to `ludwigawra/AIOS`; both manifest files updated.
 3. **First-time hook fire timing** — on macOS, the first `bash` invocation in a fresh session can take 200ms+. Hook timeout is 5000ms for SessionStart, plenty of headroom, but watch for `timed out` warnings on slow disks.

@@ -33,7 +33,7 @@
 ## Next (toward production-readiness)
 
 1. **Real plugin install end-to-end** — Ludwig runs `docs/install-test.md` in his own Claude Code session (the runbook ships everything needed). Audit done; only the interactive verification is outstanding.
-2. **Repo rename** `florentxlundaisociety → aios` — Ludwig does the GitHub Settings rename, then 4 files need their hardcoded URLs updated: `README.md`, `plugin/.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`, `docs/getting-started.md`.
+2. ~~Repo rename~~ — done 2026-05-05. Renamed to `ludwigawra/AIOS` (uppercase per Ludwig's choice). All 4 hardcoded URL references updated.
 3. **README polish** — replace `$X / $Y` placeholder pricing with real tiers (or remove pricing block until ready); fix `example.com/pricing` link; verify docs/getting-started.md walks through the renamed folders.
 4. **New-skill audit** — sanity-read each of the autonomy skills (`forge-skill`, `nightly-goal-pursuit`, `behavioral-learning`, `auto-outreach-queue`) end-to-end against the renamed brain to confirm no path drift, and verify they fail gracefully when their preconditions aren't met (no goals, no people files, no autonomous-runs ledger yet).
 5. **Licensing replace stub** — implement real ed25519 verification in `plugin/licensing/check.ts`, embed a real public key, document rotation, add 14-day grace. Currently the stub passes everything.

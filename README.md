@@ -84,7 +84,7 @@ That's it. No `git`, no `bash`, no `node`, no `python3` required.
 In any Claude Code session, run:
 
 ```
-/plugin marketplace add ludwigawra/florentxlundaisociety
+/plugin marketplace add ludwigawra/AIOS
 ```
 
 This tells Claude Code to treat this GitHub repo as a plugin marketplace. Claude Code clones it locally (cached), reads `.claude-plugin/marketplace.json`, and registers AI-OS as an installable plugin.
