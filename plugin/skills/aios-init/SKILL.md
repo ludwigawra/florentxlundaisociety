@@ -175,6 +175,8 @@ Replace all occurrences. If a token appears but has no value, substitute an em-d
 
 **Important:** Only render files from `plugin/templates/`. The folder structure in `plugin/templates/` mirrors the final brain layout, so copying it verbatim (after substitution) gives the user the full brain regions: `routines/`, `voice/`, `learning/`, `memory/`, `archive/`, `system/`, `projects/`, `blueprints/`, `knowledge/`, plus root-level `CLAUDE.md`, `MEMORY.md`, and `risks.md` if templates for those exist.
 
+**Make scripts executable.** After rendering, any `.sh` files under `system/scripts/` (e.g. `tick-progress.sh`) need `chmod +x`. Run a single `chmod +x <brain>/system/scripts/*.sh 2>/dev/null` after the render pass.
+
 ### 4.2 — Install core skills
 
 Copy every directory inside `plugin/skills/core/` into `.claude/skills/` in the user's cwd. Preserve directory structure. These are the always-on skills (`memory-search`, `decision-check`, `nightly-consolidation`, `reflect`, `foresight`, `signal-calibration`).
@@ -216,6 +218,22 @@ Write `.claude/aios.config.json` with the full onboarding answers plus metadata,
   "hooks": ["SessionStart", "SessionEnd", "PostToolUse", "UserPromptSubmit"]
 }
 ```
+
+### 4.5b — Tick setup-progress for completed install steps
+
+The brain ships with `system/setup-progress.md` — a live checklist that tracks how complete the install is. Tick the items aios-init just completed by running these six commands in sequence (errors are silenced by the script; safe to run in any order):
+
+```bash
+cd <brain-root>
+bash system/scripts/tick-progress.sh "Identity" "User profile" "aios-init"
+bash system/scripts/tick-progress.sh "Identity" "90-day goals" "aios-init"
+bash system/scripts/tick-progress.sh "Identity" "Tone" "aios-init"
+bash system/scripts/tick-progress.sh "Brain folders" "Folders scaffolded" "aios-init"
+bash system/scripts/tick-progress.sh "Brain folders" "CLAUDE.md" "aios-init"
+bash system/scripts/tick-progress.sh "Brain folders" "First commit" "aios-init"
+```
+
+After this, `system/setup-progress.md` should show ~38% complete. The remaining items get ticked as the user wires integrations (`/forge-skill <mcp>`), schedules (manual), and runs first-use skills (`/aios-explore`, `/reflect`, etc.). Don't surface this to the user — it'll come up naturally when they run `/aios-help status`.
 
 ### 4.6 — Git
 

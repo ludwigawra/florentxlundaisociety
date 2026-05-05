@@ -38,7 +38,8 @@ One folder, modeled on the brain but named in plain language. Each folder has on
 | `routines/` | Daily, weekly, and on-demand routines |
 | `blueprints/` | Templates and reusable how-tos |
 | `voice/` | Brand and communication style |
-| `system/` | Goals, architecture, vital signs |
+| `system/` | Goals, architecture, vital signs, setup progress |
+| `archive/` | Inactive but searchable |
 
 No database, no cloud, no vendor lock-in. The folder is the brain — but you can read every file with a normal editor.
 
@@ -60,6 +61,7 @@ A curated set of skills that ship with the plugin and know how to use the brain.
 - `foresight` — forward-looking priorities
 - `signal-calibration` — the brain tuning its own signal detector
 - `aios-init` — one-shot install and setup
+- `aios-help` — interactive guide: tour the system, check setup progress, ask anything
 
 Skills improve over time. When you give feedback, the nightly consolidation edits the skill itself.
 
@@ -103,14 +105,15 @@ Open a Claude Code session in the folder where you want your brain to live (exam
 /aios-init
 ```
 
-This is a conversational onboarding skill — Claude walks you through a short setup (name, role, company, which integrations you use), then scaffolds your brain folder: 10 regions, templates, initial `MEMORY.md`, `CLAUDE.md` personalized to you, session hooks wired up, optional demo data if you want to see the system populated.
+This is a conversational onboarding skill — Claude walks you through a short setup (name, role, company, which integrations you use), then scaffolds your brain folder: nine regions, templates, an initial `MEMORY.md`, a `CLAUDE.md` personalized to you, a live `system/setup-progress.md` checklist, and session hooks wired up.
 
 When it finishes, you have a brain. Every future Claude Code session started inside this folder loads your brain automatically via the `SessionStart` hook.
 
 ### Step 4 — Try your first skills
 
 ```
-/memory-search      load context about a person, project, or decision
+/aios-help         tour the system, see what's set up, ask anything
+/memory-search     load context about a person, project, or decision
 /reflect           honest checkpoint on your goals
 /foresight         ranked priorities for the week ahead
 /project-status    status read on any project

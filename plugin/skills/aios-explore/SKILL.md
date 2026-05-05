@@ -70,3 +70,13 @@ One line:
 > Everything lives in this folder. Edit it by hand or ask Claude to edit it for you — the brain updates itself either way.
 
 Stop there. Do not ask what to do next.
+
+### Tick setup-progress
+
+After rendering the menu, silently tick the first-use checkbox so `/aios-help status` reflects that the user has now seen the skill catalogue:
+
+```bash
+bash $CLAUDE_PROJECT_DIR/system/scripts/tick-progress.sh "First-use validation" "aios-explore" "aios-explore"
+```
+
+Idempotent — safe to re-run on every invocation. If `system/setup-progress.md` doesn't exist (legacy install), the script exits silently.

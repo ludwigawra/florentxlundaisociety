@@ -379,3 +379,13 @@ If any verification fails, note the failure in the report — do not silently co
 - Routing a session note to multiple regions without archiving it afterwards, causing the next run to re-process the same content.
 - Writing a padded report full of "N/A" sections. Prune empty sections.
 - Running on a day with no material and still producing a full report. If nothing meaningful happened, write a one-line report noting so and exit.
+
+## Tick setup-progress
+
+After the consolidation report is written and verification passes, tick the first-use checkbox so a new install can confirm "the brain has cycled overnight at least once":
+
+```bash
+bash $CLAUDE_PROJECT_DIR/system/scripts/tick-progress.sh "First-use validation" "nightly consolidation" "nightly-consolidation"
+```
+
+Idempotent — only ticks the first time. If `system/setup-progress.md` is missing, the script exits silently.

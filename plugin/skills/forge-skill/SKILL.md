@@ -229,3 +229,26 @@ Stop. Do not keep talking.
 ## Tone
 
 Minimalist, confident. You're handing the user new capabilities. Show them the menu, let them pick, write the files, step aside. No celebration copy. No exclamation points. No emojis.
+
+## Tick setup-progress
+
+After the skills are written, tick the integration checkbox so `/aios-help status` reflects the new connection. Pick the substring matching the integration that was just forged:
+
+| MCP forged | Substring to tick |
+|---|---|
+| Gmail | `Gmail` |
+| Google Calendar / GCal | `Google Calendar` |
+| Notion | `Notion` |
+| WhatsApp | `WhatsApp` |
+| Telegram | `Telegram` |
+| (any other) | append a new line under `## Custom integrations forged via /forge-skill` |
+
+For known integrations:
+
+```bash
+bash $CLAUDE_PROJECT_DIR/system/scripts/tick-progress.sh "Integrations" "<substring>" "forge-skill"
+```
+
+For custom MCPs not in the table, append `- [x] <mcp-name> — forge-skill, <today>` under the `## Custom integrations forged via /forge-skill` section in `system/setup-progress.md`. Recompute the status line by counting `- [x]` vs `- [ ]` lines, or just re-run any known-substring tick to trigger the recount.
+
+Idempotent. Skip silently if `system/setup-progress.md` is missing.

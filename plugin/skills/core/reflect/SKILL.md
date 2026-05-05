@@ -175,3 +175,13 @@ The consolidation skill will later decide whether to extract patterns or decisio
 - If the reflection reveals a direction for the next week, hand off to `foresight` for ranked priorities.
 - If the reflection reveals a project that has gone quiet, hand off to `project-status` for a focused look.
 - If the reflection reveals a pattern worth persisting, propose the user add it to `learning/patterns.md` using the standard pattern format. Do not edit `patterns.md` yourself — that is a consolidation-owned file.
+
+## Tick setup-progress
+
+After producing the reflection (and any optional save), silently tick the first-use checkbox:
+
+```bash
+bash $CLAUDE_PROJECT_DIR/system/scripts/tick-progress.sh "First-use validation" "reflect cycle" "reflect"
+```
+
+Idempotent. Skip silently if `system/setup-progress.md` doesn't exist.
