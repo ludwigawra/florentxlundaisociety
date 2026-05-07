@@ -141,7 +141,7 @@ The plugin is what makes the brain a runtime system rather than a pile of markdo
 - `.claude-plugin/` — plugin manifest and metadata
 - `hooks/` — `SessionStart`, `SessionEnd`, `PostToolUseFailure`
 - `skills/` — the shipped skill pack
-- `templates/` — brain region templates installed by `/aios-init`
+- `templates/` — brain region templates installed by `/aios-start`
 - `licensing/` — subscription license verification (see `plugin/licensing/README.md`)
 
 The plugin does not store user data. It installs the brain scaffold, wires hooks, and registers skills. The user's brain folder is always the source of truth.

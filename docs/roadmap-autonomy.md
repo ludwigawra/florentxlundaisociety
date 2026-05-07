@@ -149,7 +149,7 @@ A 3-minute demo now has five moments (one per pillar + one close):
 ## Open questions worth deciding before pitch
 
 - **Pricing.** Still placeholder in README. The positioning doc says $33/mo (Personal.ai ceiling) is reasonable. Decision needed.
-- **First-run experience.** `aios-init` is conversational (8 questions). Good for depth, slow for demo. Do we ship a "skip — use defaults" path?
+- **First-run experience.** `aios-start` is conversational (8 questions). Good for depth, slow for demo. Do we ship a "skip — use defaults" path?
 - **Privacy messaging.** We say "local, yours." Do we write a 1-pager on data handling before the pitch, to pre-empt the first investor question?
 - **Positioning against Anthropic.** Claude memory is shipped. Is AI-OS *with* Anthropic (complement) or *despite* Anthropic (replacement)? This decides the pitch tone.
 

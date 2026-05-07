@@ -60,7 +60,7 @@ A curated set of skills that ship with the plugin and know how to use the brain.
 - `reflect` — goal-by-goal progress and course correction
 - `foresight` — forward-looking priorities
 - `signal-calibration` — the brain tuning its own signal detector
-- `aios-init` — one-shot install and setup
+- `aios-start` — one-shot install and setup
 - `aios-help` — interactive guide: tour the system, check setup progress, ask anything
 
 Skills improve over time. When you give feedback, the nightly consolidation edits the skill itself.
@@ -102,7 +102,7 @@ This tells Claude Code to treat this GitHub repo as a plugin marketplace. Claude
 Open a Claude Code session in the folder where you want your brain to live (examples use `~/my-brain`), then run:
 
 ```
-/aios-init
+/aios-start
 ```
 
 This is a conversational onboarding skill — Claude walks you through a short setup (name, role, company, which integrations you use), then scaffolds your brain folder: nine regions, templates, an initial `MEMORY.md`, a `CLAUDE.md` personalized to you, a live `system/setup-progress.md` checklist, and session hooks wired up.
@@ -136,7 +136,7 @@ Your brain folder is never touched — updates only change skills, hooks, and co
 
 - **`command not found: claude`** — Claude Code isn't installed or isn't on your `PATH`. See prerequisites.
 - **Skills don't appear after install** — run `/plugin reload` or restart your Claude Code session.
-- **`/aios-init` can't find templates** — plugin install didn't complete cleanly. Re-run `/plugin install aios@aios`.
+- **`/aios-start` can't find templates** — plugin install didn't complete cleanly. Re-run `/plugin install aios@aios`.
 - **SessionStart hook is silent** — make sure you're running Claude Code *inside* the brain folder (`cd ~/my-brain` first). Hooks scope to the current directory.
 
 ### Alternative: shell-script install *(fallback)*

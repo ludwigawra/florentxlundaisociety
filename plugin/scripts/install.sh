@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # AI-OS non-interactive installer.
 #
-# Mirrors what /aios-init does conversationally, but driven by flags.
+# Mirrors what /aios-start does conversationally, but driven by flags.
 # Useful for: CI, automated testing, headless installs, or users who
 # prefer to run the install in one shot instead of answering prompts.
 #
@@ -132,7 +132,7 @@ done < <(find "$PLUGIN_ROOT/templates" -type f -print0)
 # --- copy skills ---
 echo "installing skills"
 mkdir -p "$TARGET/.claude/skills"
-cp -R "$PLUGIN_ROOT/skills/aios-init" "$TARGET/.claude/skills/"
+cp -R "$PLUGIN_ROOT/skills/aios-start" "$TARGET/.claude/skills/"
 # Core skills are always installed
 cp -R "$PLUGIN_ROOT/skills/core" "$TARGET/.claude/skills/"
 

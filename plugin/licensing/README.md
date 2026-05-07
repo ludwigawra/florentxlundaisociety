@@ -43,7 +43,7 @@ The full schema is in [`schema.ts`](schema.ts). The verification logic is in [`c
 
 1. Purchase on the product site.
 2. A signed license file is emailed to you immediately.
-3. Save it as `~/.aios-license`. Or, when prompted by `/aios-init`, paste the contents — the init skill will write the file for you.
+3. Save it as `~/.aios-license`. Or, when prompted by `/aios-start`, paste the contents — the init skill will write the file for you.
 4. Start a new Claude Code session. The plugin verifies the license on the first session start.
 
 ---

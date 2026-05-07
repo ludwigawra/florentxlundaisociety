@@ -19,7 +19,7 @@ These are **branded placeholders** — 1600x900 PNGs generated programmatically 
 
 | File | What it should eventually show |
 |---|---|
-| `screenshot-welcome.png` | First view after `/aios-init` finishes — confirmation the brain is live, key numbers (regions scaffolded, skills installed, hooks wired), first suggested actions |
+| `screenshot-welcome.png` | First view after `/aios-start` finishes — confirmation the brain is live, key numbers (regions scaffolded, skills installed, hooks wired), first suggested actions |
 | `screenshot-briefing.png` | Morning briefing output — prioritized inbox + calendar + open threads with a clean source attribution |
 | `screenshot-brain-map.png` | Dashboard brain view — region cards with counts (decisions, people, companies, projects) and vital signs |
 

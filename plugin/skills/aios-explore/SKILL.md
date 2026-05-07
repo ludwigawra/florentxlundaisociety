@@ -1,6 +1,6 @@
 ---
 name: aios-explore
-description: Show the user every skill AI-OS has installed, grouped by purpose, with one-line descriptions and when to use each. Use this any time the user asks "what can this do", "what commands are there", or "help" — and at the end of /aios-init to orient a fresh install.
+description: Show the user every skill AI-OS has installed, grouped by purpose, with one-line descriptions and when to use each. Use this any time the user asks "what can this do", "what commands are there", or "help" — and at the end of /aios-start to orient a fresh install.
 ---
 
 # AI-OS Explore
@@ -49,7 +49,7 @@ Use this canonical grouping and copy:
 - `/signal-calibration` — tune the signal detector that routes context into sessions.
 
 **System**
-- `/aios-init` — already run. Refuses to re-run (won't overwrite your brain).
+- `/aios-start` — already run. Refuses to re-run (won't overwrite your brain).
 - `/aios-update` *(if available)* — non-destructive update of skills and hooks.
 - `/aios-explore` — this menu.
 - `/forge-skill <mcp>` — auto-generate intent-wrapped skills from a connected MCP. Run this whenever you connect a new MCP (Gmail, Notion, Linear, etc.) and the brain will propose 3–5 skills tuned to how you work.
@@ -60,7 +60,7 @@ Use this canonical grouping and copy:
 - Do not explain the brain model.
 - Do not list skills the user doesn't have.
 - Do not list integrations that are not connected.
-- Do not add a "Getting started" section — that's what `/aios-init` was for.
+- Do not add a "Getting started" section — that's what `/aios-start` was for.
 - Keep the whole output under ~35 lines.
 
 ### Close with

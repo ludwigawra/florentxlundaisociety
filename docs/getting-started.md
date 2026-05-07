@@ -48,10 +48,10 @@ claude
 Then run the bootstrap skill:
 
 ```
-/aios-init
+/aios-start
 ```
 
-`/aios-init` is a short conversational onboarding (eight questions: name, role, company, use case, goals, integrations, content pillars, language, tone). When you confirm, it scaffolds your brain folder:
+`/aios-start` is a short conversational onboarding (eight questions: name, role, company, use case, goals, integrations, content pillars, language, tone). When you confirm, it scaffolds your brain folder:
 
 ```
 ~/my-brain/

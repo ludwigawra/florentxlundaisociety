@@ -1,6 +1,6 @@
 # Install test runbook
 
-A 5-minute end-to-end verification you run yourself in a fresh Claude Code session before shipping the plugin to anyone else. Catches drift between the plugin manifest, hook wiring, and the `/aios-init` flow.
+A 5-minute end-to-end verification you run yourself in a fresh Claude Code session before shipping the plugin to anyone else. Catches drift between the plugin manifest, hook wiring, and the `/aios-start` flow.
 
 ---
 
@@ -52,12 +52,12 @@ In a new Claude Code session in the same `/tmp/aios-install-test` dir:
 /help
 ```
 
-Expected: `/aios-init`, `/aios-update`, `/aios-explore`, and `/aios:forge-skill` (or similar namespacing) all appear in the list.
+Expected: `/aios-start`, `/aios-update`, `/aios-explore`, and `/aios:forge-skill` (or similar namespacing) all appear in the list.
 
 ### Step 4 — Run the bootstrap
 
 ```
-/aios-init
+/aios-start
 ```
 
 Expected: 8-question conversational interview. Answer minimally:
@@ -121,6 +121,6 @@ All 7 steps succeed without errors. Any of:
 
 ## Known issues to watch for
 
-1. **Skill duplication** — `/plugin install` exposes skills as `/aios:reflect` etc; `/aios-init` ALSO copies them to `<brain>/.claude/skills/reflect/`. Both work but local takes precedence in Claude Code's resolution. May become an update-conflict source. Open architectural question — see PLAN.md.
+1. **Skill duplication** — `/plugin install` exposes skills as `/aios:reflect` etc; `/aios-start` ALSO copies them to `<brain>/.claude/skills/reflect/`. Both work but local takes precedence in Claude Code's resolution. May become an update-conflict source. Open architectural question — see PLAN.md.
 2. ~~Homepage URL~~ — resolved 2026-05-05. Repo renamed to `ludwigawra/AIOS`; both manifest files updated.
 3. **First-time hook fire timing** — on macOS, the first `bash` invocation in a fresh session can take 200ms+. Hook timeout is 5000ms for SessionStart, plenty of headroom, but watch for `timed out` warnings on slow disks.

@@ -18,7 +18,7 @@ Invoke this skill whenever any of the following apply:
 - A specific new skill has been announced and the user wants to pull only that one
 - The user suspects their install has drifted from the plugin version and wants a dry-run diff
 
-Do not invoke on a fresh install — use `/aios-init` instead. Update only runs against an existing AI-OS (presence of `aios.config.json` or `CLAUDE.md` at the root).
+Do not invoke on a fresh install — use `/aios-start` instead. Update only runs against an existing AI-OS (presence of `aios.config.json` or `CLAUDE.md` at the root).
 
 ## Inputs
 

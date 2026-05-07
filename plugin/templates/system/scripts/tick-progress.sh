@@ -5,7 +5,7 @@
 #   tick-progress.sh <category> <item-substring> [skill-name]
 #
 # Examples:
-#   tick-progress.sh "Identity" "User profile created" aios-init
+#   tick-progress.sh "Identity" "User profile created" aios-start
 #   tick-progress.sh "Integrations" "Gmail" forge-skill
 #   tick-progress.sh "First-use validation" "/reflect cycle" reflect
 #

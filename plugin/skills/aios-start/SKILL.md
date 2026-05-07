@@ -1,5 +1,5 @@
 ---
-name: aios-init
+name: aios-start
 description: Bootstrap a new AI-OS in the current directory. Conversational onboarding that scaffolds a brain-inspired personal operating system — persistent memory, learned patterns, and skills that improve over time. Use this the first time a user sets up AI-OS in a repo.
 ---
 
@@ -28,7 +28,7 @@ If any of those exist, **stop and refuse**:
 
 > AI-OS is already installed in this directory.
 >
-> Running `/aios-init` again would overwrite memory, patterns, and skill calibration. If you want to reinstall from scratch, move or delete the existing brain files first, then run this again. If you want to add or update skills, use `/aios-update` instead (coming soon).
+> Running `/aios-start` again would overwrite memory, patterns, and skill calibration. If you want to reinstall from scratch, move or delete the existing brain files first, then run this again. If you want to add or update skills, use `/aios-update` instead (coming soon).
 
 Do not proceed. End the skill.
 
@@ -221,16 +221,16 @@ Write `.claude/aios.config.json` with the full onboarding answers plus metadata,
 
 ### 4.5b — Tick setup-progress for completed install steps
 
-The brain ships with `system/setup-progress.md` — a live checklist that tracks how complete the install is. Tick the items aios-init just completed by running these six commands in sequence (errors are silenced by the script; safe to run in any order):
+The brain ships with `system/setup-progress.md` — a live checklist that tracks how complete the install is. Tick the items aios-start just completed by running these six commands in sequence (errors are silenced by the script; safe to run in any order):
 
 ```bash
 cd <brain-root>
-bash system/scripts/tick-progress.sh "Identity" "User profile" "aios-init"
-bash system/scripts/tick-progress.sh "Identity" "90-day goals" "aios-init"
-bash system/scripts/tick-progress.sh "Identity" "Tone" "aios-init"
-bash system/scripts/tick-progress.sh "Brain folders" "Folders scaffolded" "aios-init"
-bash system/scripts/tick-progress.sh "Brain folders" "CLAUDE.md" "aios-init"
-bash system/scripts/tick-progress.sh "Brain folders" "First commit" "aios-init"
+bash system/scripts/tick-progress.sh "Identity" "User profile" "aios-start"
+bash system/scripts/tick-progress.sh "Identity" "90-day goals" "aios-start"
+bash system/scripts/tick-progress.sh "Identity" "Tone" "aios-start"
+bash system/scripts/tick-progress.sh "Brain folders" "Folders scaffolded" "aios-start"
+bash system/scripts/tick-progress.sh "Brain folders" "CLAUDE.md" "aios-start"
+bash system/scripts/tick-progress.sh "Brain folders" "First commit" "aios-start"
 ```
 
 After this, `system/setup-progress.md` should show ~38% complete. The remaining items get ticked as the user wires integrations (`/forge-skill <mcp>`), schedules (manual), and runs first-use skills (`/aios-explore`, `/reflect`, etc.). Don't surface this to the user — it'll come up naturally when they run `/aios-help status`.

@@ -13,11 +13,11 @@ AI-OS is built in five phases. Each phase is complete before the next begins —
 - [x] Short-term memory auto-creation per session
 - [x] Transcript archiving on session end
 - [x] Brain-stem pointer pattern (global `~/.claude/CLAUDE.md`)
-- [x] `/aios-init` installer skill
+- [x] `/aios-start` installer skill
 - [x] Root `CLAUDE.md`, `MEMORY.md`, `risks.md` templates
 - [x] Basic plugin manifest
 
-**Outcome:** A user can install AI-OS, run `/aios-init`, and have Claude read their brain at every session start.
+**Outcome:** A user can install AI-OS, run `/aios-start`, and have Claude read their brain at every session start.
 
 ---
 
@@ -71,7 +71,7 @@ AI-OS is built in five phases. Each phase is complete before the next begins —
 - [ ] Search — full-text across the brain folder
 - [ ] Vital signs dashboard — unextracted corrections, last consolidation, short-term file count
 - [ ] Pro-tier views — extended analytics, calibration history charts, cross-skill comparisons
-- [ ] Auto-launch from `/aios-init`
+- [ ] Auto-launch from `/aios-start`
 
 **Outcome:** A user can open `localhost:3000` and understand the state of their brain at a glance. The dashboard reads the filesystem directly and holds no state of its own.
 

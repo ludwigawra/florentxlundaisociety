@@ -13,7 +13,7 @@ plugin/
   .claude-plugin/     plugin manifest
   skills/             shipped skills (one folder per skill)
   hooks/              session hooks (SessionStart, SessionEnd, PostToolUseFailure)
-  templates/          brain region templates installed by /aios-init
+  templates/          brain region templates installed by /aios-start
   licensing/          subscription license check
 dashboard/
   src/                Next.js app — brain browser and views

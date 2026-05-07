@@ -20,7 +20,7 @@ If they invoked `/forge-skill` with no argument:
 - If zero MCPs are connected, say so plainly and point the user to `plugin/docs/mcp-directory.md` for suggestions of what to connect. Stop.
 - If one or more are connected, list them and ask which one to forge skills for. Wait for the answer.
 
-**Refuse to run on a stale brain.** Check that the user's cwd has `.claude/aios.config.json`. If not, tell them to run `/aios-init` first. Stop.
+**Refuse to run on a stale brain.** Check that the user's cwd has `.claude/aios.config.json`. If not, tell them to run `/aios-start` first. Stop.
 
 ---
 

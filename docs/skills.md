@@ -16,7 +16,7 @@ Search the AI-OS brain for relevant files, entities, and knowledge before starti
 
 Search prior decisions on a topic before making a new one. Invoked when a session is about to commit to a direction on something the brain might have prior context on. Reads `memory/decisions/` and `learning/patterns.md`, surfaces contradictions or supporting precedent, and flags them before the new decision lands. Prevents the system from quietly disagreeing with itself.
 
-### `aios-init`
+### `aios-start`
 
 One-shot install and setup. Invoked once per machine, right after the plugin is added. Creates the brain scaffold at `~/AI-OS/` (or a custom path), personalizes `CLAUDE.md` via a brief interview, optionally wires `~/.claude/CLAUDE.md` with a brain-stem pointer, and verifies the hooks are registered. Leaves the user with a working brain and a pointer to the dashboard.
 
