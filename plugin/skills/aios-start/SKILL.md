@@ -298,7 +298,71 @@ Five things to try next, {{user.name}}:
 Open CLAUDE.md at the repo root if you want to see how the brain is wired.
 ```
 
+Do not stop yet — there is one last manual step the brain needs in order to actually learn overnight. Move directly into Phase 6.
+
+---
+
+## Phase 6 — Schedule the nightly consolidation
+
+The brain only gets smarter if it consolidates while you sleep. Claude Code can't schedule itself, so the user has to wire one routine manually through the Claude Code UI. Walk them through it — exact values, in order, no improvisation.
+
+Open with this short framing, verbatim:
+
+> One last step. The brain learns by running a consolidation pass every night — it reads the day's short-term memory, extracts decisions and patterns, routes new people and companies into long-term storage, and updates your skills based on the feedback you gave. Without this, nothing graduates from short-term to long-term.
+>
+> I can't schedule it for you, but it's a 30-second click-path inside Claude Code. Follow these exactly.
+
+Then show the click-path and the fields as a single block. Do not split it across messages.
+
+```
+1. Open Code → Routines in the Claude Code sidebar.
+2. Click "New routine" in the top right.
+3. Choose "Local".
+4. Paste these values into the form:
+
+   Name
+   nightly-consolidation
+
+   Description
+   Process the day's short-term memory, extract patterns, route new entities,
+   improve skills.
+
+   Instructions
+   Run the /nightly-consolidation skill on this brain. Read every file in
+   memory/short-term/ that has not yet been archived, extract decisions
+   into memory/decisions/, route new people and companies into
+   knowledge/people/ and knowledge/companies/, log skill feedback into
+   learning/skill-feedback/, append corrections and patterns into
+   learning/corrections.md and learning/patterns.md, and archive the
+   processed short-term files. Write a one-page summary report to
+   memory/short-term/consolidation-report-YYYY-MM-DD.md. Be conservative —
+   never delete user data, always archive.
+
+5. Toggle "Ask permissions" → "Bypass permissions".
+   (The routine runs at night with no one watching; permission prompts would
+   block it indefinitely.)
+
+6. Click "Select folder" and pick the AI-OS folder you just created:
+   {{cwd}}
+
+7. Schedule → "Daily", At 05:00.
+
+8. Save.
+```
+
+Substitute `{{cwd}}` with the absolute path of the user's current working directory (the brain root) when you render this. Do not leave the token in.
+
+After showing the block, close with:
+
+> That's it. The first run happens tomorrow at 05:00. You can also trigger it manually any time with `/nightly-consolidation` — useful right after a long session.
+>
+> Welcome home, {{user.name}}.
+
 Then stop. Do not keep talking. Do not ask what to do next. The user is welcome home.
+
+### Why this step is manual
+
+Claude Code routines are configured through the desktop app's UI, not through files in the repo. There is no API or config file aios-start could write to install this routine for the user. The closest substitute — a launchd / cron job — runs outside Claude Code and can't invoke a skill. So the UI path is the only working option, and the user runs it once.
 
 ---
 

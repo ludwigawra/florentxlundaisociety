@@ -1,6 +1,6 @@
 ---
 name: forge-skill
-description: Auto-generate intent-wrapped skills from a connected MCP's tool definitions. The user connects a new MCP (Gmail, Notion, Linear, Supabase, whatever), then runs /forge-skill <mcp-name> and the brain proposes 3-5 skill candidates that wrap those tools with natural-language intents. Every skill is approved by the user before it's written. This is how AI-OS grows capabilities as the user connects new tools.
+description: Auto-generate intent-wrapped skills from a connected MCP's tool definitions. The user connects a new MCP (Gmail, Notion, Linear, Supabase, whatever), then runs /forge-skill [mcp-name] and the brain proposes 3-5 skill candidates that wrap those tools with natural-language intents. Every skill is approved by the user before it's written. This is how AI-OS grows capabilities as the user connects new tools.
 ---
 
 # Forge Skill
